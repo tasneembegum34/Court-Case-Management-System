@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+
+        {%load static%}
+        
+      {% if messages %}
+      <ul class="messages">
+          {% for message in messages %}
+          <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+          {% endfor %}
+      </ul> 
+      {% endif %}
+<title>Client Registration Form</title>
+<link rel="stylesheet" href="{% static 'styles/clientRegister_style.css' %}">
+</head>
+<body>
+
+<form action="" style="border:1px solid #ccc" method="POST">
+    {% csrf_token %}
+  <div class="container">
+    <h1>Sign Up</h1>
+    <p>Please fill in this form to create an account.</p>
+    <hr>
+    <label for="first_name"><b>First Name*</b></label>
+    <input type="text"  id="name" name="first_name" required>
+<br>
+    <label for="last_name"><b>Last Name*</b></label>
+    <input type="text"  name="last_name" required>
+<br>
+    <label for="dob">Date of Birth:</label>
+    <input type="date"   name="dob"><br><br>
+
+    <label for="age"><b>Age*</b></label>
+    <input type="text"  name="age" required>
+<br>
+    <label for="gender"><b>Gender</b></label><br>
+    <input type="radio" id="male" name="gender" value="Male">
+    <label for="male">Male</label><br>
+    <input type="radio" id="female" name="gender" value="Female">
+    <label for="female">Female</label><br>
+    <input type="radio" id="other" name="gender" value="Other">
+    <label for="other">Other</label><br><br>
+
+    <label for="phno">Ph No.*</label>
+    <input style="width: 50%;" type="tel" placeholder="----Enter Ph No. in 999-999-999 format---" name="phno" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"><br><br>
+    <label for="email"><b>Email*</b></label>
+    <input type="text"  placeholder="---Enter email ex: rahul@gmail.com--"  name="email" required>
+    <br>
+    <label for="username"><b>User Name*</b></label>
+    <input type="text"   name="username" required>
+<br>
+    <label for="password"><b>Password*</b></label>
+    <input type="password"   name="password" required>
+<br>
+    <label for="re_password"><b>Confirm Password*</b></label>
+    <input   type="password"   name="re_password" required>
+<br>
+    
+
+  
+    <div class="clearfix">
+      <button type="button" id="cancelbtn"  class="cancelbtn">Cancel</button>
+      <script type="text/javascript">
+        document.getElementById("cancelbtn").onclick=function(){
+          location.href="/home/";
+        };
+</script>
+      <button type="submit" class="signupbtn">Sign Up</button>
+    
+</script>
+
+    </div>
+  </div>
+</form>

@@ -1,0 +1,11 @@
+<head>
+{%load static%}
+</head>
+<body>
+    {% for dest in dests%}
+    <h1>{{dest.name}}</h1>
+    <img src="{{dest.img.url}}" alt="">
+    <p>{{dest.desc}}</p>
+    <p>{{dest.price}}</p>
+    {%endfor%}
+</body>
