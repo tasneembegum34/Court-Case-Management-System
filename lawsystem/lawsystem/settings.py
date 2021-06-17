@@ -38,12 +38,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    #'accounts',
-    'enrollmentInfo',
-    'client.apps.ClientConfig',
+    'hireAdvocates',
+    'enrollmentInfo', 
     'advocate',
     'login',
-    'django_filters',
+    'client',
 ]
 
 MIDDLEWARE = [
@@ -145,5 +144,7 @@ STATICFILES_DIRS=[
 STATIC_ROOT=os.path.join(BASE_DIR,'assests')
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
+
+
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'

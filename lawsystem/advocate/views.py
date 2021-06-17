@@ -18,7 +18,9 @@ def advocateRegister(request):
         try:
             msg=""
             first_name=request.POST['first_name']
+            first_name=first_name.upper()
             last_name=request.POST['last_name']
+            last_name=last_name.upper()
             age=request.POST['age']
             dob=request.POST['dob']
             gender=request.POST['gender']

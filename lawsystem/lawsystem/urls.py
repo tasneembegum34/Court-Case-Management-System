@@ -21,7 +21,7 @@ urlpatterns = [
  path('',include('client.urls')),
  path('',include('advocate.urls')),
  path('',include('login.urls')),
-
+ path('',include('hireAdvocates.urls')),
 ]
 
 #urlpatterns =urlpatterns + static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
