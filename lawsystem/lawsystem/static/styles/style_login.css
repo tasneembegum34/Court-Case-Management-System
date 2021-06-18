@@ -1,16 +1,10 @@
 
 body {margin: 0;  
   padding: 0;  
-  background-color:red;  
   font-family: 'Cambria'; 
- 
-  background-image:url('/lawsystem/static/images/login_bg.jpg');
+  background-color: white;
    }
-   #grad1 {
-    height: 200px;
-    background-color: red; /* For browsers that do not support gradients */
-    background-image: linear-gradient(to right,pink,lightpink, lightgreen,lightyellow);
-  }
+  
 .login{  
       width: 380px;  
       overflow: hidden;  

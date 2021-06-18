@@ -31,6 +31,7 @@ def advocateRegister(request):
             re_password=request.POST['re_password']
             experience=request.POST['experience']
             expertise=request.POST['expertise']
+            address=request.POST['address']
             if password==re_password:
                 eno=request.POST['eno']
                 eno_date=request.POST['eno_date']
@@ -39,7 +40,7 @@ def advocateRegister(request):
                 if enroll is  True:
                     print("entered usercreation")
                     user=advocateAccounts.objects.create(first_name=first_name,last_name=last_name,age=age,gender=gender,dob=dob,
-                    phno=phno,email=email,username=username,password=password,experience=experience,expertise=expertise)
+                    phno=phno,email=email,username=username,password=password,experience=experience,expertise=expertise,address=address)
                     print(user)
                     print("user created---------------")
                     return redirect('/regSuccessful/')

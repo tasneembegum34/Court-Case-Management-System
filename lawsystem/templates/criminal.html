@@ -53,6 +53,24 @@
   background-color:darkgrey;
   color: white;
 }
+.addbtn {
+  background-color:black;
+  position:static;
+  border: none;
+  color: white;
+  padding: 16px 32px;
+  text-align: center;
+  font-size: 16px;
+  margin: 4px 2px;
+  opacity: 0.6;
+  transition: 0.3s;
+ height: 50px;
+ width: 200px;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.addbtn:hover {opacity: 1}
     </style>
   </head>
   <body style="background-color:#878384;">
@@ -82,6 +100,7 @@
           </ul>
         </div>
       </nav><br>
+      <div>
       <h2>CRIMINAL CASE ADVOCATES</h2><br>
   <!--------------->
   {% block content %}
@@ -91,45 +110,48 @@
         {% for id in ad_details %}
           {% if forloop.counter|divisibleby:2 %}
           <div class="card text-dark bg-dark mb-3" style="max-width: 75rem;">
-            <div class="card-header" style="color: white;">{{id.first_name}} {{id.last_name}}</div>
+            <div class="card-header" style="color: white;">{{id.first_name}} {{id.last_name}} Advocate</div>
             <div class="card-body">
               <h5 class="card-title" style="color: white;">Phno: {{id.phno}}</h5>
-              <p class="card-text" style="color: white;">{{id.address}}</p>
               <table id="ad_details">
                 <tr>
                   <th>Experience</th>
                   <th>Email</th>
-                  <th>Description</th>
+                  <th>Address</th>
                 </tr>
                 <tr>
-                  <td>{{id.experience}} </td>
+                  <td>{{id.experience}}+ Years in business</td>
                   <td>{{id.email}} </td>
-                  <td>{{id.description}} </td>
+                  <td>{{id.address}} </td>
                 </tr>
+
               </table>
             </div>
+            <button  type="submit" class="addbtn" >Add to list</button>
           </div>
+          
           {% else %}
           <div class="card text-dark bg-light mb-3" style="max-width: 75rem;">
-            <div class="card-header"><b>{{id.first_name}} {{id.last_name}}</b></div>
+            <div class="card-header"><b>{{id.first_name}} {{id.last_name}} Advocate</b></div>
             <div class="card-body">
               <h5 class="card-title">Phno: {{id.phno}}</h5>
-              <p class="card-text">{{id.address}}</p>
               <table id="ad_details">
                 <tr>
                   <th>Experience</th>
                   <th>Email</th>
-                  <th>Description</th>
+                  <th>Address</th>
                 </tr>
                 <tr>
-                  <td>{{id.experience}} </td>
+                  <td>{{id.experience}}+ Years in business</td>
                   <td>{{id.email}} </td>
-                  <td>{{id.description}} </td>
+                  <td>{{id.address}} </td>
                 </tr>
               </table>
             </div>
+            <button type="submit" class="addbtn">Add to list</button>
           </div>
           {% endif %}
+         
        {% endfor%}
       {% else %}
       
@@ -141,84 +163,8 @@
       
   {% endblock %}
       
-      <div class="card text-dark bg-light mb-3" style="max-width: 75rem;">
-        <div class="card-header">T SUNIL RAJ ADVOCATE</div>
-        <div class="card-body">
-          <h5 class="card-title">9912789818</h5>
-          <p class="card-text">PLOT NO.36,Mata Building,Rd Number 12,Banjara Hills,Hyderabad,500034</p>
-          <ul class="card-text">
-            <li>4.9 Rating</li>
-            <li>20+ Years in business</li>
-            <li>TOP in both criminal and civil cases</li>
-          </ul>
-        </div>
-      </div>
-      <div class="card text-white bg-dark mb-3" style="max-width: 75rem;">
-        <div class="card-header">MALLESH YADAV G</div>
-        <div class="card-body">
-          <h5 class="card-title">9849962609</h5>
-          <p class="card-text">F.NO:106,Cyber Residency,Indranagar,Gachibowli,Hyderabad,500032</p>
-          <ul class="card-text">
-            <li>4.1 Rating</li>
-            <li>3+ Years in business</li>
-            <li>M.A.,B.Ed.,LLB</li>
-            <li>malleshadvocate99@gmail.com</li>
-          </ul>
-        </div>
-      </div>
-      <div class="card text-dark bg-light mb-3" style="max-width: 75rem;">
-        <div class="card-header">SAMEER HUSSAIN</div>
-        <div class="card-body">
-          <h5 class="card-title">04023717578</h5>
-          <p class="card-text">186-C LIG,BK guda,Sanjeeva Reddy Nagar,Hyderabad,500038</p>
-          <ul class="card-text">
-            <li>4.8 Rating</li>
-            <li>7+ Years in business</li>
-            <li>chief Counsel</li>
-            <li>Founder of Sameer & Associates</li>
-          </ul>
-        </div>
-      </div>
-      <div class="card text-white bg-dark mb-3" style="max-width: 75rem;">
-        <div class="card-header">SYED SHAKIR HUSSAIN</div>
-        <div class="card-body">
-          <h5 class="card-title">9885789079</h5>
-          <p class="card-text">9-4-134/5/A/62, Grammar Colony,Toli Chowki,Hyderabad,500008</p>
-          <ul class="card-text">
-            <li>4.5 Rating</li>
-            <li>10+ Years in business</li>
-            <li>LL.M., LLB</li>
-            <li>shakir.lawyer@gmail.com</li>
-          </ul>
-        </div>
-      </div>
-      <div class="card text-dark bg-light mb-3" style="max-width: 75rem;">
-        <div class="card-header">SHARFUDDIN ANWAR</div>
-        <div class="card-body">
-          <h5 class="card-title">9866194338</h5>
-          <p class="card-text">8-1-523/48/1,Sabza Colony,Brindavan Colony,tolichowki,Hyderabad,500008</p>
-          <ul class="card-text">
-            <li>4.9 Rating</li>
-            <li>8+ Years in business</li>
-            <li>Vice President at PEACE ARMY Telangana</li>
-            <li>sharflaw33@gmail.com</li>
-          </ul>
-        </div>
-      </div>
-      <div class="card text-white bg-dark mb-3" style="max-width: 75rem;">
-        <div class="card-header">KRISHNA MURTHY PASUPALA</div>
-        <div class="card-body">
-          <h5 class="card-title">9966374355</h5>
-          <p class="card-text">Vysya Bank Colony,rd no.2,Bowenpally,Hyderabad,500009</p>
-          <ul class="card-text">
-            <li>4.8 Rating</li>
-            <li>11+ Years in business</li>
-            <li>M.A.,B.Ed.,LLB</li>
-            <li>krishnamurthy767@gmail.com</li>
-          </ul>
-        </div>
-      </div>
-
+     
+    </div>
       
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
   </body>
