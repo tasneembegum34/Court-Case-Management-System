@@ -1,0 +1,60 @@
+
+#card {
+    position: relative;
+    width: 320px;
+    display: block;
+    margin: 40px auto;
+    text-align: center;
+    font-family: 'Source Sans Pro', sans-serif;
+  }
+  
+  #upper-side {
+    padding: 2em;
+    background-color: #8BC34A;
+    display: block;
+    color: #fff;
+    border-top-right-radius: 8px;
+    border-top-left-radius: 8px;
+  }
+  #lower-side {
+    padding: 2em;
+    background-color: lightgrey;
+    display: block;
+    color: #fff;
+    border-bottom-right-radius: 8px;
+    border-bottom-left-radius: 8px;
+  }
+  #checkmark {
+    font-weight: lighter;
+    fill: #fff;
+    margin: -3.5em auto auto 20px;
+  }
+  #status {
+    font-weight: lighter;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 1em;
+    margin-top: -.2em;
+    margin-bottom: 0;
+  }
+  #message {
+    margin-top: -.5em;
+    color: #757575;
+    letter-spacing: 1px;
+  }
+  .contBtn {
+    position: relative;
+    top: 1.5em;
+    text-decoration: none;
+    background: #8bc34a;
+    color: #fff;
+    margin: auto;
+    padding: .8em 3em;
+    border-top-right-radius: 8px;
+    border-top-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    border-bottom-left-radius: 8px;
+  }
+ .contBtn:hover{
+   color: darkgreen;
+ }
