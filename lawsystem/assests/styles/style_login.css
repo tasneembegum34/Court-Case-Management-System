@@ -1,18 +1,22 @@
 
 body {margin: 0;  
   padding: 0;  
-  background-color:white;  
   font-family: 'Cambria'; 
+
+  background-image:url('{% static "images/login_bg.jpg"%');
    }
+  
 .login{  
       width: 380px;  
       overflow: hidden;  
       margin: auto;  
       margin: 20 0 0 450px;
       padding: 60px;  
-      background: rgb(139, 137, 137); 
+      background: rgb(139, 137, 137);
       margin-top: 80px;
-      border-radius: 10%;     
+      border-radius: 10%; 
+     border-color: black;
+    
 }  
 h1{  
   text-align: center;  
