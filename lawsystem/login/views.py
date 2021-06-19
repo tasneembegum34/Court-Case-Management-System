@@ -3,6 +3,7 @@ from django.contrib import messages
 from django.shortcuts import render
 from client.models import clientAccounts
 from advocate.models import advocateAccounts
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 
 def login(request):
@@ -36,6 +37,7 @@ def login(request):
        
  
     return render(request, 'login.html')
+
 
 def logout(request):
     return render(request,'/home/')

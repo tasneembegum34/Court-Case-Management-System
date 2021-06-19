@@ -2,6 +2,7 @@ from django.shortcuts import render,redirect
 from django.contrib import messages
 from django.contrib.auth.models import User
 from .models import clientAccounts, sectionNoDetails
+from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 #import selenium
 # Create your views here.
@@ -10,8 +11,10 @@ user_type=""
 def home(request):
     return render(request,'home.html')
  
+@login_required(login_url='/login/')
 def clientHome(request):
     return render(request,'clientHome.html') 
+
 
 def clientRegister(request):
     if request.method=='POST':
@@ -49,7 +52,6 @@ def regSuccessful(request):
     return render(request,'regSuccessful.html')
 
 
-
 def searchSection(request):
     if request.method=="POST":
         searched=request.POST['searched']
@@ -58,6 +60,7 @@ def searchSection(request):
         return render(request,'searchSection.html',{'sections':sections})
     else:
         return render(request,'searchSection.html')
+
 
 def hireAdvocates(request):
     return render(request,'project.html')

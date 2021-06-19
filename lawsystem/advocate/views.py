@@ -5,11 +5,13 @@ from django.contrib import messages
 from django.contrib.auth.models import User
 from .models import advocateAccounts
 from enrollmentInfo.models import EnrollmentDetails
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 user_type=""
 def home(request):
     return render(request,'home.html')
  
+@login_required(login_url='/login/')
 def advocateHome(request):
     return render(request,'advocateHome.html')
 

@@ -8,7 +8,7 @@
 </head>
 <body style="background-color: white;">
 
-  <div class="login" style="border-style: solid;">
+  <div class="login" style="border-style: solid;
   color: black;
   border-width: thick; ">
     <h1>Login</h1>
@@ -34,8 +34,9 @@
     <span>Remember me</span>    
     <br><br>    
     <a class="btn btn-primary" href="#" role="button">Forget Password</a>   
-        
+  
   </div>
+  
 </form>
 
 
@@ -57,7 +58,7 @@
 {% if messages %}
 <ul class="messages">
     {% for message in messages %}
-    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    <p style="color: lightred;"><li  {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li></p>
     {% endfor %}
 </ul>
 {% endif %}
