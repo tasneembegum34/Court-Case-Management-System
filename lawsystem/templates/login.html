@@ -5,6 +5,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="{% static 'styles/style_login.css' %}">
+
 </head>
 <body style="background-color: white;">
 
@@ -34,11 +35,19 @@
     <span>Remember me</span>    
     <br><br>    
     <a class="btn btn-primary" href="#" role="button">Forget Password</a>   
-  
+ 
+  <br>
+  <br>
+  {% if messages %}
+  <ul class="messages">
+      {% for message in messages %}
+      <p style="color: lightred;"><li  {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li></p>
+      {% endfor %}
+  </ul>
+  {% endif %}
   </div>
-  
-</form>
 
+</form>
 
 
   <!--- <button style="width: 100%; padding: 10px 18px; background-color: black;" type="submit" id="loginbtn" >Login</button>
@@ -55,13 +64,7 @@
   </div>
   <p>Don't have an account? Create one <a href="/register">here</a></p>
 </form>-->
-{% if messages %}
-<ul class="messages">
-    {% for message in messages %}
-    <p style="color: lightred;"><li  {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li></p>
-    {% endfor %}
-</ul>
-{% endif %}
+
 
 </body>
 </html>

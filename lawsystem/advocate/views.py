@@ -6,6 +6,7 @@ from django.contrib.auth.models import User
 from .models import advocateAccounts
 from enrollmentInfo.models import EnrollmentDetails
 from django.contrib.auth.decorators import login_required
+from .decorators import unauthenticated_user
 # Create your views here.
 user_type=""
 def home(request):
@@ -15,6 +16,7 @@ def home(request):
 def advocateHome(request):
     return render(request,'advocateHome.html')
 
+@unauthenticated_user
 def advocateRegister(request):
     if request.method=='POST':
         try:
@@ -43,6 +45,8 @@ def advocateRegister(request):
                     print("entered usercreation")
                     user=advocateAccounts.objects.create(first_name=first_name,last_name=last_name,age=age,gender=gender,dob=dob,
                     phno=phno,email=email,username=username,password=password,experience=experience,expertise=expertise,address=address)
+                    us=User.objects.create(username=username,password=password)
+                    User.save(us)
                     print(user)
                     print("user created---------------")
                     return redirect('/regSuccessful/')

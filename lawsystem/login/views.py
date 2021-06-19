@@ -1,12 +1,17 @@
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from django.contrib import messages
 from django.shortcuts import render
 from client.models import clientAccounts
 from advocate.models import advocateAccounts
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
+from django.contrib.auth.hashers import make_password
 # Create your views here.
+from django.contrib.auth import authenticate,login,logout
+from client.decorators import unauthenticated_user
 
-def login(request):
+@unauthenticated_user
+def loginPage(request):
     if request.method == "POST":
         username=request.POST["uname"]
         psw=request.POST["psw"]
@@ -15,23 +20,34 @@ def login(request):
             print(usertype)
             if usertype=="client":
                 print(username,psw)
-                user1=clientAccounts.objects.filter(username=username,password=psw).exists()
-                print(user1)
-                if user1==True:
-                    print('not entered')
-                    return render(request, 'clientHome.html')
+                user1=authenticate(request,username=username,password=psw)
+                if user1 is not None :
+                    print("authenticated----")
+                    usercli=clientAccounts.objects.filter(username=username,password=psw).exists()
+                    if usercli==True:
+                        login(request,user1)
+                        return render(request, 'clientHome.html')
+                    else:
+                        messages.info(request,"username as  usertype 'client' unrecongnized")
+                        return render(request, 'login.html')
                 else:
-                    print('entered-----')
-                    messages.info(request,'username or password is incorrect')
+                    messages.info(request,"username or password incorrect")
                     return render(request, 'login.html')
             elif usertype=="advocate":
-                user2=advocateAccounts.objects.filter(username=username,password=psw).exists()
-                if user2==True:
-                    return render(request, 'advocateHome.html')
+                user1=authenticate(request,username=username,password=psw)
+                if user1 is not None:
+                    usercli=advocateAccounts.objects.filter(username=username,password=psw).exists()
+                    if usercli==True:
+                        login(request,user1)
+                        return render(request, 'advocateHome.html')
+                    else:
+                        messages.info(request,"username as usertype 'advocate' unrecongnized")
+                        return render(request, 'login.html')  
                 else:
                     messages.info(request,'username or password is incorrect')
                     return render(request, 'login.html')   
-        except:    
+        except Exception as e:    
+            print(e)
             messages.info(request,'usertype not selected')
             return render(request, 'login.html')
        
@@ -39,5 +55,20 @@ def login(request):
     return render(request, 'login.html')
 
 
-def logout(request):
-    return render(request,'/home/')
+def logoutUser(request):
+    logout(request)
+    print("came+++++++++++")
+    return render(request,'home.html')
+
+
+"""
+user1=clientAccounts.objects.filter(username=username,password=psw).exists()
+                print(user1)
+
+                if  user1==True:
+                    print('not entered')
+                    password=make_password(psw)
+                    us=User.objects.create(username=username,password=password)
+                    User.save(us)
+                    return render(request, 'clientHome.html')
+                else:"""
