@@ -71,6 +71,29 @@
           }
 
           .addbtn:hover {opacity: 1}
+    #sectionsDetails {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse; 
+  width: 90%;
+}
+
+#sectionsDetails td, #sectionsDetails th {
+  border: 1px solid #ddd;
+  padding: 10px;
+}
+
+#sectionsDetails tr:nth-child(even){background-color: #f2f2f2;}
+
+#sectionsDetails tr:hover {background-color: #ddd;}
+
+#sectionsDetails th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color:darkgrey;
+  color: white;
+}
+  
     </style>
   </head>
   <body style="background-color:#878384;">
@@ -101,77 +124,41 @@
         </div>
       </nav><br>
       <div>
-      <h2>CRIMINAL CASE ADVOCATES</h2><br>
-  <!--------------->
-  {% block content %}
-  <center>
-      {% if ad_details %}
-    
-        {% for id in ad_details %}
-          {% if forloop.counter|divisibleby:2 %}
-          <div class="card text-dark bg-dark mb-3" style="max-width: 75rem;">
-            <div class="card-header" style="color: white;">{{id.first_name}} {{id.last_name}} Advocate</div>
-            <div class="card-body">
-              <h5 class="card-title" style="color: white;">Phno: {{id.phno}}</h5>
-              <table id="ad_details">
-                <tr>
-                  <th>Experience</th>
-                  <th>Email</th>
-                  <th>Address</th>
-                </tr>
-                <tr>
-                  <td>{{id.experience}}+ Years in business</td>
-                  <td>{{id.email}} </td>
-                  <td>{{id.address}} </td>
-                </tr>
+        {% block content %}
+        <br>
+<center>
+    {% if id %}
+      <h2>My List</h2>
+      <br>
+    <table id="sectionsDetails">
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Phone No</th>
+        <th>Experience</th>
+        <th>Expertise</th>
+        <th>Address</th>
+      </tr>
+        <tr>
+          <td>{{id.first_name}} {{id.last_name}}</td>
+          <td>{{id.email}} </td>
+          <td>{{id.phno}} </td>
+          <td>{{id.experience}} </td>
+          <td>{{id.expertise}} </td>
+          <td>{{id.address}}</td>
+        </tr>
 
-              </table>
-            </div>
-            <form  method=POST action="{% url 'criminalAd' %}">
-              {%csrf_token%}
-            <button  type="submit" name="add"  value='{{id.username}}' class="addbtn" >Add to list</button>
-            </form>
-          </div>
-          
-          {% else %}
-          <div class="card text-dark bg-light mb-3" style="max-width: 75rem;">
-            <div class="card-header"><b>{{id.first_name}} {{id.last_name}} Advocate</b></div>
-            <div class="card-body">
-              <h5 class="card-title">Phno: {{id.phno}}</h5>
-              <table id="ad_details">
-                <tr>
-                  <th>Experience</th>
-                  <th>Email</th>
-                  <th>Address</th>
-                </tr>
-                <tr>
-                  <td>{{id.experience}}+ Years in business</td>
-                  <td>{{id.email}} </td>
-                  <td>{{id.address}} </td>
-                </tr>
-              </table>
-            </div>
-            <form  method=POST action="{% url 'criminalAd' %}">
-              {%csrf_token%}
-            <button type="submit" name="add" value='{{id.username}}' class="addbtn">Add to list</button>
-          </form>
-          </div>
-          {% endif %}
-          
-       {% endfor%}
-      {% else %}
-      
-        <h1>nothing to display</h1>
-      
-      {% endif %}
-      
-      </center>
-      
-  {% endblock %}
-      
-     
-    </div>
-      
-      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
-  </body>
-</html>
+    {% else %}
+    
+      <h1>Hey!. Nothing to display.</h1>
+    
+    {% endif %}
+    </table>
+    
+    </center>
+    
+    {% endblock %}
+            
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+        </body>
+      </html>

@@ -10,6 +10,6 @@ urlpatterns=[
     #path('commonAd/',views.commonAd),
     #path('statutoryAd/',views.statutoryAd),
     path('firms/',views.firms),
-    #path('addToList/',views.addToList,name="addToList")
+    path('MyAdList/',views.MyAdList,name="MyAdList")
 
 ]

@@ -14,7 +14,7 @@ def criminalAd(request):
         val=request.POST['add']
         username=request.user
         id=clientAccounts.objects.get(Q(username=username))
-        id.hiredAdUsername +=","+val
+        id.hiredAdUsername =val
         id.save()
         print(id.hiredAdUsername)
     return render(request,'criminal.html',{'ad_details':ad_details})
@@ -33,3 +33,11 @@ def firms(request):
     ad_details=advocateAccounts.objects.all()
     return render(request,'firms.html',{'ad_details':ad_details})
 
+
+def MyAdList(request):
+    user=clientAccounts.objects.get(username=request.user)
+    hiredAdUsername=user.hiredAdUsername
+    adList=advocateAccounts.objects.get(username=hiredAdUsername)
+    print("adlist=====")
+    print(adList.username)
+    return render(request,'MyAdList.html',{'id':adList})

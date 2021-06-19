@@ -11,7 +11,7 @@ from django.contrib.auth import authenticate,login,logout
 from client.decorators import unauthenticated_user
 
 @unauthenticated_user
-def loginPage(request):
+def loginPage(request): 
     if request.method == "POST":
         username=request.POST["uname"]
         psw=request.POST["psw"]

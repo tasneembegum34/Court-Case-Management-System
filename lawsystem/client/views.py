@@ -14,14 +14,14 @@ user_type=""
 def home(request):
     return render(request,'home.html')
  
-@login_required(login_url='/login/')
-@allowed_users(allowed_roles=['client'])
+#@login_required(login_url='/login/')
+#@allowed_users(allowed_roles=['client'])
 def clientHome(request):
     print("client  home")
     return render(request,'clientHome.html') 
 
 
-@unauthenticated_user
+@unauthenticated_user 
 def clientRegister(request):
     if request.method=='POST':
         try:
