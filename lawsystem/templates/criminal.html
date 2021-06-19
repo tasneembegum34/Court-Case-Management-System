@@ -127,7 +127,10 @@
 
               </table>
             </div>
-            <button  type="submit" class="addbtn" >Add to list</button>
+            <form  method=POST action="{% url 'criminalAd' %}">
+              {%csrf_token%}
+            <button  type="submit" name="add"  value='{{id.username}}' class="addbtn" >Add to list</button>
+            </form>
           </div>
           
           {% else %}
@@ -148,10 +151,13 @@
                 </tr>
               </table>
             </div>
-            <button type="submit" class="addbtn">Add to list</button>
+            <form  method=POST action="{% url 'criminalAd' %}">
+              {%csrf_token%}
+            <button type="submit" name="add" value='{{id.username}}' class="addbtn">Add to list</button>
+          </form>
           </div>
           {% endif %}
-         
+          
        {% endfor%}
       {% else %}
       

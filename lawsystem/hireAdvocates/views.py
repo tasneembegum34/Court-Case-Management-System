@@ -1,6 +1,8 @@
+from django.http.response import HttpResponseRedirect
 from django.shortcuts import render
 from django.db.models import Q
 from advocate.models import advocateAccounts
+from client.models import clientAccounts
 # Create your views here.
 
 def hireAdvocates(request): 
@@ -8,6 +10,13 @@ def hireAdvocates(request):
 
 def criminalAd(request):
     ad_details=advocateAccounts.objects.filter(Q(expertise='criminal'))
+    if request.method=="POST":
+        val=request.POST['add']
+        username=request.user
+        id=clientAccounts.objects.get(Q(username=username))
+        id.hiredAdUsername +=","+val
+        id.save()
+        print(id.hiredAdUsername)
     return render(request,'criminal.html',{'ad_details':ad_details})
 
 def civilAd(request):
@@ -23,3 +32,4 @@ def statutoryAd(request):
 def firms(request):
     ad_details=advocateAccounts.objects.all()
     return render(request,'firms.html',{'ad_details':ad_details})
+

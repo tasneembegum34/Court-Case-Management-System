@@ -5,11 +5,11 @@ from . import views
 urlpatterns=[
 
     path('hireAdvocates/',views.hireAdvocates),
-    path('criminalAd/',views.criminalAd),
+    path('criminalAd/',views.criminalAd,name='criminalAd'),
     path('civilAd/',views.civilAd),
-    path('commonAd/',views.commonAd),
-    path('statutoryAd/',views.statutoryAd),
+    #path('commonAd/',views.commonAd),
+    #path('statutoryAd/',views.statutoryAd),
     path('firms/',views.firms),
-
+    #path('addToList/',views.addToList,name="addToList")
 
 ]

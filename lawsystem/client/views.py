@@ -57,6 +57,8 @@ def clientRegister(request):
 
 def regSuccessful(request):
             return render(request,'regSuccessful.html')
+
+
 def searchSection(request):
     if request.user.is_authenticated:
         print("search entered")
@@ -76,4 +78,4 @@ def hireAdvocates(request):
         return render(request,'project.html')
     else:
         return redirect('login')
- 
+  
