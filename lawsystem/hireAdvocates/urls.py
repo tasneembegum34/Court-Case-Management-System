@@ -7,9 +7,8 @@ urlpatterns=[
     path('hireAdvocates/',views.hireAdvocates),
     path('criminalAd/',views.criminalAd,name='criminalAd'),
     path('civilAd/',views.civilAd),
-    #path('commonAd/',views.commonAd),
-    #path('statutoryAd/',views.statutoryAd),
     path('firms/',views.firms),
-    path('MyAdList/',views.MyAdList,name="MyAdList")
+    path('MyAdList/',views.MyAdList,name="MyAdList"),
+    path('MyClientList/',views.MyClientList ),
 
 ]

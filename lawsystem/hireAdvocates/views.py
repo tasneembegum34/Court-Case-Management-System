@@ -30,18 +30,11 @@ def civilAd(request):
         print(id.hiredAdUsername)
     return render(request,'civil.html',{'ad_details':ad_details})
     
-
-def commonAd(request):
-    return render(request,'common.html')
-
-def statutoryAd(request):
-    return render(request,'statutory.html')
-
 def firms(request):
     ad_details=advocateAccounts.objects.all()
     if request.method=="POST":
         val=request.POST['add']
-        username=request.user
+        username=request.user 
         id=clientAccounts.objects.get(Q(username=username))
         id.hiredAdUsername =val
         id.save()
@@ -50,9 +43,21 @@ def firms(request):
 
 
 def MyAdList(request):
-    user=clientAccounts.objects.get(username=request.user)
-    hiredAdUsername=user.hiredAdUsername
-    adList=advocateAccounts.objects.get(username=hiredAdUsername)
-    print("adlist=====")
-    print(adList.username)
-    return render(request,'MyAdList.html',{'id':adList})
+    if request.method=="POST":
+        user=clientAccounts.objects.get(username=request.user)
+        user.hiredAdUsername=""
+        user.save()
+        return render(request,'MyAdList.html')
+    else:
+        user=clientAccounts.objects.get(username=request.user)
+        hiredAdUsername=user.hiredAdUsername
+        if hiredAdUsername:
+            adList=advocateAccounts.objects.get(username=hiredAdUsername)
+            print("adlist=====")
+            print(adList.username)
+            return render(request,'MyAdList.html',{'id':adList})
+        else:
+            return render(request,'MyAdList.html')
+        
+def MyClientList(request):
+    return render(request,'MyClientList.html')

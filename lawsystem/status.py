@@ -1,16 +1,13 @@
-from os import stat
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from webdriver_manager.chrome import ChromeDriverManager
 import pytesseract as tess
-import re,time, urllib
-import requests
-from bs4 import BeautifulSoup
+import re,time
 from PIL import Image
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from selenium.common.exceptions import TimeoutException
 
+  
 def slow_typing(element,text):
     for character in text:
         element.send_keys(character)
@@ -39,9 +36,7 @@ text=tess.image_to_string(img)
 print(text)
 temp=re.findall(r'\d+',text)
 res=list(map(int,temp))
-print(res)
 num=res[0]
-print(num)
 
 element=driver.find_element(By.XPATH,"//input[contains(@id,'captcha')]").send_keys(str(num))
 
@@ -50,18 +45,23 @@ driver.find_element(By.XPATH,"//input[contains(@id,'searchbtn')]").click()
 try:
     myElem = WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.CLASS_NAME, 'historyform')))
     print("Page is ready!")
-    status=driver.find_elements(By.XPATH,"//form[contains(@class,'historyform')]")
-    pageSource = driver.page_source
-    """print(status)
-    for i in status:
-        print(i.text)
-    print("========")"""
+    heading=driver.find_element(By.XPATH,"//h2[contains(@id,'chHeading')]")
+    caseDetailsArray=[]
+    caseDetailsArray.append(heading.text)
+    print(heading.text)
+    for i in range(1,5):
+        l=driver.find_elements_by_xpath ("//*[@class= 'table  case_details_table']/tbody/tr["+str(i)+"]/td")
+        for j in l:
+            #print(j.text)
+            caseDetailsArray.append(j.text)
+    caseStatus=[]
+    for i in range(1,5):
+        l=driver.find_elements_by_xpath ("//*[@class= 'table_r table  text-left']/tbody/tr["+str(i)+"]/td")
+        for j in l:
+            caseStatus.append(j.text)
+    print(caseDetailsArray,caseStatus)
     
-    url="https://services.ecourts.gov.in/ecourtindia_v6/#"
-    response=requests.get(url)
-    soup=BeautifulSoup(pageSource,'html.parser')
-    data_array=soup.find(id="caseHistoryDiv")
-    print(data_array)
+    
 except Exception as e:
     print(e)
     print("Loading took too much time!")

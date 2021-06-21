@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  
+  {%load static%}
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
@@ -13,13 +13,14 @@
 <style>
   #hello-msg{
     font-size: 18px;
-    color:#fff;
+    color:#fff; 
     margin-right: 20px;
   }
   </style>
 <body>
+  {%csrf_token%}
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand">CCMS</a> 
+        <a class="navbar-brand">way2CMS</a> 
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -30,7 +31,7 @@
               <a class="nav-link" href="/advocateHome/"><i class="fa fa-home" aria-hidden="true"></i>Home <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">My Clients</a>
+              <a class="nav-link" href="/MyClientList/">My Clients</a>
             </li>
             <li class="nav-item dropdown">
               <a  class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -44,6 +45,47 @@
           </ul>
           <span id="hello-msg">Hello,{{request.user}}</span>
         </div>
-      </nav>
+      </nav> <br><br><br>
+    <!------------------->
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6 mb-4">
+          <div  class="card" style="width: 85%; height: 80%;  background-color: lightpink; box-shadow: 1px 1px 2px black;">
+            <img class="card-img-top"  style="width: 100%; height: 65%;" src="{% static 'images/legalAdvice.png' %}" alt="Card image cap">
+
+              <div class="card-body">
+                  <h5 class="card-title">My Clients</h5>
+                  <p class="card-text">
+                    You can check your current Clients list here.
+                  </p>
+                    
+                  <a href="/MyClientList/" class="btn btn-dark btn-sm">
+                      Go!
+                  </a>
+                  
+              </div>
+          </div>
+      </div>
+          <div class="col-lg-6 mb-4">
+              <div class="card" style="width: 85%; height: 80%; background-color: lightsalmon; box-shadow: 1px 1px 2px black;">
+                <img class="card-img-top" style="width: 100%; height: 65%;" src="{% static 'images/advocate.png' %}" alt="Card image cap">
+
+                  <div class="card-body">
+                      <h5 class="card-title">Hiring Request</h5>
+                      <p class="card-text">
+                          You can check clients request here.
+                      </p>
+
+                      <a href="#" class="btn btn-dark btn-sm">
+                          Go!
+                      </a>
+                      
+                  </div>
+              </div>
+          </div>
+     
+      </div>
+  </div>
+    <!---------->
 </body>
 </html>

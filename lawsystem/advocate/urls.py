@@ -8,5 +8,6 @@ urlpatterns=[
     path('advocateHome/',views.advocateHome),
     path('advocateRegister/',views.advocateRegister),
     path('regSuccessful/',views.regSuccessful),
+
   
 ]

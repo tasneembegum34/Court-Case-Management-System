@@ -2,11 +2,18 @@
 from django.shortcuts import render,redirect
 from django.contrib import messages
 from django.contrib.auth.models import User
+from requests.api import head
 from .models import clientAccounts, sectionNoDetails
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponseRedirect
 from django.db.models import Q
-#import selenium
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from webdriver_manager.chrome import ChromeDriverManager
+import pytesseract as tess
+import re,time
+from PIL import Image
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 # Create your views here.
 from .decorators import unauthenticated_user,allowed_users
 
@@ -49,7 +56,7 @@ def clientRegister(request):
             if msg:
                 return redirect('/clientRegister/')
             else: 
-                messages.error(request,"one feild is incorrect")
+                messages.error(request,"One feild is incorrect")
                 print(e)
                 return redirect('/clientRegister/')
     else:
@@ -79,3 +86,68 @@ def hireAdvocates(request):
     else:
         return redirect('login')
   
+def caseStatus(request):
+    if request.user.is_authenticated:
+        if request.method=="POST":
+            cnr_no=request.POST['cnr']
+            if len(cnr_no)!=16:
+                messages='CNR No is less than 16 digits'
+                return render(request,'caseStatus.html', {'messages':messages})
+            else:
+                error=""
+                try:
+                    tess.pytesseract.tesseract_cmd=r'E:\SHAREit\tasneemfiles\tesseract.exe'
+
+                    driver=webdriver.Chrome(ChromeDriverManager().install())
+                    driver.maximize_window()
+                    driver.get("https://services.ecourts.gov.in/ecourtindia_v6/")
+
+                    driver.implicitly_wait(10)
+                    #cnrno="MHAU030151912016"
+                    element=driver.find_element(By.XPATH,"//input[contains(@id,'cino')]").send_keys(cnr_no)
+                    
+                    img=driver.find_element(By.XPATH,"//img[contains(@id,'captcha_image')]")
+                    img2=driver.find_element_by_id("captcha_image")
+                    screenshot_as_bytes=img2.screenshot_as_png
+                    with open('captcha.png', 'wb') as f:
+                        f.write(screenshot_as_bytes)
+                    img=Image.open('captcha.png')
+                    text=tess.image_to_string(img)
+                    temp=re.findall(r'\d+',text)
+                    res=list(map(int,temp))
+                    num=res[0]
+                    if(len(str(num))==0):
+                        error="Captch Error please enter details again"
+                        raise Exception(error)
+
+                    element=driver.find_element(By.XPATH,"//input[contains(@id,'captcha')]").send_keys(str(num))
+
+                    driver.find_element(By.XPATH,"//input[contains(@id,'searchbtn')]").click()
+
+             
+                    myElem = WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.CLASS_NAME, 'historyform')))
+                    print("Page is ready!")
+                    heading=driver.find_element(By.XPATH,"//h2[contains(@id,'chHeading')]")
+                    caseDetailsArray=[]
+                    caseDetailsArray.append(heading.text)
+                    for i in range(1,5):
+                        l=driver.find_elements_by_xpath ("//*[@class= 'table  case_details_table']/tbody/tr["+str(i)+"]/td")
+                        for j in l:
+                            #print(j.text)
+                            caseDetailsArray.append(j.text)
+                    caseStatus=[]
+                    for i in range(1,5):
+                        l=driver.find_elements_by_xpath ("//*[@class= 'table_r table  text-left']/tbody/tr["+str(i)+"]/td")
+                        for j in l:
+                            caseStatus.append(j.text)
+                    #print(caseDetailsArray,caseStatus)
+                    driver.close()    
+                    return render(request,'caseStatus.html',context={'caseDetailsArray':caseDetailsArray,'caseStatus2':caseStatus})
+                except Exception as e:
+                    print(e)
+                    print("Loading took too much time!")
+                    return render(request,'caseStatus.html',error)
+        else:
+            return render(request,'caseStatus.html')
+    else:
+        return redirect('login')

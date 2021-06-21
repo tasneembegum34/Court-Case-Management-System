@@ -9,3 +9,10 @@ temp=re.findall(r'\d+',text)
 res=list(map(int,temp))
 num=res[0]
 print(num)
+
+"""url="https://services.ecourts.gov.in/ecourtindia_v6/#"
+    pageSource = driver.page_source
+    response=requests.get(url)
+    soup=BeautifulSoup(pageSource,'html.parser')
+    data_array=soup.find(id="caseHistoryDiv")
+    #print(data_array)"""
