@@ -51,16 +51,18 @@ try:
     myElem = WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.CLASS_NAME, 'historyform')))
     print("Page is ready!")
     status=driver.find_elements(By.XPATH,"//form[contains(@class,'historyform')]")
-    print(status)
+    pageSource = driver.page_source
+    """print(status)
     for i in status:
         print(i.text)
-    print("========")
+    print("========")"""
     
-
-    """response=requests.get(url)
-    soup=BeautifulSoup(response.text,'html.parser')
+    url="https://services.ecourts.gov.in/ecourtindia_v6/#"
+    response=requests.get(url)
+    soup=BeautifulSoup(pageSource,'html.parser')
     data_array=soup.find(id="caseHistoryDiv")
-    print(data_array)"""
-except TimeoutException:
+    print(data_array)
+except Exception as e:
+    print(e)
     print("Loading took too much time!")
 driver.close()

@@ -21,7 +21,15 @@ def criminalAd(request):
 
 def civilAd(request):
     ad_details=advocateAccounts.objects.filter(Q(expertise='civil'))
+    if request.method=="POST":
+        val=request.POST['add']
+        username=request.user
+        id=clientAccounts.objects.get(Q(username=username))
+        id.hiredAdUsername =val
+        id.save()
+        print(id.hiredAdUsername)
     return render(request,'civil.html',{'ad_details':ad_details})
+    
 
 def commonAd(request):
     return render(request,'common.html')
@@ -31,6 +39,13 @@ def statutoryAd(request):
 
 def firms(request):
     ad_details=advocateAccounts.objects.all()
+    if request.method=="POST":
+        val=request.POST['add']
+        username=request.user
+        id=clientAccounts.objects.get(Q(username=username))
+        id.hiredAdUsername =val
+        id.save()
+        print(id.hiredAdUsername)
     return render(request,'firms.html',{'ad_details':ad_details})
 
 

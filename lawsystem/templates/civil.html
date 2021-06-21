@@ -51,24 +51,24 @@
   background-color:darkgrey;
   color: white;
 }
-        .addbtn {
-  background-color:black;
-  position:static;
-  border: none;
-  color: white;
-  padding: 16px 32px;
-  text-align: center;
-  font-size: 16px;
-  margin: 4px 2px;
-  opacity: 0.6;
-  transition: 0.3s;
- height: 50px;
- width: 200px;
-  text-decoration: none;
-  cursor: pointer;
-}
+.addbtn {
+            background-color:black;
+            position:static;
+            border: none;
+            color: white;
+            padding: 16px 32px;
+            text-align: center;
+            font-size: 16px;
+            margin: 4px 2px;
+            opacity: 0.6;
+            transition: 0.3s;
+          height: 50px;
+          width: 200px;
+            text-decoration: none;
+            cursor: pointer;
+          }
 
-.addbtn:hover {opacity: 1}
+          .addbtn:hover {opacity: 1}
     </style>
   </head>
   <body style="background-color:#878384;">
@@ -83,7 +83,7 @@
             <a class="nav-link" href="/clientHome/"><i class="fa fa-home" aria-hidden="true"></i>MyHome<span class="sr-only"></span></a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="">My Client</a>
+            <a class="nav-link" href="/MyAdList/">My Client</a>
           </li>
 
           <li class="nav-item dropdown">
@@ -103,7 +103,7 @@
       <!--------------->
   {% block content %}
   <center>
-      {% if ad_details %}
+      {% if ad_details %} 
     
         {% for id in ad_details %}
           {% if forloop.counter|divisibleby:2 %}
@@ -125,7 +125,10 @@
 
               </table>
             </div>
-            <button  type="submit" class="addbtn" >Add to list</button>
+            <form  method=POST action="{% url 'criminalAd' %}">
+              {%csrf_token%}
+            <button  type="submit" name="add"  value='{{id.username}}' class="addbtn" >Add to list</button>
+            </form>
           </div>
           
           {% else %}
@@ -146,7 +149,10 @@
                 </tr>
               </table>
             </div>
-            <button type="submit" class="addbtn">Add to list</button>
+            <form  method=POST action="{% url 'criminalAd' %}">
+              {%csrf_token%}
+            <button  type="submit" name="add"  value='{{id.username}}' class="addbtn" >Add to list</button>
+            </form>
           </div>
           {% endif %}
          

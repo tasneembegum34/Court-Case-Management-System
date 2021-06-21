@@ -83,7 +83,7 @@
               <a class="nav-link" href="/clientHome/"><i class="fa fa-home" aria-hidden="true"></i>MyHome<span class="sr-only"></span></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">My List</a>
+              <a class="nav-link" href="/MyAdList/">My List</a>
             </li>
 
             <li class="nav-item dropdown">
@@ -98,7 +98,7 @@
           </ul>
         </div>
       </nav><br>
-      <h2>ADVOCATE FIRMS</h2><br>
+      <h2>ALL ADVOCATES </h2><br>
 
       {% block content %}
       <center>
@@ -107,7 +107,7 @@
             {% for id in ad_details %}
               {% if forloop.counter|divisibleby:2 %}
               <div class="card text-dark bg-dark mb-3" style="max-width: 75rem;">
-                <div class="card-header" style="color: white;">{{id.first_name}} {{id.last_name}} Firm</div>
+                <div class="card-header" style="color: white;">{{id.first_name}} {{id.last_name}}</div>
                 <div class="card-body">
                   <h5 class="card-title" style="color: white;">Phno: {{id.phno}}</h5>
                   <table id="ad_details">
@@ -124,12 +124,15 @@
     
                   </table>
                 </div>
-                <button  type="submit" class="addbtn" >Add to list</button>
+                <form  method=POST action="{% url 'criminalAd' %}">
+                  {%csrf_token%}
+                <button  type="submit" name="add"  value='{{id.username}}' class="addbtn" >Add to list</button>
+                </form>
               </div>
               
               {% else %}
               <div class="card text-dark bg-light mb-3" style="max-width: 75rem;">
-                <div class="card-header"><b>{{id.first_name}} {{id.last_name}} Firm</b></div>
+                <div class="card-header"><b>{{id.first_name}} {{id.last_name}} </b></div>
                 <div class="card-body">
                   <h5 class="card-title">Phno: {{id.phno}}</h5>
                   <table id="ad_details">
@@ -145,7 +148,10 @@
                     </tr>
                   </table>
                 </div>
-                <button type="submit" class="addbtn">Add to list</button>
+                <form  method=POST action="{% url 'criminalAd' %}">
+                  {%csrf_token%}
+                <button  type="submit" name="add"  value='{{id.username}}' class="addbtn" >Add to list</button>
+                </form>
               </div>
               {% endif %}
              
