@@ -5,12 +5,14 @@ from django.contrib.auth.models import User
 from requests.api import head
 from .models import clientAccounts, sectionNoDetails
 from django.contrib.auth.decorators import login_required
+from django.core.exceptions import ValidationError
+from django.core.validators import validate_email
 from django.db.models import Q
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from webdriver_manager.chrome import ChromeDriverManager
 import pytesseract as tess
-import re,time
+import re
 from PIL import Image
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
@@ -40,18 +42,24 @@ def clientRegister(request):
             gender=request.POST['gender']
             phno=request.POST['phno']
             email=request.POST['email']
-            username=request.POST['username']
-            password=request.POST['password']
-            re_password=request.POST['re_password']
-            if password==re_password:
-                user=clientAccounts.objects.create(first_name=first_name,last_name=last_name,email=email,dob=dob,username=username,password=password,age=age,gender=gender,phno=phno)
-                print("user created---------------")
-                us=User.objects.create(username=username,password=password)
-                User.save(us)
-                return redirect('/regSuccessful/')
-            else:
-                msg="Password doesn't match"
-                return redirect()
+            try:
+                validate_email(email)
+                username=request.POST['username']
+                password=request.POST['password']
+                re_password=request.POST['re_password']
+                if password==re_password:
+                    user=clientAccounts.objects.create(first_name=first_name,last_name=last_name,email=email,dob=dob,username=username,password=password,age=age,gender=gender,phno=phno)
+                    print("user created---------------")
+                    us=User.objects.create(username=username,password=password)
+                    User.save(us)
+                    return redirect('/regSuccessful/')
+                else:
+                    msg="Password doesn't match"
+                    return redirect()
+            except ValidationError as e:
+                print(e)
+                messages.error(request,"bad email, details:")
+                return redirect('/clientRegister/')
         except Exception as e:
             if msg:
                 return redirect('/clientRegister/')
