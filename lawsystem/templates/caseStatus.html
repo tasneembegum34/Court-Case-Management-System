@@ -70,7 +70,47 @@ element.style {
           }
 
           .submitbtn:hover {opacity: 1}
+          .loader-wrapper {  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: #242f3f;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+}
+.loader {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  position: relative;
+  border: 4px solid #Fff;
+  animation: loader 2s infinite ease;
+}
+.loader-inner {
+  vertical-align: top;
+  display: inline-block;
+  width: 100%;
+  background-color: #fff;
+  animation: loader-inner 2s infinite ease-in;
+}
+@keyframes loader {
+  0% { transform: rotate(0deg);}
+  25% { transform: rotate(180deg);}
+  50% { transform: rotate(180deg);}
+  75% { transform: rotate(360deg);}
+  100% { transform: rotate(360deg);}
+}
+@keyframes loader-inner {
+  0% { height: 0%;}
+  25% { height: 0%;}
+  50% { height: 100%;}
+  75% { height: 100%;}
+  100% { height: 0%;}
+}
         </style>
+        
     </head>
     <body>
         {%csrf_token%}
@@ -100,7 +140,7 @@ element.style {
         </div>
       </nav><br><br><br>
       <div>
-        <form  method=POST action="{% url 'caseStatus' %}" align="center" style="margin-top:-5px;">
+        <form  method=POST action="{% url 'caseStatus' %}" align="center"  class="status_form" style="margin-top:-5px;">
             {%csrf_token%}
             <h1> CASE DETAILS AND STATUS</h1>
             <br>
@@ -108,12 +148,20 @@ element.style {
         <input style="width:300px;" type="text"  placeholder="Ex-MHAU999999999999" name="cnr">
         <button  type="submit" name="submit"   class="submitbtn" >Submit</button>
           </form>
-      </div>
+          <div class="loader-wrapper">
+            <span class="loader"><span class="loader-inner"></span></span>
+        </div>
+          <script>
+            $(window).on("load",function(){
+                $(".loader-wrapper").fadeOut("slow");
+            });
+            </script>
+        </div>
       {% block content %}
       <br>
 <center>
   {% if caseDetailsArray %}
-        <div align="center" style="margin-top:-5px;">
+        <div align="center" style="margin-top:-5px;" class="main_status">
             <h2 class="h1classH" tabindex="0" id="chHeading">{{caseDetailsArray.0}}
                <!--- Chief Judicial Magistrate , Aurangabad</h2>-->
                 
@@ -218,11 +266,14 @@ element.style {
     </center>
     
     {% endblock %}
-    {% if messages %}
-   <script>
-       alert('{{ messages }}');
-   </script>
- 
-    {% endif %}
+{% if messages %}
+  <ul class="messages">
+      
+      <p style="color: lightred;"><li  {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ messages }}</li></p>
+      
+  </ul>
+  {% endif %}
+  
+
     </body>
 </html>

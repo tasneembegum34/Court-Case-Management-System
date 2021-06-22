@@ -116,7 +116,7 @@ def caseStatus(request):
                     temp=re.findall(r'\d+',text)
                     res=list(map(int,temp))
                     num=res[0]
-                    if(len(str(num))==0):
+                    if(len(str(num))<5):
                         error="Captch Error please enter details again"
                         raise Exception(error)
 
@@ -144,6 +144,7 @@ def caseStatus(request):
                     driver.close()    
                     return render(request,'caseStatus.html',context={'caseDetailsArray':caseDetailsArray,'caseStatus2':caseStatus})
                 except Exception as e:
+                    driver.close()  
                     print(e)
                     print("Loading took too much time!")
                     return render(request,'caseStatus.html',error)
