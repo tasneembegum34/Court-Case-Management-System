@@ -28,10 +28,10 @@ def loginPage(request):
                         login(request,user1)
                         return render(request, 'clientHome.html')
                     else:
-                        messages.info(request,"Username as  usertype 'Client' unrecongnized")
+                        messages.error(request,"Username as  usertype 'Client' unrecongnized")
                         return render(request, 'login.html')
                 else:
-                    messages.info(request,"Username or Password incorrect")
+                    messages.error(request,"Username or Password incorrect")
                     return render(request, 'login.html')
             elif usertype=="advocate":
                 user1=authenticate(request,username=username,password=psw)
@@ -41,14 +41,14 @@ def loginPage(request):
                         login(request,user1)
                         return render(request, 'advocateHome.html')
                     else:
-                        messages.info(request,"Username as usertype 'Advocate' unrecongnized")
+                        messages.error(request,"Username as usertype 'Advocate' unrecongnized")
                         return render(request, 'login.html')  
                 else:
-                    messages.info(request,'Username or Password is Incorrect')
+                    messages.error(request,'Username or Password is Incorrect')
                     return render(request, 'login.html')   
         except Exception as e:    
             print(e)
-            messages.info(request,'Usertype not selected')
+            messages.error(request,'Usertype not selected')
             return render(request, 'login.html')
        
  

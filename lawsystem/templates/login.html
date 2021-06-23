@@ -5,7 +5,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="{% static 'styles/style_login.css' %}">
-
+<script src="https://use.fontawesome.com/a48ffc1c86.js"></script>
 </head>
 <body style="background-color: white;">
 
@@ -26,7 +26,7 @@
     <input type="password" name="psw" id="password"  placeholder="Enter password"><br><br>
     <label for="usertype"><b>User Type</b></label><br>
     <input type="radio" id="client" name="usertype" value="client">
-    <label for="client">Client</label>
+    <label for="client">Client</label> 
     <input type="radio" id="advocate" name="usertype" value="advocate">
     <label for="advocate">Advocate</label><br>
     
@@ -34,17 +34,24 @@
     <input type="checkbox" id="check">    
     <span>Remember me</span>    
     <br><br>    
-    <a class="btn btn-primary" href="#" role="button">Forget Password</a>   
- 
+    <a class="btn btn-primary" href="#" role="button">Forget Password</a>  <br> 
+    <p>Don't have an account?   Create one    ------><a href="/home/">here</a></p>
   <br>
+  <script class="lazy" data-src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+  <script class="lazy" data-src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+  <script class="lazy" data-src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+  
+  {% for message in messages %}
   <br>
-  {% if messages %}
-  <ul class="messages">
-      {% for message in messages %}
-      <p style="color: lightred;"><li  {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li></p>
-      {% endfor %}
-  </ul>
-  {% endif %}
+  <div class="container-fluid p-0" style="width:max-content;" >
+    <div class="alert {{ message.tags }} alert-dismissible" role="alert" style="text-align: center; background-color:lightgoldenrodyellow" >
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close" >
+        <span aria-hidden="true">&times;</span>
+      </button>
+      {{ message }}
+    </div>
+  </div>
+  {% endfor %}
   </div>
 
 </form>
@@ -62,7 +69,7 @@
     </script>
     <span class="psw"> <a href="#">Forgot password?</a></span>
   </div>
-  <p>Don't have an account? Create one <a href="/register">here</a></p>
+ 
 </form>-->
 
 

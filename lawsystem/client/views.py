@@ -54,19 +54,20 @@ def clientRegister(request):
                     User.save(us)
                     return redirect('/regSuccessful/')
                 else:
-                    msg="Password doesn't match"
-                    return redirect()
+                    messages.error(request,"Password doesn't match")
+                    return render(request, 'clientRegister.html')
             except ValidationError as e:
                 print(e)
                 messages.error(request,"bad email, details:")
-                return redirect('/clientRegister/')
+                return redirect(request,"clientRegister.html")
         except Exception as e:
             if msg:
-                return redirect('/clientRegister/')
+                messages.error(request,"Password doesn't match")
+                return render(request, 'clientRegister.html')
             else: 
-                messages.error(request,"One feild is incorrect")
                 print(e)
-                return redirect('/clientRegister/')
+                messages.error(request,"One feild is incorrect")
+                return render(request, 'clientRegister.html')
     else:
         return render(request,'clientRegister.html')
 
@@ -99,11 +100,12 @@ def caseStatus(request):
         if request.method=="POST":
             cnr_no=request.POST['cnr']
             if len(cnr_no)!=16:
-                mesg='CNR No is less than 16 digits'
+                mesg='CNR Number is less than 16 digits!!!'
                 messages.warning(request,mesg)
                 return render(request,'caseStatus.html')# {'messages':mesg})
             else:
                 error=""
+                num=0
                 try:
                     tess.pytesseract.tesseract_cmd=r'E:\SHAREit\tasneemfiles\tesseract.exe'
 
@@ -127,8 +129,9 @@ def caseStatus(request):
                     num=res[0]
                     print(str(num))
                     if(len(str(num))<5):
-                        error="Captch Error please enter details again"
-                        print(error)
+                        error=" Error occured please enter details again"
+                        messages.warning(request,error)
+                        return render(request,'caseStatus.html')# {'messages':mesg})
                         raise Exception
                     else:
                         element=driver.find_element(By.XPATH,"//input[contains(@id,'captcha')]").send_keys(str(num))
@@ -144,25 +147,26 @@ def caseStatus(request):
                         for i in range(1,5):
                             l=driver.find_elements_by_xpath ("//*[@class= 'table  case_details_table']/tbody/tr["+str(i)+"]/td")
                             for j in l:
-                                #print(j.text)
                                 caseDetailsArray.append(j.text)
                         caseStatus=[]
                         for i in range(1,5):
                             l=driver.find_elements_by_xpath ("//*[@class= 'table_r table  text-left']/tbody/tr["+str(i)+"]/td")
                             for j in l:
                                 caseStatus.append(j.text)
-                        #print(caseDetailsArray,caseStatus)   
                         return render(request,'caseStatus.html',context={'caseDetailsArray':caseDetailsArray,'caseStatus2':caseStatus})
                 except Exception as e:
                     print(e)
                     print("Loading took too much time!")
                     if(error):
-                         return render(request,'caseStatus.html',{"messages":error})
+                        messages.error(request,error)
+                        return render(request,'caseStatus.html')
                     else:
                         msg="Loading took too much time! Please try again"
-                        return render(request,'caseStatus.html',{"messages":msg})
+                        messages.error(request,msg)
+                        return render(request,'caseStatus.html')
                 finally:
                     driver.close()
+                    num=0
         else:
             return render(request,'caseStatus.html')
     else:

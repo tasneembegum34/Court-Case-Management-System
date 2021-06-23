@@ -52,19 +52,19 @@ def advocateRegister(request):
                     return redirect('/regSuccessful/')
                    
                 else:
-                    msg="Incorrect Enrollment number or date"
-                    return redirect()
+                    messages.error(request,"Incorrect Enrollment number or date")
+                    return render(request, 'advocateRegister.html')
             else:
-               msg="Password doesn't match"
-               return redirect()
+                messages.error(request,"Password doesn't match")
+                return render(request, 'advocateRegister.html')
         except Exception as e:
             if msg:
-                messages.error(request,msg)
-                return redirect('/advocateRegister/')
+                messages.error(request,"Password doesn't match")
+                return render(request, 'advocateRegister.html')
             else: 
                 messages.error(request,"one feild is incorrect")
                 print(e)
-                return redirect('/advocateRegister/')
+                return render(request, 'advocateRegister.html')
     else:
         return render(request,'advocateRegister.html')
 
