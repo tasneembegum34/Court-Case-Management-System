@@ -99,8 +99,9 @@ def caseStatus(request):
         if request.method=="POST":
             cnr_no=request.POST['cnr']
             if len(cnr_no)!=16:
-                messages='CNR No is less than 16 digits'
-                return render(request,'caseStatus.html', {'messages':messages})
+                mesg='CNR No is less than 16 digits'
+                messages.warning(request,mesg)
+                return render(request,'caseStatus.html')# {'messages':mesg})
             else:
                 error=""
                 try:
@@ -124,38 +125,44 @@ def caseStatus(request):
                     temp=re.findall(r'\d+',text)
                     res=list(map(int,temp))
                     num=res[0]
+                    print(str(num))
                     if(len(str(num))<5):
                         error="Captch Error please enter details again"
-                        raise Exception(error)
+                        print(error)
+                        raise Exception
+                    else:
+                        element=driver.find_element(By.XPATH,"//input[contains(@id,'captcha')]").send_keys(str(num))
 
-                    element=driver.find_element(By.XPATH,"//input[contains(@id,'captcha')]").send_keys(str(num))
+                        driver.find_element(By.XPATH,"//input[contains(@id,'searchbtn')]").click()
 
-                    driver.find_element(By.XPATH,"//input[contains(@id,'searchbtn')]").click()
-
-             
-                    myElem = WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.CLASS_NAME, 'historyform')))
-                    print("Page is ready!")
-                    heading=driver.find_element(By.XPATH,"//h2[contains(@id,'chHeading')]")
-                    caseDetailsArray=[]
-                    caseDetailsArray.append(heading.text)
-                    for i in range(1,5):
-                        l=driver.find_elements_by_xpath ("//*[@class= 'table  case_details_table']/tbody/tr["+str(i)+"]/td")
-                        for j in l:
-                            #print(j.text)
-                            caseDetailsArray.append(j.text)
-                    caseStatus=[]
-                    for i in range(1,5):
-                        l=driver.find_elements_by_xpath ("//*[@class= 'table_r table  text-left']/tbody/tr["+str(i)+"]/td")
-                        for j in l:
-                            caseStatus.append(j.text)
-                    #print(caseDetailsArray,caseStatus)
-                    driver.close()    
-                    return render(request,'caseStatus.html',context={'caseDetailsArray':caseDetailsArray,'caseStatus2':caseStatus})
+                
+                        myElem = WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.CLASS_NAME, 'historyform')))
+                        print("Page is ready!")
+                        heading=driver.find_element(By.XPATH,"//h2[contains(@id,'chHeading')]")
+                        caseDetailsArray=[]
+                        caseDetailsArray.append(heading.text)
+                        for i in range(1,5):
+                            l=driver.find_elements_by_xpath ("//*[@class= 'table  case_details_table']/tbody/tr["+str(i)+"]/td")
+                            for j in l:
+                                #print(j.text)
+                                caseDetailsArray.append(j.text)
+                        caseStatus=[]
+                        for i in range(1,5):
+                            l=driver.find_elements_by_xpath ("//*[@class= 'table_r table  text-left']/tbody/tr["+str(i)+"]/td")
+                            for j in l:
+                                caseStatus.append(j.text)
+                        #print(caseDetailsArray,caseStatus)   
+                        return render(request,'caseStatus.html',context={'caseDetailsArray':caseDetailsArray,'caseStatus2':caseStatus})
                 except Exception as e:
-                    driver.close()  
                     print(e)
                     print("Loading took too much time!")
-                    return render(request,'caseStatus.html',error)
+                    if(error):
+                         return render(request,'caseStatus.html',{"messages":error})
+                    else:
+                        msg="Loading took too much time! Please try again"
+                        return render(request,'caseStatus.html',{"messages":msg})
+                finally:
+                    driver.close()
         else:
             return render(request,'caseStatus.html')
     else:
