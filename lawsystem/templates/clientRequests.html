@@ -30,8 +30,7 @@
           text-align: center;
           font-family: Cuprum,sans-serif;
         }
-              
-    #clientDetails {
+        #clientDetails {
   font-family: Arial, Helvetica, sans-serif;
   border-collapse: collapse; 
   width: 90%;
@@ -71,64 +70,65 @@
           }
 
           .removebtn:hover {opacity: 1}
-  </style>
-<body>
-  {%csrf_token%}
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand">way2CMS</a> 
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-      
-        <div style="position: relative;" class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul  class="navbar-nav mr-auto">
-            <li class="nav-item active">
-              <a class="nav-link" href="/advocateHome/"><i class="fa fa-home" aria-hidden="true"></i>Home <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/clientRequests/">Client Requests</a>
-            </li>
-            <li class="nav-item dropdown">
-              <a  class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <i class="fa fa-user" aria-hidden="true"></i>  My Account
-              </a>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="#">Settings</a>
-                <a class="dropdown-item" href="/logout/">Logout</a>
-                
-            </li>
-          </ul>
-          <span id="hello-msg">Hello,{{request.user}}</span>
-        </div>
-      </nav> <br> 
-      <div>
+    </style>
 
+</head>
+<body >
+  {%csrf_token%}
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand">way2CMS</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavDropdown">
+    <ul class="navbar-nav">
+      <li class="nav-item active">
+        <a class="nav-link" href="/clientHome/"><i class="fa fa-home" aria-hidden="true"></i>MyHome<span class="sr-only"></span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/MyClientList/">My List</a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          MyAccount
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          <a class="dropdown-item" href="#">Settings</a>
+          <a class="dropdown-item" href="/logout/">Logout</a>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </nav><br>
+    <div>
         {% block content %}
         <br>
 <center>
-    {% if id %}
+    <p>came{{usernameList}}</p>
+    {% if usernameList %}
       <h2>My List</h2>
       <br>
-    <table id="clientDetails">
-      <tr>
-        <th>Name</th>
-        <th>Email</th>
-        <th>Phone No</th>
-        <th></th>
-      </tr>
+        <table id="clientDetails">
         <tr>
-          <td>{{id.first_name}} {{id.last_name}}</td>
-          <td>{{id.email}} </td>
-          <td>{{id.phno}} </td>
-          <td>
-          <form  method=POST action="{% url 'MyAdList' %}">
-            {%csrf_token%}
-          <button  type="submit" name="remove"  value='{{id.username}}' class="removebtn" >Remove</button>
-          </form></td>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone No</th>
+            <th></th>
+            <th></th>
         </tr>
-        
+        {% for id in usernameList%}
+            <tr>
+            <td>{{id.first_name}} {{id.last_name}}</td>
+            <td>{{id.email}} </td>
+            <td>{{id.phno}} </td>
+            <td>
+            <form  method=POST action="">
+                {%csrf_token%}
+            <button  type="submit" name="add"  value='{{id.username}}' class="removebtn" >Add</button>
+            </form></td>
+            </tr>
+            {% endfor %}
       </table>
-      
     {% else %}
     <h2>My List</h2>
       <h5>Hey!. Nothing to display.</h5>
@@ -138,9 +138,8 @@
           <th>Name</th>
           <th>Email</th>
           <th>Phone No</th>
-         
-        </tr>
        
+        </tr>
         </table>
     {% endif %}
   
@@ -149,7 +148,7 @@
     
     {% endblock %}
             
-            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
   
     </body>
     </html>

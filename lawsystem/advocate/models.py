@@ -15,5 +15,7 @@ class advocateAccounts(models.Model):
     experience=models.IntegerField(default=0,blank=True)
     expertise=models.CharField(max_length=15,blank=True)
     address=models.CharField(max_length=255,default="Nil")
+    confirmedClients=models.CharField(max_length=30,blank=True)
+    clientRequest=models.CharField(max_length=30,blank=True)
 
    

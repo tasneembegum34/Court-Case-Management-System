@@ -123,10 +123,12 @@
         {% block content %}
         <br>
 <center>
-    {% if id %}
+    {% if usernameList %}
       <h2>My List</h2>
       <br>
+     
     <table id="advocateDetails"> 
+      
       <tr>
         <th>Name</th>
         <th>Email</th>
@@ -136,6 +138,7 @@
         <th>Address</th>
         <th>Actions</th>
       </tr>
+      {% for id in usernameList%}
         <tr>
           <td>{{id.first_name}} {{id.last_name}}</td>
           <td>{{id.email}} </td>
@@ -151,12 +154,13 @@
           </form>
           <form  method=POST action="{% url 'MyAdList' %}">
             {%csrf_token%}
-          <button class="contactbtn" style="vertical-align:middle" ><span>Contact </span></button></td>
+          <button class="contactbtn" style="vertical-align:middle" value='{{id.username}}'  ><span>Contact </span></button></td>
         </form>
         </tr>
         
-      </table>
       
+      {% endfor %}
+    </table>
     {% else %}
     <h2>My List</h2>
       <h5>Hey!. Nothing to display.</h5>

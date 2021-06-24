@@ -10,5 +10,6 @@ urlpatterns=[
     path('firms/',views.firms),
     path('MyAdList/',views.MyAdList,name="MyAdList"),
     path('MyClientList/',views.MyClientList ),
+    path('clientRequests/',views.clientRequests,name="clientRequests" ),
 
 ]
