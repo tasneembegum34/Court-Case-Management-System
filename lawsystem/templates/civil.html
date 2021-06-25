@@ -85,7 +85,9 @@
           <li class="nav-item">
             <a class="nav-link" href="/MyAdList/">My Client</a>
           </li>
-
+          <li class="nav-item">
+            <a class="nav-link" href="/confirmedAds/">Confirmed Advocates</a>
+          </li>  
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               MyAccount
@@ -125,7 +127,7 @@
 
               </table>
             </div>
-            <form  method=POST action="{% url 'criminalAd' %}">
+            <form  method=POST action="{% url 'civilAd' %}">
               {%csrf_token%}
             <button  type="submit" name="add"  value='{{id.username}}' class="addbtn" >Add to list</button>
             </form>

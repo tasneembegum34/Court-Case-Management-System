@@ -127,7 +127,7 @@
         <br>
 <center>
     {% if usernameList %}
-      <h2>My Advocate List</h2>
+      <h2>Confirmed Advocates</h2>
       <br>
      
     <table id="advocateDetails"> 
@@ -139,7 +139,6 @@
         <th>Experience</th>
         <th>Expertise</th>
         <th>Address</th>
-        <th>Actions</th>
       </tr>
       {% for id in usernameList%}
         <tr>
@@ -149,23 +148,14 @@
           <td>{{id.experience}} </td>
           <td>{{id.expertise}} </td>
           <td>{{id.address}}</td>
-          <td>
-          <form  method=POST action="{% url 'MyAdList' %}">
-            {%csrf_token%}
-          <button  type="submit" name="remove"  value='{{id.username}}' class="removebtn" >Remove</button>
-
-          </form>
-          <form  method=POST action="{% url 'MyAdList' %}">
-            {%csrf_token%}
-          <button class="contactbtn" style="vertical-align:middle" value='{{id.username}}'  ><span>Contact </span></button></td>
-        </form>
+          
         </tr>
         
       
       {% endfor %}
     </table>
     {% else %}
-    <h2>My Advocate List</h2>
+    <h2>Confirmed Advocates</h2>
       <h5>Hey!. Nothing to display.</h5>
 
       <table id="advocateDetails">

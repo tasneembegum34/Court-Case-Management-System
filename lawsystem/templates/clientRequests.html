@@ -88,6 +88,9 @@
       <li class="nav-item">
         <a class="nav-link" href="/MyClientList/">My List</a>
       </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/clientRequests/">Client Requests</a>
+      </li>
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           MyAccount
@@ -104,9 +107,8 @@
         {% block content %}
         <br>
 <center>
-    <p>came{{usernameList}}</p>
     {% if usernameList %}
-      <h2>My List</h2>
+      <h2>Client Requests</h2>
       <br>
         <table id="clientDetails">
         <tr>
@@ -114,7 +116,7 @@
             <th>Email</th>
             <th>Phone No</th>
             <th></th>
-            <th></th>
+           
         </tr>
         {% for id in usernameList%}
             <tr>
@@ -130,9 +132,8 @@
             {% endfor %}
       </table>
     {% else %}
-    <h2>My List</h2>
+    <h2>Client Requests</h2>
       <h5>Hey!. Nothing to display.</h5>
-
       <table id="clientDetails">
         <tr>
           <th>Name</th>
