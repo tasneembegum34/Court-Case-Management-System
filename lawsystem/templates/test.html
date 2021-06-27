@@ -6,6 +6,13 @@
  
     <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script src="https://use.fontawesome.com/a48ffc1c86.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
 
 <style>
 
@@ -73,13 +80,6 @@ text-decoration: none;
 
 /* Change color on hover – Links change color when you move the mouse cursor on the links*/
 
-.topnav a:hover {
-
-background-color: #ddd;
-
-color: black;
-
-}
 
 /* This generates two unequal columns that are located next to each other */
 
@@ -128,7 +128,7 @@ background-color: white;
 padding: 20px;
 
 margin-top: 20px;
-
+height:400px;
 }
 
 /* Clear floats after the columns */
@@ -186,29 +186,57 @@ width: 100%;
 }
 
 </style>
-{%load static%}
 </head>
 
 <body>
 
-<div class="header">
-    <img style="width: 190px; height: 80px; padding-right: 15px;" class="d-block w-80" src="{% static 'images/new_logo.PNG' %}" >
-<h1>My Website</h1>
-
-<p>Resize the browser window to see the effect.</p>
-
+<div class="header" style="background-color:lightslategray">
+    <center><img style="width: 300px; height: 80px; padding-right: 15px;" class="d-block w-80" src="{% static 'images/new_logo.PNG' %}" ></center>
 </div>
 
 <div class="topnav">
-
-<a href="#">Link</a>
-
-<a href="#">Link</a>
-
-<a href="#">Link</a>
-
-<a href="#" style="float:right">Link</a>
-
+  <nav  class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <!--div class="container"-->
+      <img style="width: 90px; height: 50px; padding-right: 15px;" class="d-block w-80" src="{% static 'images/logo.PNG' %}" >
+      <a class="navbar-brand">way2CMS</a> 
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div  class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav navbar-expand-lg navbar-dark bg-dark avbar-left">
+          <li class="nav-item active">
+            <a class="nav-link" href="#" ><i class="fa fa-home" aria-hidden="true"></i> Home</a>
+          </li>
+          <li class="nav-item ">
+            <a class="nav-link" href="#"  >About</a>
+          </li>  
+          <li class="nav-item ">
+            <a class="nav-link" href="#"  >Services</a>
+          </li>  
+          <li class="nav-item ">
+            <a class="nav-link" href="#"  >Contact</a>
+          </li>            
+           </ul>
+      </div>
+    
+      <ul class="navbar-nav navbar-expand-lg navbar-dark bg-dark avbar-left">
+          <li class="nav-item">
+            <a class="nav-link" href="/login/"  ><span class="glyphicon glyphicon-log-in"></span> Login</a>
+          </li>
+          <li class="nav-item dropdown" >
+            <a class="nav-link"  class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Register
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+              <a  class="dropdown-item" href="/clientRegister/">As Client</a>
+              <a  class="dropdown-item" href="/advocateRegister/">As Lawyer</a>
+              
+            </div>
+          </li>
+      </ul>
+    
+    <!--div-->
+    </nav>
 </div>
 
 <div class="row">
@@ -217,75 +245,80 @@ width: 100%;
 
 <div class="card">
 
-<h2>TITLE HEADING</h2>
 
-<h5>Title description, Dec 7, 2017</h5>
+<div id="carouselExampleControls" class="carousel slide " data-ride="carousel">
+  <div class="carousel-inner bg-light">
+    <div class="carousel-item active">
+      <div class="d-flex justify-content-center">
+      <img class="d-block w-80" src="{% static 'images/image1.jpg' %}" alt="First slide" height="300">
+      <div class="carousel-caption d-none d-md-block">
+        <p ><b>Courts And Cases</b></p> 
+      </div>
+    </div></div>
+    <div class="carousel-item">
+      <div class="d-flex justify-content-center">
+      <img class="d-block w-80" src="{% static 'images/image2.jpg'%}" alt="Second slide" height="300">
+      <div class="carousel-caption d-none d-md-block">
+       <p>Hire Your Advocate/Lawyer</p>
+      </div>
+    </div></div>
+    <div class="carousel-item">
+      <div class="d-flex justify-content-center">
+      <img class="d-block w-80" src="{% static 'images/image3.jpg'%}" alt="Third slide" height="300">
+      <div class="carousel-caption d-none d-md-block">
+        <p class="text-secondary">Check Your Status</p>
+      </div>
+    </div></div>
+  </div>
 
-<div class="fakeimg" style="height:200px;">Image</div>
-
-<p>Some text..</p>
-
-<p>Sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.</p>
+  <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
+</div>
+<br>
 
 </div>
 
-<div class="card">
 
-<h2>TITLE HEADING</h2>
-
-<h5>Title description, Sep 2, 2017</h5>
-
-<div class="fakeimg" style="height:200px;">Image</div>
-
-<p>Some text..</p>
-
-<p>Sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.</p>
-
-</div>
 
 </div>
 
 <div class="rightcolumn">
 
-<div class="card">
+<div class="card ">
 
-<h2>About Me</h2>
+<h2>About</h2>
 
-<div class="fakeimg" style="height:100px;">Image</div>
 
-<p>Some text about me in culpa qui officia deserunt mollit anim..</p>
-
-</div>
-
-<div class="card">
-
-<h3>Popular Post</h3>
-
-<div class="fakeimg"><p>Image</p></div>
-
-<div class="fakeimg"><p>Image</p></div>
-
-<div class="fakeimg"><p>Image</p></div>
+<p class=" font-italic font-weight-bold">way2CMS(Case managment system).<br> This is your one stop place to
+  hire a lawyer, get a legal advice, know about few sections and also access information about 
+  your on going case(if there is any). Our ultimate goal is to give easy access to users, all at one place.
+   All the details that we provide on our website are legit. And all your personal details are safe with us. 
+   Happy browsing!! </p>
 
 </div>
 
-<div class="card">
-
-<h3>Follow Me</h3>
-
-<p>Some text..</p>
 
 </div>
 
 </div>
 
-</div>
+<div class="footer text-light bg-dark" >
+  <p>footer</p>  
 
-<div class="footer">
+  <div class="card-footer text-light bg-dark">
+    <i class="fa fa-phone-square" aria-hidden="true"></i>&nbsp; &nbsp;
+    <i class="fa fa-envelope" aria-hidden="true"></i>&nbsp; &nbsp;
+    <i class="fa fa-instagram" aria-hidden="true"></i>&nbsp; &nbsp;
+    <i class="fa fa-facebook-square" aria-hidden="true"></i>
+  </div>
+  
 
-<h2>Footer</h2>
-
-</div>
 
 </body>
 

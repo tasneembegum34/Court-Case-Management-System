@@ -11,20 +11,135 @@
   <script src="https://use.fontawesome.com/a48ffc1c86.js"></script>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
 <style>
-  .navbar li {
+
+* {
+box-sizing: border-box;
+}
+
+body {
+font-family: Arial;
+background: #f1f1f1;
+padding: 10px;
+}
+
+.header {
+padding: 20px;
+text-align: center;
+background: white;
+}
+
+/* Style the top navigation bar */
+.topnav {
+overflow:visible;
+background-color: #333;
+z-index: 1 !important; 
+position: relative;
+}
+
+.navbar li {
   /* (80px - button height 34px) / 2 = 23px */
   padding-left: 10px !important;
   padding-right: 10px !important;
   font-size: medium;
+
+    position: relative; /* <-- Added */
+}
+.topnav a {
+float: left;
+display: block;
+text-align: center;
+padding: 14px 16px;
+text-decoration: none;
+}
+
+.leftcolumn {
+float: left;
+width: 75%;
+}
+/* Right column */
+.rightcolumn {
+float: left;
+width: 24%;
+background-color: #f1f1f1;
+padding-left: 20px;
+}
+/* Add a card effect for articles */
+.card {
+background-color: white;
+padding: 20px;
+margin-top: 20px;
+height:500px;
+}
+/* Clear floats after the columns */
+.row:after {
+content: “”;
+display: table;
+clear: both;
+}
+/* Footer – This defines the footer section of the website */
+.footer {
+padding: 20px;
+text-align: center;
+background: #ddd;
+margin-top: 20px;
+}
+.main-body {
+    padding: 15px;
+    
+}
+
+
+.card {
+    box-shadow: 0 1px 3px 0 rgba(0,0,0,.1), 0 1px 2px 0 rgba(0,0,0,.06);
+}
+
+.card {
+
+    color: #1a202c;
+    text-align: left;
+    background-color: #343a40;
+
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 0 solid rgba(0,0,0,.125);
+    border-radius: .25rem;
+}
+
+.card-body {
+    flex: 1 1 auto;
+    min-height: 1px;
+    padding: 1rem;
+}
+/* Responsive layout – when the screen has less than 800px width, this makes the two columns be placed on top of each other*/
+@media screen and (max-width: 800px) {
+.leftcolumn, .rightcolumn {
+width: 100%;
+padding: 0;
+}
+}
+/* Responsive layout – when the screen is less than 400px wide, make the navigation links stack on top of each other instead of next to each other */
+@media screen and (max-width: 400px) {
+.topnav a {
+float: none;
+width: 100%;
+}
 }
 </style>
 </head>
 
 <body>
+  <div class="header" style="background-color:lightslategray">
+    <center><img style="width: 300px; height: 90px; padding-right: 15px;" class="d-block w-80" src="{% static 'images/new_logo.PNG' %}" ></center>
+</div>
+<div class="topnav">
     <nav  class="navbar navbar-expand-lg navbar-dark bg-dark">
       <!--div class="container"-->
-        <img style="width: 90px; height: 50px; padding-right: 15px;" class="d-block w-80" src="{% static 'images/logo.PNG' %}" >
-        <a class="navbar-brand">way2CMS</a> 
+        
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -37,63 +152,67 @@
               <a class="nav-link" href="#"  >About</a>
             </li>  
             <li class="nav-item ">
-              <a class="nav-link" href="#"  >Services</a>
-            </li>  
-            <li class="nav-item ">
               <a class="nav-link" href="#"  >Contact</a>
             </li>            
+            <li class="nav-item ">
+              <a class="nav-link" href="#feedback_section"  >Feedback</a>
+            </li>
              </ul>
         </div>
       
         <ul class="navbar-nav navbar-expand-lg navbar-dark bg-dark avbar-left">
+          <li class="nav-item dropdown" >
+            <a class="nav-link"   class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Register
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+              <a  class="dropdown-item" href="/clientRegister/">As Client</a>
+              <a  class="dropdown-item" href="/advocateRegister/">As Lawyer</a>
+              
+            </div>
+          </li>
             <li class="nav-item">
               <a class="nav-link" href="/login/"  ><span class="glyphicon glyphicon-log-in"></span> Login</a>
             </li>
-            <li class="nav-item dropdown" >
-              <a class="nav-link"  class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Register
-              </a>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                <a  class="dropdown-item" href="/clientRegister/">As Client</a>
-                <a  class="dropdown-item" href="/advocateRegister/">As Lawyer</a>
-                
-              </div>
-            </li>
+           
         </ul>
       
       <!--div-->
       </nav>
-      
-      <div class="w3-container w3-cursive">
-      <h1 class=" text-center font-weight-bold">way2CMS</h1>
-     </div>
-      <br>
+    </div>
+  
+    <div class="row">
 
-       <div id="carouselExampleControls" class="carousel slide " data-ride="carousel">
-        <div class="carousel-inner bg-light">
+      <div class="leftcolumn">
+      
+      <div class="card"  style="border-radius: 0.5%; padding-top: 60px;">
+      
+      
+      <div id="carouselExampleControls" class="carousel slide " data-ride="carousel">
+        <div class="carousel-inner bg-light ">
           <div class="carousel-item active">
             <div class="d-flex justify-content-center">
-            <img class="d-block w-80" src="{% static 'images/image1.jpg' %}" alt="First slide" height="300">
+            <img class="d-block w-80" src="{% static 'images/image1.jpg' %}" alt="First slide" height="350" >
             <div class="carousel-caption d-none d-md-block">
               <p ><b>Courts And Cases</b></p> 
             </div>
           </div></div>
           <div class="carousel-item">
             <div class="d-flex justify-content-center">
-            <img class="d-block w-80" src="{% static 'images/image2.jpg'%}" alt="Second slide" height="300">
+            <img class="d-block w-80" src="{% static 'images/image2.jpg'%}" alt="Second slide" height="350">
             <div class="carousel-caption d-none d-md-block">
              <p>Hire Your Advocate/Lawyer</p>
             </div>
           </div></div>
           <div class="carousel-item">
             <div class="d-flex justify-content-center">
-            <img class="d-block w-80" src="{% static 'images/image3.jpg'%}" alt="Third slide" height="300">
+            <img class="d-block w-80" src="{% static 'images/image3.jpg'%}" alt="Third slide" height="350">
             <div class="carousel-caption d-none d-md-block">
               <p class="text-secondary">Check Your Status</p>
             </div>
           </div></div>
         </div>
-
+      
         <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
           <span class="carousel-control-prev-icon" aria-hidden="true"></span>
           <span class="sr-only">Previous</span>
@@ -104,37 +223,70 @@
         </a>
       </div>
       <br>
-  
-    <!--end-->
-      <div class="container">
-        <div class="row">
-          <div class="col-sm">
-            
-          </div>
-          <div class="col-sm">
-            <p class="text-center font-italic font-weight-bold">way2CMS(Case managment system). This is your one stop place to
-               hire a lawyer, get a legal advice, know about few sections and also access information about 
-               your on going case(if there is any). Our ultimate goal is to give easy access to users, all at one place.
-                All the details that we provide on our website are legit. And all your personal details are safe with us. 
-                Happy browsing!! </p>
-          </div>
-          <div class="col-sm">
-            
-          </div>
-        </div>
+      
       </div>
       
-      <body class="d-flex flex-column min-vh-100">
-        <div class="wrapper flex-grow-1"></div>
-        
-        <div class="card card-dark text-right text-light bg-dark">
-        <div class="card-footer">
+      
+      
+      </div>
+      
+      <div class="rightcolumn">
+      
+      <div class="card "  style="border-radius: 5%;">
+      
+      <center><h2><b>About</b></h2></center>
+    
+    <br>
+      <p class=" font-italic font-weight-bold" style="font-size:18px; text-align:justify;" >way2CMS(Case managment system).
+        This is your one stop place to hire a lawyer, get a legal advice, know about few sections and also access 
+        information about  your on going case(if there is any). Our ultimate goal is to give easy access to users,
+        all at one place.All the details that we provide on our website are legit. And all your personal details 
+        are safe with us. Happy browsing!! </p>
+      
+      </div>
+      
+      
+      </div>
+      
+      </div>
+      <section id="feedback_section">
+      <div class="footer text-light bg-dark" >
+        <div class="container">
+          <div class="row">
+          <div class="col-md-8">
+              <div class="card">
+                  <div class="card-body tab-content">
+                      <div class="tab-pane active" id="profile">
+                      <p class="text-dark text-centre">We want the best for our users. How about you give some feedback, so that we can better and better!!</p>
+                      <form>
+                      <div class="form-group">
+                        <label for="uname">User Name</label>
+                        <input type="text" class="form-control" id="uname" placeholder="Enter your User name" value="">
+                        </div>
+                        <div class="form-group">
+                         <label for="email">Email</label>
+                          <input type="text" class="form-control" id="email"  placeholder="Enter your Email ID" value="">
+                          </div>
+                          <div class="form-group">
+                          <label for="msg">Message</label>
+                          <textarea class="form-control autosize" id="msg" placeholder="Feel free to give suggestions or write a message please!!" style="overflow: hidden; overflow-wrap: break-word; resize: none; height: 62px;"></textarea>
+                      </div>
+                      <button type="button" class="btn btn-dark">Submit</button>
+                      </form>
+                      </div></div></div>
+              </div>
+          </div>
+      </div>
+      
+        <div class="card-footer text-light bg-dark">
           <i class="fa fa-phone-square" aria-hidden="true"></i>&nbsp; &nbsp;
           <i class="fa fa-envelope" aria-hidden="true"></i>&nbsp; &nbsp;
           <i class="fa fa-instagram" aria-hidden="true"></i>&nbsp; &nbsp;
           <i class="fa fa-facebook-square" aria-hidden="true"></i>
         </div>
-      </div>
+        
+      
+      </section>
     </body>     
     
     </body></html>
