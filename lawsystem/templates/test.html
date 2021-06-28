@@ -1,325 +1,171 @@
 <!DOCTYPE html>
 <html lang="en">
-
-
 <head>
- 
-    <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-  <script src="https://use.fontawesome.com/a48ffc1c86.js"></script>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+	<meta charset="UTF-8">
+	<title>How to open popup model after few seconds when website load using jquery</title>
 
-<style>
+	<!-- BOOTSTRAP 4.4.1 -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
 
-* {
+	<!-- ANIMATE CSS -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css" />
 
-box-sizing: border-box;
-
-}
-
-body {
-
-font-family: Arial;
-
-padding: 10px;
-
-background: #f1f1f1;
-
-}
-
-/* Header/Blog Title – You define the title to your header or the blog */
-
-.header {
-
-padding: 30px;
-
-text-align: center;
-
-background: white;
-
-}
-
-.header h1 {
-
-font-size: 50px;
-
-}
-
-/* Style the top navigation bar */
-
-.topnav {
-
-overflow: hidden;
-
-background-color: #333;
-
-}
-
-/* Style the top navigation links for the navigation bar*/
-
-.topnav a {
-
-float: left;
-
-display: block;
-
-color: #f2f2f2;
-
-text-align: center;
-
-padding: 14px 16px;
-
-text-decoration: none;
-
-}
-
-/* Change color on hover – Links change color when you move the mouse cursor on the links*/
+	<!-- FONT AWESOME 4.7.0 -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+	<style>
+	
+		#myModal .modal-body{
+			padding: 0;
+		}
+		#myModal .modal-dialog {
+		    max-width: 600px;
+		}
+		#myModal .formWrap{
+			padding: 3px 4px;
+		}
+		#myModal h5{
+			font-size: 14px;
+			margin-bottom: 10px;
+		}
+		#myModal form{
+			margin-top: 0px;
+		}
+		#myModal input{
+			width: 100%;
+		    height: 30px;
+		    padding: 0 10px;
+		    border: 1px solid #e2e2e2;
+		    margin-bottom: 10px;
+		}
+		#myModal input:focus{
+			outline: #FF5722;
+			border-color: #FF5722 !important;
+		}
+		#myModal .submit{
+		    background: #FF5722;
+		    color: #fff;
+		    border: none;
+		}
+	
 
 
-/* This generates two unequal columns that are located next to each other */
-
-/* Left column */
-
-.leftcolumn {
-
-float: left;
-
-width: 75%;
-
-}
-
-/* Right column */
-
-.rightcolumn {
-
-float: left;
-
-width: 25%;
-
-background-color: #f1f1f1;
-
-padding-left: 20px;
-
-}
-
-/* This adds a fake image */
-
-.fakeimg {
-
-background-color: #aaa;
-
-width: 100%;
-
-padding: 20px;
-
-}
-
-/* Add a card effect for articles */
 
 .card {
-
-background-color: white;
-
-padding: 20px;
-
-margin-top: 20px;
-height:400px;
+    box-shadow: 0 1px 3px 0 rgba(0,0,0,.1), 0 1px 2px 0 rgba(0,0,0,.06);
 }
 
-/* Clear floats after the columns */
-
-.row:after {
-
-content: “”;
-
-display: table;
-
-clear: both;
-
+.card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+  
+    border-radius: .25rem;
+    width:100%;
 }
 
-/* Footer – This defines the footer section of the website */
-
-.footer {
-
-padding: 20px;
-
-text-align: center;
-
-background: #ddd;
-
-margin-top: 20px;
-
+.card-body {
+    flex: 1 1 auto;
+    min-height: 1px;
+    padding: 1rem;
+}
+.custom-control-input:checked ~ .custom-control-label::before {
+    color: #fff;
 }
 
-/* Responsive layout – when the screen has less than 800px width, this makes the two columns be placed on top of each other*/
-
-@media screen and (max-width: 800px) {
-
-.leftcolumn, .rightcolumn {
-
-width: 100%;
-
-padding: 0;
-
-}
-
-}
-
-/* Responsive layout – when the screen is less than 400px wide, make the navigation links stack on top of each other instead of next to each other */
-
-@media screen and (max-width: 400px) {
-
-.topnav a {
-
-float: none;
-
-width: 100%;
-
-}
-
-}
-
-</style>
+	</style>
 </head>
-
 <body>
 
-<div class="header" style="background-color:lightslategray">
-    <center><img style="width: 300px; height: 80px; padding-right: 15px;" class="d-block w-80" src="{% static 'images/new_logo.PNG' %}" ></center>
-</div>
 
-<div class="topnav">
-  <nav  class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <!--div class="container"-->
-      <img style="width: 90px; height: 50px; padding-right: 15px;" class="d-block w-80" src="{% static 'images/logo.PNG' %}" >
-      <a class="navbar-brand">way2CMS</a> 
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div  class="collapse navbar-collapse" id="navbarNavDropdown">
-        <ul class="navbar-nav navbar-expand-lg navbar-dark bg-dark avbar-left">
-          <li class="nav-item active">
-            <a class="nav-link" href="#" ><i class="fa fa-home" aria-hidden="true"></i> Home</a>
-          </li>
-          <li class="nav-item ">
-            <a class="nav-link" href="#"  >About</a>
-          </li>  
-          <li class="nav-item ">
-            <a class="nav-link" href="#"  >Services</a>
-          </li>  
-          <li class="nav-item ">
-            <a class="nav-link" href="#"  >Contact</a>
-          </li>            
-           </ul>
-      </div>
-    
-      <ul class="navbar-nav navbar-expand-lg navbar-dark bg-dark avbar-left">
-          <li class="nav-item">
-            <a class="nav-link" href="/login/"  ><span class="glyphicon glyphicon-log-in"></span> Login</a>
-          </li>
-          <li class="nav-item dropdown" >
-            <a class="nav-link"  class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Register
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-              <a  class="dropdown-item" href="/clientRegister/">As Client</a>
-              <a  class="dropdown-item" href="/advocateRegister/">As Lawyer</a>
-              
+
+<!-- Button trigger modal -->
+<!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+  Launch demo modal
+</button> -->
+
+<!-- Modal -->
+<div class="modal animated shake" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content" style="width: 100%;">
+              <div class="container">
+                        <div class="card-body tab-content">
+                            <div class="tab-pane active" id="profile">
+                              <div style="font-size: 22px;" >
+                                <center ><p><b>Need Suggestion for Hiring an Advocate ?</b></p></center>
+                                </div>
+                            <p class="text-dark text-centre" style="font-size: 12px;">We will filter up and provide potential advocate list. How about you fill this form and make it easier for us?</p>
+                            <form style="font-size: 12px;">  
+                            <div class="form-group" >
+                              <label for="uname">User Name</label>
+                              <input style="font-size: 12px;" type="text" class="form-control" id="uname" placeholder="Enter your User name" value="">
+                              </div>
+                              <div class="form-group">
+                               <label for="email">Email</label>
+                                <input style="font-size: 12px;"  type="text" class="form-control" id="email"  placeholder="Enter your Email ID" value="">
+                                </div>
+                                <div class="form-group">
+                                    <label for="uname">Select a category from the list below</label>
+                                    <div class="custom-control custom-radio">
+                                        <input style="font-size: 12px;" type="radio" id="customRadio1" name="customRadio" class="custom-control-input">
+                                        <label class="custom-control-label" for="customRadio1">Defamation</label>
+                                      </div>
+                                      <div class="custom-control custom-radio">
+                                        <input style="font-size: 12px;" type="radio" id="customRadio2" name="customRadio" class="custom-control-input">
+                                        <label class="custom-control-label" for="customRadio2">Custody of youngsters</label>
+                                      </div>
+                                      <div class="custom-control custom-radio">
+                                        <input style="font-size: 12px;" type="radio" id="customRadio3" name="customRadio" class="custom-control-input">
+                                        <label class="custom-control-label" for="customRadio3">Propert disputes(Possession etc,)</label>
+                                      </div>
+                                      <div class="custom-control custom-radio">
+                                        <input style="font-size: 12px;" type="radio" id="customRadio4" name="customRadio" class="custom-control-input">
+                                        <label class="custom-control-label" for="customRadio4">Marital disputes(divorce, domestic voilence etc.,)</label>
+                                      </div>
+                                      <div class="custom-control custom-radio">
+                                        <input style="font-size: 12px;" type="radio" id="customRadio5" name="customRadio" class="custom-control-input">
+                                        <label class="custom-control-label" for="customRadio5">Theft</label>
+                                      </div>
+                                      <div class="custom-control custom-radio">
+                                        <input style="font-size: 12px;" type="radio" id="customRadio6" name="customRadio" class="custom-control-input">
+                                        <label class="custom-control-label" for="customRadio6">Assault</label>
+                                      </div>
+                                      <div class="custom-control custom-radio">
+                                        <input style="font-size: 12px;"  type="radio" id="customRadio7" name="customRadio" class="custom-control-input">
+                                        <label class="custom-control-label" for="customRadio7">Others</label>
+                                      </div>
+                                    </div>
+                                <div class="form-group">
+                                <label for="msg">Description</label>
+                                <textarea style="font-size: 12px;" class="form-control autosize" id="msg" placeholder="Can you describe your problem statement here in few words. (Eg. What is the legal dispute?, What is your stand?)" style="overflow: hidden; overflow-wrap: break-word; resize: none; height: 62px;"></textarea>
+                            </div>
+                            <button type="button" class="btn btn-dark">Submit</button>
+                            </form>
+                            </div></div>
             </div>
-          </li>
-      </ul>
-    
-    <!--div-->
-    </nav>
-</div>
 
-<div class="row">
-
-<div class="leftcolumn">
-
-<div class="card">
-
-
-<div id="carouselExampleControls" class="carousel slide " data-ride="carousel">
-  <div class="carousel-inner bg-light">
-    <div class="carousel-item active">
-      <div class="d-flex justify-content-center">
-      <img class="d-block w-80" src="{% static 'images/image1.jpg' %}" alt="First slide" height="300">
-      <div class="carousel-caption d-none d-md-block">
-        <p ><b>Courts And Cases</b></p> 
-      </div>
-    </div></div>
-    <div class="carousel-item">
-      <div class="d-flex justify-content-center">
-      <img class="d-block w-80" src="{% static 'images/image2.jpg'%}" alt="Second slide" height="300">
-      <div class="carousel-caption d-none d-md-block">
-       <p>Hire Your Advocate/Lawyer</p>
-      </div>
-    </div></div>
-    <div class="carousel-item">
-      <div class="d-flex justify-content-center">
-      <img class="d-block w-80" src="{% static 'images/image3.jpg'%}" alt="Third slide" height="300">
-      <div class="carousel-caption d-none d-md-block">
-        <p class="text-secondary">Check Your Status</p>
-      </div>
-    </div></div>
+    </div>
   </div>
-
-  <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="sr-only">Previous</span>
-  </a>
-  <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="sr-only">Next</span>
-  </a>
-</div>
-<br>
-
 </div>
 
 
+<!-- JQUERY 3.4.1 CDN LINK -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
-</div>
+<!-- BOOTSTRAP 4.4.1 -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.min.js"></script>
 
-<div class="rightcolumn">
+<script>
+	
+	$(window).on('load', function(){
+		setTimeout(function(){
+			$('#myModal').modal('show')
+		}, 3000);  // 3000 = 3 second // 500 = 0.5 second
+	});
 
-<div class="card ">
-
-<h2>About</h2>
-
-
-<p class=" font-italic font-weight-bold">way2CMS(Case managment system).<br> This is your one stop place to
-  hire a lawyer, get a legal advice, know about few sections and also access information about 
-  your on going case(if there is any). Our ultimate goal is to give easy access to users, all at one place.
-   All the details that we provide on our website are legit. And all your personal details are safe with us. 
-   Happy browsing!! </p>
-
-</div>
-
-
-</div>
-
-</div>
-
-<div class="footer text-light bg-dark" >
-  <p>footer</p>  
-
-  <div class="card-footer text-light bg-dark">
-    <i class="fa fa-phone-square" aria-hidden="true"></i>&nbsp; &nbsp;
-    <i class="fa fa-envelope" aria-hidden="true"></i>&nbsp; &nbsp;
-    <i class="fa fa-instagram" aria-hidden="true"></i>&nbsp; &nbsp;
-    <i class="fa fa-facebook-square" aria-hidden="true"></i>
-  </div>
-  
-
-
+</script>
 </body>
-
 </html>

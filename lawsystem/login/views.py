@@ -57,18 +57,17 @@ def loginPage(request):
 
 def logoutUser(request):
     logout(request)
-    print("came+++++++++++")
     return render(request,'home.html')
 
+def advocateSettings(request):
+    return render(request,'advocateSettings.html')
 
-"""
-user1=clientAccounts.objects.filter(username=username,password=psw).exists()
-                print(user1)
+def clientSettings(request):
+    return render(request,'clientSettings.html')
 
-                if  user1==True:
-                    print('not entered')
-                    password=make_password(psw)
-                    us=User.objects.create(username=username,password=password)
-                    User.save(us)
-                    return render(request, 'clientHome.html')
-                else:"""
+def show_popup_once_processor(request):
+    show_popup = False
+    if not request.session.get('popup_seen', False):
+        request.session['popup_seen'] = True
+        show_popup = True
+    return { "show_popup": show_popup }

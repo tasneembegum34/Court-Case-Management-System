@@ -9,6 +9,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   <script src="https://use.fontawesome.com/a48ffc1c86.js"></script>
+
 </head>
 <style>
 #hello-msg{
@@ -18,6 +19,7 @@
 }
 </style>
 <body>
+{% include  'test.html' %}
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <a class="navbar-brand">way2CMS</a> 
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -40,7 +42,7 @@
                 <i  class="fa fa-user" aria-hidden="true"></i>  My Account
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="#">Settings</a>
+                <a class="dropdown-item" href="/clientSettings/">Settings</a>
                 <a class="dropdown-item" href="/logout/">Logout</a>
                 </div>
             </li>
@@ -112,5 +114,6 @@
               </div>
           </div>
       </div>
+
 </body>
 </html>
