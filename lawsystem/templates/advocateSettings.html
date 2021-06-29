@@ -4,11 +4,13 @@
   
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   <script src="https://use.fontawesome.com/a48ffc1c86.js"></script>
+  
 </head>
 <style>
 body{
@@ -71,6 +73,24 @@ body{
 .nav-item.nav-link.has-icon.nav-link-faded.active  {
                 background-color: #343a40;
             }
+.form-group input[type=password] {
+  width:700px;
+  height: 45px;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+  outline: none;
+  border-radius: 5px;
+}
+.form-group input[type=password]:focus {
+  border: 3px solid #555;
+}
+#hello-msg{
+  font-size: 18px;
+  color:#fff;
+  margin-right: 20px;
+}
 </style>
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-light">
@@ -88,114 +108,262 @@ body{
               <i  class="fa fa-user" aria-hidden="true"></i>  My Account
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="/advocateSettings/">Settings</a>
+              <a class="dropdown-item" href="/advocateSettings/">
               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-settings mr-2"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
               </svg>Settings</a>
               <a class="dropdown-item" href="/logout/"><i class="fa fa-sign-out" style="font-size:20px"></i>Logout</a>
               </div>
           </li>
           </ul>
-          </div></nav> <br><br>
-    <div class="container">
-      <div class="row gutters-sm">
-        <div class="col-md-4 d-none d-md-block">
-          <div class="card">
-            <div class="card-body">
-              <nav class="nav flex-column nav-pills nav-gap-y-1">
-                <a href="#profile" data-toggle="tab" class="nav-item nav-link has-icon nav-link-faded active">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user mr-2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>Profile Information
-                </a>
-                <a href="#account" data-toggle="tab" class="nav-item nav-link has-icon nav-link-faded">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-settings mr-2"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>Account Settings
-                </a>
-                <a href="#security" data-toggle="tab" class="nav-item nav-link has-icon nav-link-faded">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-shield mr-2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>Security
-                </a>
-              </nav>
+          </div>
+          <span id="hello-msg">Hello,{{request.user}}</span></nav> <br>
+          <script class="lazy" data-src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+          <script class="lazy" data-src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+          <script class="lazy" data-src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+          
+          {% for message in messages %}
+          <br>
+          <div class="container-fluid p-0" style="width:max-content;" >
+            <div class="alert {{ message.tags }} alert-dismissible" role="alert" style="text-align: center; background-color:lightgoldenrodyellow" >
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close" >
+                <span aria-hidden="true">&times;</span>
+              </button>
+              {{ message }}
             </div>
           </div>
-        </div>
-        <div class="col-md-8">
-          <div class="card">
-            <div class="card-header border-bottom mb-3 d-flex d-md-none">
-              <ul class="nav nav-tabs card-header-tabs nav-gap-x-1" role="tablist">
-                <li class="nav-item">
-                  <a href="#profile" data-toggle="tab" class="nav-link has-icon active"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg></a>
-                </li>
-                <li class="nav-item">
-                  <a href="#account" data-toggle="tab" class="nav-link has-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-settings"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg></a>
-                </li>
-                <li class="nav-item">
-                  <a href="#security" data-toggle="tab" class="nav-link has-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-shield"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg></a>
-                </li>
-              </ul>
-            </div>
-            <div class="card-body tab-content">
-              <div class="tab-pane active" id="profile">
-                <h6>YOUR PROFILE INFORMATION</h6>
-                <hr>
-                <form>
-                  <div class="form-group">
-                    <label for="fname">First Name</label>
-                    <input type="text" class="form-control" id="fname" aria-describedby="fullNameHelp" placeholder="Enter your first name" value="">
-                    <small id="fullNameHelp" class="form-text text-muted">Your name may appear around here where you are mentioned. You can change or remove it at any time.</small>
+          {% endfor %}
+          <br>
+          <div class="container">
+            <div class="row gutters-sm">
+              <div class="col-md-4 d-none d-md-block">
+                <div class="card">
+                  <div class="card-body">
+                    <nav class="nav flex-column nav-pills nav-gap-y-1">
+                      <a href="#profile" data-toggle="tab" class="nav-item nav-link has-icon nav-link-faded active">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user mr-2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>Profile Information
+                      </a>
+                      <a href="#account" data-toggle="tab" class="nav-item nav-link has-icon nav-link-faded">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-settings mr-2"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+                        Professional Information Settings
+                      </a--->
+                      <a href="#security" data-toggle="tab" class="nav-item nav-link has-icon nav-link-faded">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-shield mr-2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>Security
+                      </a>
+                    </nav>
                   </div>
-                   
-                  <div class="form-group">
-                    <label for="lname">Last Name</label>
-                    <input type="text" class="form-control" id="fname" aria-describedby="lastNameHelp" placeholder="Enter your first name" value="">
-                    <small id="lastNameHelp" class="form-text text-muted"></small>
-                  </div>
-                  <div class="form-group">
-                    <label for="phno">Phone no.</label>
-                    <input type="text" class="form-control" id="phno" placeholder="Enter your Phone no." value="">
-                  </div>
-                  <div class="form-group">
-                    <label for="Email">Email Address</label>
-                    <input type="text" class="form-control" id="Email" placeholder="Enter your Email Address" value="">
-                  </div>
-                  <div class="form-group small text-muted">
-                    All of the fields on this page are optional and can be deleted at any time, and by filling them out, you're giving us consent to share this data wherever your user profile appears.
-                  </div>
-                  <button type="button" class="btn btn-dark">Update Profile</button>
-                  <button type="reset" class="btn btn-light">Reset Changes</button>
-                </form>
+                </div>
               </div>
-              <div class="tab-pane" id="account">
-                <h6>ACCOUNT SETTINGS</h6>
-                <hr>
-                <form>
-                  <div class="form-group">
-                    <label for="username">Username</label>
-                    <input type="text" class="form-control" id="username" aria-describedby="usernameHelp" placeholder="Enter your username" value="">
-                    <small id="usernameHelp" class="form-text text-muted">After changing your username, your old username becomes available for anyone else to claim.</small>
+              <div class="col-md-8">
+                <div class="card">
+                  <div class="card-header border-bottom mb-3 d-flex d-md-none">
+                    <ul class="nav nav-tabs card-header-tabs nav-gap-x-1" role="tablist">
+                      <li class="nav-item">
+                        <a href="#profile" data-toggle="tab" class="nav-link has-icon active"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg></a>
+                      </li>
+                      <li class="nav-item">
+                        <a href="#account" data-toggle="tab" class="nav-link has-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-settings"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg></a>
+                      </li>
+                      <li class="nav-item">
+                        <a href="#security" data-toggle="tab" class="nav-link has-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-shield"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg></a>
+                      </li>
+                    </ul>
                   </div>
-                  <hr>
-                  <div class="form-group">
-                    <label class="d-block text-danger">Delete Account</label>
-                    <p class="text-muted font-size-sm">Once you delete your account, there is no going back. We would be glad if you gave it a thought again before bidding us Good Bye!</p>
+                  <div class="card-body tab-content">
+                    <div class="tab-pane active" id="profile">
+                      <h6>YOUR PROFILE INFORMATION</h6>
+                      <hr>
+         
+                      <form method=POST action="/advocateSettings/">
+                        {% csrf_token %}
+                        <div class="form-group">
+                          <label for="fname">First Name</label>
+                          <input type="text" class="form-control" id="fname"  name="first_name" aria-describedby="fullNameHelp" placeholder="Enter your first name" value="{{userInfo.first_name}}">
+                          <small id="fullNameHelp" class="form-text text-muted">Your name may appear around here where you are mentioned. You can change or remove it at any time.</small>
+                        </div>
+                         
+                        <div class="form-group">
+                          <label for="lname">Last Name</label>
+                          <input type="text" class="form-control" id="fname"  name="last_name" aria-describedby="lastNameHelp" placeholder="ENter your last name" value="{{userInfo.last_name}}">
+                          <small id="lastNameHelp" class="form-text text-muted"></small>
+                        </div>
+                        <div class="form-group">
+                          <label for="phno">Phone no.</label>
+                          <input type="text" class="form-control" id="phno" name="phoneNo" placeholder="Enter your Phone no." value="{{userInfo.phno}}">
+                        </div>
+                        <div class="form-group">
+                          <label for="Email">Email Address</label>
+                          <input type="text" class="form-control" id="Email" name="email" placeholder="Enter your Email Address" value="{{userInfo.email}}">
+                        </div>
+                        <div class="form-group">
+                          <label for="Email">Address</label>
+                          <input type="text" class="form-control" id="address" name="address" placeholder="Enter your Address" value="{{userInfo.address}}">
+                        </div>
+                        <div class="form-group small text-muted">
+                          All of the fields on this page are optional and can be deleted at any time, and by filling them out, you're giving us consent to share this data wherever your user profile appears.
+                        </div>
+                  
+                          {% csrf_token %}
+                        <button type="submit"  name="update" class="btn btn-dark">Update Profile</button>
+        
+                        </form>
+                  
+                    </div>
+                    <div class="tab-pane" id="account">
+                      <h6>PROFESSIONAL INFORMATION SETTINGS</h6>
+                      <hr>
+                      <form  method=POST action="/advocateSettings/">
+                        {% csrf_token %}
+                        <div class="form-group">
+  
+                          <label for="experience" style="font-weight: bold;">Years of Experience:</label>
+                        <input type="number" id="experience" name="experience" value="{{userInfo.experience}}"><br><br>
+
+                        <label for="expertise" style="font-weight: bold;">Expertise:</label>&ensp;&ensp;
+                        {%if userInfo.expertise == "criminal" %}
+                        <input type="radio" id="criminal" name="expertise" value= "{{userInfo.expertise}}" checked="checked"> 
+                        {% else %}
+                        <input type="radio" id="criminal" name="expertise" value="{{userInfo.expertise}}" >
+                        {% endif %}
+                        <label for="criminal">criminal</label>&ensp;&ensp;
+
+                        {%if userInfo.expertise == "civil" %}
+                        <input type="radio" id="civil" name="expertise" value="{{userInfo.expertise}}" checked="checked">
+                        {% else %}
+                        <input type="radio" id="civil" name="expertise" value="{{userInfo.expertise}}">
+                        {% endif %}
+                        <label for="civil">civil</label>&ensp;&ensp;
+
+                        {%if userInfo.expertise == "others" %}
+                        <input type="radio" id="others" name="expertise" value="{{userInfo.expertise}}" checked="checked">
+                        {% else %}
+                        <input type="radio" id="others" name="expertise" value="{{userInfo.expertise}}" >
+                        {% endif %}
+                        <label for="others">others</label><br><br>
+
+                        <!---additional speciality-->
+                        <label for="additional_expertise" style="font-weight: bold;">Additional Expertise Fields:</label><br>
+                        {%if "defamation" in userInfo.additionalExpertises  %}
+                        <input type="checkbox" id="defamation" name="additional_expertise" value= "defamation" checked="checked"> 
+                        {% else %}
+                        <input type="checkbox" id="defamation" name="additional_expertise" value="defamation" >
+                        {% endif %}
+                        <label for="criminal">Defamation</label><br>
+
+                        {%if "Custody of youngsters" in userInfo.additionalExpertises  %}
+                        <input type="checkbox" id="custodyOY" name="additional_expertise" value="Custody of youngsters" checked="checked">
+                        {% else %}
+                        <input type="checkbox" id="custodyOY" name="additional_expertise" value="Custody of youngsters">
+                        {% endif %}
+                        <label for="checkbox">Custody of youngsters</label><br>
+
+                        {%if "Propert Disputes" in userInfo.additionalExpertises  %}
+                        <input type="checkbox" id="propertDisputes" name="additional_expertise" value="Propert Disputes" checked="checked">
+                        {% else %}
+                        <input type="checkbox" id="propertDisputes" name="additional_expertise" value="Propert Disputes" >
+                        {% endif %}
+                        <label for="others">Propert Disputes</label><br>
+
+                        {%if "Marital Disputes" in userInfo.additionalExpertises %}
+                        <input type="checkbox" id="maritalDisputes" name="additional_expertise" value="Marital Disputes" checked="checked">
+                        {% else %}
+                        <input type="checkbox" id="maritalDisputes" name="additional_expertise" value="Marital Disputes" >
+                        {% endif %}
+                        <label for="others">Marital Disputes</label><br>
+
+                        {%if "Theft" in userInfo.additionalExpertises %}
+                        <input type="checkbox" id="theft" name="additional_expertise" value= "Theft" checked="checked"> 
+                        {% else %}
+                        <input type="checkbox" id="theft" name="additional_expertise" value="Theft" >
+                        {% endif %}
+                        <label for="criminal">Theft</label><br>
+
+                        {%if "Assault" in userInfo.additionalExpertises %}
+                        <input type="checkbox" id="assault" name="additional_expertise" value= "Assault" checked="checked"> 
+                        {% else %}
+                        <input type="checkbox" id="assault" name="additional_expertise" value="Assault" >
+                        {% endif %}
+                        <label for="criminal">Assault</label><br>
+
+                        {%if "Others" in userInfo.additionalExpertises %}
+                        <input type="checkbox" id="others" name="additional_expertise" value= "Others" checked="checked"> 
+                        {% else %}
+                        <input type="checkbox" id="others" name="additional_expertise" value="Others" >
+                        {% endif %}
+                        <label for="criminal">Others</label><br>
+
+                        </div>
+                        <hr>
+                        
+                        {% csrf_token %}
+                        <button class="btn btn-dark" type="submit" name="proffUpdate">Update Details</button>
+                      </form>
+                    </div>
+                    <div class="tab-pane" id="security">
+                      <h6>SECURITY SETTINGS</h6>
+                      <hr>
+                      <form  method=POST action="/advocateSettings/">
+                        {% csrf_token %}
+                        <div class="form-group">
+                          <label class="d-block">Change Password</label>
+      
+                          <input type="password" name="old_pw"  placeholder="Enter your old password"  autocomplete="current-password" required=""
+                          class="id_password" style="width: 700px; height: 40px;"><i class="far fa-eye" id="togglePassword" style="margin-left: -30px; cursor: pointer;"></i>
+                          <script>
+                              const togglePassword = document.querySelector('#togglePassword');
+        const password = document.querySelector('.id_password');
+       
+        togglePassword.addEventListener('click', function (e) {
+          // toggle the type attribute
+          const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+          password.setAttribute('type', type);
+          // toggle the eye slash icon
+          this.classList.toggle('fa-eye-slash');
+      });
+                          </script>
+               <br><br>
+                        <input type="password" name="new_pw"  placeholder="New password"  autocomplete="current-password" required=""
+                        id="id_password2" style="width: 700px; height: 40px;" ><i class="far fa-eye" id="togglePassword2" style="margin-left: -30px; cursor: pointer;"></i>
+                        <script>
+                            const togglePassword2 = document.querySelector('#togglePassword2');
+      const password2= document.querySelector('#id_password2');
+      
+      togglePassword2.addEventListener('click', function (e) {
+        // toggle the type attribute
+        const type2 = password2.getAttribute('type') === 'password' ? 'text' : 'password';
+        password2.setAttribute('type', type2);
+        // toggle the eye slash icon
+        this.classList.toggle('fa-eye-slash');
+      });
+                        </script>
+                            <br><br>
+                          <input type="password" name="confirm_pw"  placeholder="New password"  autocomplete="current-password" required=""
+                          id="id_password3" style="width: 700px; height: 40px;" ><i class="far fa-eye" id="togglePassword3" style="margin-left: -30px; cursor: pointer;"></i>
+                          <script>
+                              const togglePassword3 = document.querySelector('#togglePassword3');
+        const password3= document.querySelector('#id_password3');
+        
+        togglePassword3.addEventListener('click', function (e) {
+          // toggle the type attribute
+          const type3 = password3.getAttribute('type') === 'password' ? 'text' : 'password';
+          password3.setAttribute('type', type3);
+          // toggle the eye slash icon
+          this.classList.toggle('fa-eye-slash');
+        });
+                          </script>
+                          <br><br>
+                          {% csrf_token %}
+                          <button type="submit" name="change_pw" class="btn btn-dark">Change Password</button>
+                        </div>
+                      </form>
+                      <hr>
                   </div>
-                  <button class="btn btn-danger" type="button">Delete Account</button>
-                </form>
+                </div>
               </div>
-              <div class="tab-pane" id="security">
-                <h6>SECURITY SETTINGS</h6>
-                <hr>
-                <form>
-                  <div class="form-group">
-                    <label class="d-block">Change Password</label>
-                    <input type="text" class="form-control" placeholder="Enter your old password">
-                    <input type="text" class="form-control mt-1" placeholder="New password">
-                    <input type="text" class="form-control mt-1" placeholder="Confirm new password">
-                    <br>
-                    <button type="button" class="btn btn-dark">Change Password</button>
-                  </div>
-                </form>
-                <hr>
             </div>
           </div>
-        </div>
-      </div>
-    </div>
+        </body>
+     
+      
+      
   </body>
     </html>

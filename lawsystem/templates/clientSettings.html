@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
@@ -40,7 +40,19 @@ body{
     border: 0 solid rgba(0,0,0,.125);
     border-radius: .25rem;
 }
-
+.form-group input[type=password] {
+  width:700px;
+  height: 45px;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+  outline: none;
+  border-radius: 5px;
+}
+.form-group input[type=password]:focus {
+  border: 3px solid #555;
+}
 .card-body {
     flex: 1 1 auto;
     min-height: 1px;
@@ -201,10 +213,52 @@ body{
                   {% csrf_token %}
                   <div class="form-group">
                     <label class="d-block">Change Password</label>
-                    <input type="password" name="old_pw" class="form-control" placeholder="Enter your old password">
-                    <input type="password" name="new_pw" class="form-control mt-1" placeholder="New password">
-                    <input type="password" name="confirm_pw" class="form-control mt-1" placeholder="Confirm new password">
-                    <br>
+
+                    <input type="password" name="old_pw"  placeholder="Enter your old password"  autocomplete="current-password" required=""
+                    class="id_password" style="width: 700px; height: 40px;"><i class="far fa-eye" id="togglePassword" style="margin-left: -30px; cursor: pointer;"></i>
+                    <script>
+                        const togglePassword = document.querySelector('#togglePassword');
+  const password = document.querySelector('.id_password');
+ 
+  togglePassword.addEventListener('click', function (e) {
+    // toggle the type attribute
+    const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+    password.setAttribute('type', type);
+    // toggle the eye slash icon
+    this.classList.toggle('fa-eye-slash');
+});
+                    </script>
+         <br><br>
+                  <input type="password" name="new_pw"  placeholder="New password"  autocomplete="current-password" required=""
+                  id="id_password2" style="width: 700px; height: 40px;" ><i class="far fa-eye" id="togglePassword2" style="margin-left: -30px; cursor: pointer;"></i>
+                  <script>
+                      const togglePassword2 = document.querySelector('#togglePassword2');
+const password2= document.querySelector('#id_password2');
+
+togglePassword2.addEventListener('click', function (e) {
+  // toggle the type attribute
+  const type2 = password2.getAttribute('type') === 'password' ? 'text' : 'password';
+  password2.setAttribute('type', type2);
+  // toggle the eye slash icon
+  this.classList.toggle('fa-eye-slash');
+});
+                  </script>
+                      <br><br>
+                    <input type="password" name="confirm_pw"  placeholder="New password"  autocomplete="current-password" required=""
+                    id="id_password3" style="width: 700px; height: 40px;" ><i class="far fa-eye" id="togglePassword3" style="margin-left: -30px; cursor: pointer;"></i>
+                    <script>
+                        const togglePassword3 = document.querySelector('#togglePassword3');
+  const password3= document.querySelector('#id_password3');
+  
+  togglePassword3.addEventListener('click', function (e) {
+    // toggle the type attribute
+    const type3 = password3.getAttribute('type') === 'password' ? 'text' : 'password';
+    password3.setAttribute('type', type3);
+    // toggle the eye slash icon
+    this.classList.toggle('fa-eye-slash');
+  });
+                    </script>
+                    <br><br>
                     {% csrf_token %}
                     <button type="submit" name="change_pw" class="btn btn-dark">Change Password</button>
                   </div>
@@ -231,6 +285,6 @@ body{
     </div>
   </div>
   {% endfor %}
-  </div>
+
 
     </html>

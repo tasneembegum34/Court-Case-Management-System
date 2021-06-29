@@ -12,4 +12,6 @@ urlpatterns=[
     path('MyClientList/',views.MyClientList ),
     path('clientRequests/',views.clientRequests,name="clientRequests" ),
     path('confirmedAds/',views.confirmedAds ,name="confirmedAds" ),
+    path('suggestingAds/',views.suggestingAds,name="suggestingAds" ),
+    
 ]

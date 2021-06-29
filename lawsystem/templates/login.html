@@ -6,6 +6,17 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="{% static 'styles/style_login.css' %}">
 <script src="https://use.fontawesome.com/a48ffc1c86.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+<style>
+  #id_password{  
+  width: 300px;  
+  height: 30px;  
+  border: none;  
+  border-radius: 3px;  
+  padding-left: 8px;  
+
+} 
+</style>
 </head>
 <body style="background-color: white;">
 
@@ -23,7 +34,21 @@
     </b>    
     </label>     
 
-    <input type="password" name="psw" id="password"  placeholder="Enter password"><br><br>
+    <input type="password" name="psw"  placeholder="Enter password" autocomplete="current-password" required=""
+    id="id_password" ><i class="far fa-eye" id="togglePassword" style="margin-left: -40px; cursor: pointer;"></i>
+    <script>
+        const togglePassword = document.querySelector('#togglePassword');
+const password= document.querySelector('#id_password');
+
+togglePassword.addEventListener('click', function (e) {
+// toggle the type attribute
+const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+password.setAttribute('type', type);
+// toggle the eye slash icon
+this.classList.toggle('fa-eye-slash');
+});
+    </script>
+    <br><br>
     <label for="usertype"><b>User Type</b></label><br>
     <input type="radio" id="client" name="usertype" value="client">
     <label for="client">Client</label> 

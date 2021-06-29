@@ -174,7 +174,7 @@
         backdrop: 'static',
         keyboard: false
     })
-          }, 3000);  // 3000 = 3 second // 500 = 0.5 second
+          }, 2000);  // 3000 = 3 second // 500 = 0.5 second
         });
       
       </script>
@@ -190,43 +190,44 @@
                                     
                                     </div>
                                 <p class="text-dark text-centre" style="font-size: 12px;">We will filter up and provide potential advocate list. How about you fill this form and make it easier for us?</p>
-                                <form action="{% url 'caseStatus' %}" style="font-size: 12px;">  
+                                <form action="{% url 'suggestingAds' %}" style="font-size: 12px;" method="POST">  
+                                  {% csrf_token %}
                                 <div class="form-group" >
-                                  <label for="uname">User Name</label>
+                                  <!--label for="uname">User Name</label>
                                   <input style="font-size: 12px;" type="text" class="form-control" id="uname" placeholder="Enter your User name" value="">
                                   </div>
                                   <div class="form-group">
                                    <label for="email">Email</label>
                                     <input style="font-size: 12px;"  type="text" class="form-control" id="email"  placeholder="Enter your Email ID" value="">
-                                    </div>
+                                    </div-->
                                     <div class="form-group">
                                         <label for="uname">Select a category from the list below</label>
                                         <div class="custom-control custom-radio">
-                                            <input style="font-size: 12px;" type="radio" id="customRadio1" name="customRadio" class="custom-control-input">
+                                            <input style="font-size: 12px;" type="radio" id="customRadio1" name="customRadio" class="custom-control-input" value="defamation">
                                             <label class="custom-control-label" for="customRadio1">Defamation</label>
                                           </div>
                                           <div class="custom-control custom-radio">
-                                            <input style="font-size: 12px;" type="radio" id="customRadio2" name="customRadio" class="custom-control-input">
+                                            <input style="font-size: 12px;" type="radio" id="customRadio2" name="customRadio" class="custom-control-input" value="Custody of youngsters">
                                             <label class="custom-control-label" for="customRadio2">Custody of youngsters</label>
                                           </div>
                                           <div class="custom-control custom-radio">
-                                            <input style="font-size: 12px;" type="radio" id="customRadio3" name="customRadio" class="custom-control-input">
+                                            <input style="font-size: 12px;" type="radio" id="customRadio3" name="customRadio" class="custom-control-input" value="Propert Disputes">
                                             <label class="custom-control-label" for="customRadio3">Propert disputes(Possession etc,)</label>
                                           </div>
                                           <div class="custom-control custom-radio">
-                                            <input style="font-size: 12px;" type="radio" id="customRadio4" name="customRadio" class="custom-control-input">
+                                            <input style="font-size: 12px;" type="radio" id="customRadio4" name="customRadio" class="custom-control-input" value="Marital Disputes">
                                             <label class="custom-control-label" for="customRadio4">Marital disputes(divorce, domestic voilence etc.,)</label>
                                           </div>
                                           <div class="custom-control custom-radio">
-                                            <input style="font-size: 12px;" type="radio" id="customRadio5" name="customRadio" class="custom-control-input">
+                                            <input style="font-size: 12px;" type="radio" id="customRadio5" name="customRadio" class="custom-control-input" value="Theft">
                                             <label class="custom-control-label" for="customRadio5">Theft</label>
                                           </div>
                                           <div class="custom-control custom-radio">
-                                            <input style="font-size: 12px;" type="radio" id="customRadio6" name="customRadio" class="custom-control-input">
+                                            <input style="font-size: 12px;" type="radio" id="customRadio6" name="customRadio" class="custom-control-input" value="Assault">
                                             <label class="custom-control-label" for="customRadio6">Assault</label>
                                           </div>
                                           <div class="custom-control custom-radio">
-                                            <input style="font-size: 12px;"  type="radio" id="customRadio7" name="customRadio" class="custom-control-input">
+                                            <input style="font-size: 12px;"  type="radio" id="customRadio7" name="customRadio" class="custom-control-input" value="Others">
                                             <label class="custom-control-label" for="customRadio7">Others</label>
                                           </div>
                                         </div>
@@ -234,6 +235,7 @@
                                     <label for="msg">Description</label>
                                     <textarea style="font-size: 12px;" class="form-control autosize" id="msg" placeholder="Can you describe your problem statement here in few words. (Eg. What is the legal dispute?, What is your stand?)" style="overflow: hidden; overflow-wrap: break-word; resize: none; height: 62px;"></textarea>
                                 </div>
+                                {% csrf_token %}
                                 <button type="submit" class="btn btn-dark">Submit</button>
                                 </form>
                                 </div></div>

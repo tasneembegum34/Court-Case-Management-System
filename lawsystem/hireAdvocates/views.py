@@ -73,13 +73,13 @@ def MyAdList(request):
             l.remove(ad_remove)            
             user_cli.hiredAdUsername=",".join(l)
 
-            l2=user_ad.clientRequest.split(',')
+            """l2=user_ad.clientRequest.split(',')
             l2.remove(user_cli.username)
-            user_ad.clientRequest=",".join(l2)
+            user_ad.clientRequest=",".join(l2)"""
         else:
             user_cli.hireAdUsername=""
         user_cli.save()
-        user_ad.save()
+        #user_ad.save()
         usernameList,contactedAdsList=displayHiredAds(req_user)
         if contactedAdsList:
             return render(request,'MyAdList.html',context={'usernameList':usernameList,'contactedAdsList':contactedAdsList})
@@ -181,3 +181,9 @@ def clientRequests(request):
         render(request,'clientRequests.html',{'usernameList':usernameList})
     return render(request,'clientRequests.html',{'usernameList':usernameList1})
 
+def suggestingAds(request):
+    if request.method=="POST":
+        expertiseFeild=request.POST['customRadio']
+        print(expertiseFeild)
+        ad_details=advocateAccounts.objects.filter(Q(additionalExpertises__icontains=expertiseFeild))
+    return render(request,'suggestedAdsList.html',context={'ad_details':ad_details,'heading':expertiseFeild})

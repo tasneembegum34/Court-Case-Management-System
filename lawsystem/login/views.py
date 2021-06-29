@@ -61,11 +61,55 @@ def logoutUser(request):
     return render(request,'home.html')
 
 def advocateSettings(request):
-    return render(request,'advocateSettings.html')
+    userInfo=advocateAccounts.objects.get(username=request.user)
+    if request.method=="POST"  and 'update' in request.POST:
+        print("came")
+        userInfo.first_name=request.POST['first_name']
+        userInfo.last_name=request.POST['last_name']
+        userInfo.phno=request.POST['phoneNo']
+        userInfo.email=request.POST['email']
+        userInfo.save()
+        messages.info(request,"Profile updated Successfully")
+        print(userInfo.first_name)
+
+    if request.method=="POST"  and 'proffUpdate' in request.POST:
+        userInfo.experience=request.POST['experience']
+        userInfo.expertise=request.POST['expertise']
+        userInfo.additionalExpertises=request.POST.getlist('additional_expertise')
+        print(userInfo.additionalExpertises)
+        userInfo.save()
+        messages.info(request,"Proffessional Info updated Successfully")
+
+    if request.method=="POST"  and 'change_pw' in request.POST:
+        old_pw=request.POST['old_pw']
+        new_pw=request.POST['new_pw']
+        confirm_pw=request.POST['confirm_pw']
+        cli_user=authenticate(request,username=request.user,password=old_pw)
+        if cli_user is not None:
+            if new_pw!=old_pw:
+                if new_pw==confirm_pw:
+                    userInfo.password=new_pw
+                    userInfo.save()
+                    u=User.objects.get(username=cli_user)
+                    u.set_password(new_pw)
+                    u.save()
+                    messages.info(request,"Password successfully changed")
+                    return HttpResponseRedirect("/login/")
+                else: 
+                    messages.error(request,"Error: Password does not match")
+                    return render(request,'advocateSettings.html',{'userInfo':userInfo})
+            else:
+                messages.error(request,"Error: New password and old password are same")
+                return render(request,'advocateSettings.html',{'userInfo':userInfo})
+        else:
+            messages.error(request,"Error: Your old password is incorrect")
+            return render(request,'advocateSettings.html',{'userInfo':userInfo})
+
+    return render(request,'advocateSettings.html',{'userInfo':userInfo})
+
 
 
 def clientSettings(request):
-    print(request.user)
     userInfo=clientAccounts.objects.get(username=request.user)
     if request.method=="POST"  and 'update' in request.POST:
         print("came")
@@ -80,30 +124,32 @@ def clientSettings(request):
         confirm_pw=request.POST['confirm_pw']
         cli_user=authenticate(request,username=request.user,password=old_pw)
         if cli_user is not None:
-            if new_pw==confirm_pw:
-                userInfo.password=new_pw
-                userInfo.save()
-                print(userInfo.password)
-                u=User.objects.get(username=cli_user)
-                u.set_password(new_pw)
-                print(u.password)
-                u.save()
-                messages.info(request,"password successfully changed")
-                return HttpResponseRedirect("/login/")
-            else: 
-                messages.error(request,"password does not match")
-                return render(request,'clientSettings.html',{'userInfo':userInfo})
+            if new_pw!=old_pw:
+                if new_pw==confirm_pw:
+                    userInfo.password=new_pw
+                    userInfo.save()
+                    u=User.objects.get(username=cli_user)
+                    u.set_password(new_pw)
+                    u.save()
+                    messages.info(request,"Password successfully changed")
+                    return HttpResponseRedirect("/login/")
+                else: 
+                    messages.error(request,"Error: Password does not match")
+                    return render(request,'clientSettings.html',{'userInfo':userInfo})
+            else:
+                messages.error(request,"Error: New password and old password are same")
+                return render(request,'advocateSettings.html',{'userInfo':userInfo})
         else:
-            messages.error(request,"your old password is incorrect")
+            messages.error(request,"Error: Your old password is incorrect")
             return render(request,'clientSettings.html',{'userInfo':userInfo})
 
     return render(request,'clientSettings.html',{'userInfo':userInfo})
 
     
-def show_popup_once_processor(request):
+"""def show_popup_once_processor(request):
     show_popup = False
     if not request.session.get('popup_seen', False):
         request.session['popup_seen'] = True
         show_popup = True
-    return { "show_popup": show_popup }
+    return { "show_popup": show_popup }"""
 
