@@ -157,13 +157,38 @@
           </form>
           <form  method=POST action="{% url 'MyAdList' %}">
             {%csrf_token%}
-          <button class="contactbtn" style="vertical-align:middle" value='{{id.username}}'  ><span>Contact </span></button></td>
+          <button class="contactbtn" name="contact" style="vertical-align:middle" value='{{id.username}}'  ><span>Contact </span></button></td>
         </form>
         </tr>
         
-      
       {% endfor %}
     </table>
+    <br><br>
+          <h2>Contacted Advocate List</h2>
+          <br>
+   
+          <table id="advocateDetails"> 
+          <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Phone No</th>
+          <th>Experience</th>
+          <th>Expertise</th>
+          <th>Address</th>
+          </tr>
+          {% for id2 in contactedAdsList%}
+         <tr>
+           <td>{{id2.first_name}} {{id2.last_name}}</td>
+            <td>{{id2.email}} </td>
+            <td>{{id2.phno}} </td>
+           <td>{{id2.experience}} </td>
+          <td>{{id2.expertise}} </td>
+        <td>{{id2.address}}</td>
+        
+      </tr>
+      
+    {% endfor %}
+  </table>
     {% else %}
     <h2>My Advocate List</h2>
       <h5>Hey!. Nothing to display.</h5>

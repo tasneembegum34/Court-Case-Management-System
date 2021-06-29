@@ -12,6 +12,14 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   <script src="https://use.fontawesome.com/a48ffc1c86.js"></script>
+	<!-- BOOTSTRAP 4.4.1 -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+
+	<!-- ANIMATE CSS -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css" />
+
+	<!-- FONT AWESOME 4.7.0 -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
     <title>Hire Lawyer</title>
     <style>
         
@@ -26,6 +34,48 @@
 
         }
         
+        #myModal .modal-body{
+			padding: 0;
+		}
+		#myModal .modal-dialog {
+		    max-width: 600px;
+		}
+		#myModal .formWrap{
+			padding: 3px 4px;
+		}
+		#myModal h5{
+			font-size: 14px;
+			margin-bottom: 10px;
+		}
+		#myModal form{
+			margin-top: 0px;
+		}
+		#myModal input{
+			width: 100%;
+		    height: 30px;
+		    padding: 0 10px;
+		    border: 1px solid #e2e2e2;
+		    margin-bottom: 10px;
+		}
+		#myModal input:focus{
+			outline: #FF5722;
+			border-color: #FF5722 !important;
+		}
+		#myModal .submit{
+		    background: #FF5722;
+		    color: #fff;
+		    border: none;
+		}
+	
+
+.card-body1 {
+    flex: 1 1 auto;
+    min-height: 1px;
+    padding: 1rem;
+}
+.custom-control-input:checked ~ .custom-control-label::before {
+    color: #fff;
+}
         
     </style>
   </head>
@@ -56,7 +106,13 @@
                 <a class="dropdown-item" href="/logout/">Logout</a>
                 </div>
             </li>
-
+            <script src="content/js/jquery.min.js"></script>
+            <script src="content/js/bootstrap.min.js"></script>
+            <script>
+                $(document).ready(function () {
+                    $('#navbarDropdown').dropdown();
+                });
+            </script>
             </li>
           </ul> 
         </div>
@@ -103,5 +159,91 @@
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+    <div class="modal animated shake" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    
+      <!-- BOOTSTRAP 4.4.1 -->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.min.js"></script>
+      
+      <script>
+        
+        $(window).on('load', function(){
+          setTimeout(function(){
+            $('#myModal').modal('show')({
+        backdrop: 'static',
+        keyboard: false
+    })
+          }, 3000);  // 3000 = 3 second // 500 = 0.5 second
+        });
+      
+      </script>
+      <div class="modal-dialog" role="document">
+        <div class="modal-content" style="width: 100%;">
+                  <div class="container">
+                            <div class="card-body1 tab-content">
+                                <div class="tab-pane active" id="profile">
+                                 
+                                  <div style="font-size: 22px;" >
+                                    <button class="close" data-dismiss="modal" onclick="$('#myModal').modal('hide');" aria-label="Close">&times;</button>
+                                    <center ><p><b>Need Suggestion for Hiring an Advocate ?</b></p></center>
+                                    
+                                    </div>
+                                <p class="text-dark text-centre" style="font-size: 12px;">We will filter up and provide potential advocate list. How about you fill this form and make it easier for us?</p>
+                                <form action="{% url 'caseStatus' %}" style="font-size: 12px;">  
+                                <div class="form-group" >
+                                  <label for="uname">User Name</label>
+                                  <input style="font-size: 12px;" type="text" class="form-control" id="uname" placeholder="Enter your User name" value="">
+                                  </div>
+                                  <div class="form-group">
+                                   <label for="email">Email</label>
+                                    <input style="font-size: 12px;"  type="text" class="form-control" id="email"  placeholder="Enter your Email ID" value="">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="uname">Select a category from the list below</label>
+                                        <div class="custom-control custom-radio">
+                                            <input style="font-size: 12px;" type="radio" id="customRadio1" name="customRadio" class="custom-control-input">
+                                            <label class="custom-control-label" for="customRadio1">Defamation</label>
+                                          </div>
+                                          <div class="custom-control custom-radio">
+                                            <input style="font-size: 12px;" type="radio" id="customRadio2" name="customRadio" class="custom-control-input">
+                                            <label class="custom-control-label" for="customRadio2">Custody of youngsters</label>
+                                          </div>
+                                          <div class="custom-control custom-radio">
+                                            <input style="font-size: 12px;" type="radio" id="customRadio3" name="customRadio" class="custom-control-input">
+                                            <label class="custom-control-label" for="customRadio3">Propert disputes(Possession etc,)</label>
+                                          </div>
+                                          <div class="custom-control custom-radio">
+                                            <input style="font-size: 12px;" type="radio" id="customRadio4" name="customRadio" class="custom-control-input">
+                                            <label class="custom-control-label" for="customRadio4">Marital disputes(divorce, domestic voilence etc.,)</label>
+                                          </div>
+                                          <div class="custom-control custom-radio">
+                                            <input style="font-size: 12px;" type="radio" id="customRadio5" name="customRadio" class="custom-control-input">
+                                            <label class="custom-control-label" for="customRadio5">Theft</label>
+                                          </div>
+                                          <div class="custom-control custom-radio">
+                                            <input style="font-size: 12px;" type="radio" id="customRadio6" name="customRadio" class="custom-control-input">
+                                            <label class="custom-control-label" for="customRadio6">Assault</label>
+                                          </div>
+                                          <div class="custom-control custom-radio">
+                                            <input style="font-size: 12px;"  type="radio" id="customRadio7" name="customRadio" class="custom-control-input">
+                                            <label class="custom-control-label" for="customRadio7">Others</label>
+                                          </div>
+                                        </div>
+                                    <div class="form-group">
+                                    <label for="msg">Description</label>
+                                    <textarea style="font-size: 12px;" class="form-control autosize" id="msg" placeholder="Can you describe your problem statement here in few words. (Eg. What is the legal dispute?, What is your stand?)" style="overflow: hidden; overflow-wrap: break-word; resize: none; height: 62px;"></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-dark">Submit</button>
+                                </form>
+                                </div></div>
+                </div>
+    
+        </div>
+      </div>
+    </div>
+
+    
+    <!-- JQUERY 3.4.1 CDN LINK -->
+  
   </body>
 </html>

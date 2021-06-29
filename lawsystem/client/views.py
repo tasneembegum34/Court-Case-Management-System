@@ -92,7 +92,7 @@ def searchSection(request):
 def hireAdvocates(request):
     if request.user.is_authenticated:
         return render(request,'project.html')
-    else:
+    else: 			
         return redirect('login')
   
 def caseStatus(request):

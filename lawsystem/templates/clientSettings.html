@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  
+  {%load static%}
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
@@ -132,32 +132,37 @@ body{
               <div class="tab-pane active" id="profile">
                 <h6>YOUR PROFILE INFORMATION</h6>
                 <hr>
-                <form>
+   
+                <form method=POST action="/clientSettings/">
+                  {% csrf_token %}
                   <div class="form-group">
                     <label for="fname">First Name</label>
-                    <input type="text" class="form-control" id="fname" aria-describedby="fullNameHelp" placeholder="Enter your first name" value="">
+                    <input type="text" class="form-control" id="fname"  name="first_name" aria-describedby="fullNameHelp" placeholder="Enter your first name" value="{{userInfo.first_name}}">
                     <small id="fullNameHelp" class="form-text text-muted">Your name may appear around here where you are mentioned. You can change or remove it at any time.</small>
                   </div>
                    
                   <div class="form-group">
                     <label for="lname">Last Name</label>
-                    <input type="text" class="form-control" id="fname" aria-describedby="lastNameHelp" placeholder="Enter your first name" value="">
+                    <input type="text" class="form-control" id="fname"  name="last_name" aria-describedby="lastNameHelp" placeholder="ENter your last name" value="{{userInfo.last_name}}">
                     <small id="lastNameHelp" class="form-text text-muted"></small>
                   </div>
                   <div class="form-group">
                     <label for="phno">Phone no.</label>
-                    <input type="text" class="form-control" id="phno" placeholder="Enter your Phone no." value="">
+                    <input type="text" class="form-control" id="phno" name="phoneNo" placeholder="Enter your Phone no." value="{{userInfo.phno}}">
                   </div>
                   <div class="form-group">
                     <label for="Email">Email Address</label>
-                    <input type="text" class="form-control" id="Email" placeholder="Enter your Email Address" value="">
+                    <input type="text" class="form-control" id="Email" name="email" placeholder="Enter your Email Address" value="{{userInfo.email}}">
                   </div>
                   <div class="form-group small text-muted">
                     All of the fields on this page are optional and can be deleted at any time, and by filling them out, you're giving us consent to share this data wherever your user profile appears.
                   </div>
-                  <button type="button" class="btn btn-dark">Update Profile</button>
-                  <button type="reset" class="btn btn-light">Reset Changes</button>
-                </form>
+            
+                    {% csrf_token %}
+                  <button type="submit"  name="update" class="btn btn-dark">Update Profile</button>
+                  <button type="submit" class="btn btn-light">Reset Changes</button>
+                  </form>
+            
               </div>
               <div class="tab-pane" id="account">
                 <h6>ACCOUNT SETTINGS</h6>
@@ -165,7 +170,7 @@ body{
                 <form>
                   <div class="form-group">
                     <label for="username">Username</label>
-                    <input type="text" class="form-control" id="username" aria-describedby="usernameHelp" placeholder="Enter your username" value="">
+                    <input type="text" class="form-control" id="username" aria-describedby="usernameHelp" placeholder="Enter your username" value="{{userInfo.username}}">
                     <small id="usernameHelp" class="form-text text-muted">After changing your username, your old username becomes available for anyone else to claim.</small>
                   </div>
                   <hr>
