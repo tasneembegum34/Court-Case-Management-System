@@ -6,6 +6,7 @@ from advocate.models import advocateAccounts
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.contrib.auth.hashers import make_password
+from django.http import HttpResponseRedirect
 # Create your views here.
 from django.contrib.auth import authenticate,login,logout
 from client.decorators import unauthenticated_user
@@ -64,6 +65,7 @@ def advocateSettings(request):
 
 
 def clientSettings(request):
+    print(request.user)
     userInfo=clientAccounts.objects.get(username=request.user)
     if request.method=="POST"  and 'update' in request.POST:
         print("came")
@@ -72,6 +74,29 @@ def clientSettings(request):
         userInfo.phno=request.POST['phoneNo']
         userInfo.email=request.POST['email']
         userInfo.save()
+    if request.method=="POST"  and 'change_pw' in request.POST:
+        old_pw=request.POST['old_pw']
+        new_pw=request.POST['new_pw']
+        confirm_pw=request.POST['confirm_pw']
+        cli_user=authenticate(request,username=request.user,password=old_pw)
+        if cli_user is not None:
+            if new_pw==confirm_pw:
+                userInfo.password=new_pw
+                userInfo.save()
+                print(userInfo.password)
+                u=User.objects.get(username=cli_user)
+                u.set_password(new_pw)
+                print(u.password)
+                u.save()
+                messages.info(request,"password successfully changed")
+                return HttpResponseRedirect("/login/")
+            else: 
+                messages.error(request,"password does not match")
+                return render(request,'clientSettings.html',{'userInfo':userInfo})
+        else:
+            messages.error(request,"your old password is incorrect")
+            return render(request,'clientSettings.html',{'userInfo':userInfo})
+
     return render(request,'clientSettings.html',{'userInfo':userInfo})
 
     

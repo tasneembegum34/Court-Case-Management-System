@@ -5,6 +5,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
@@ -71,29 +72,39 @@ body{
 .nav-item.nav-link.has-icon.nav-link-faded.active  {
                 background-color: #343a40;
             }
+            #hello-msg{
+  font-size: 18px;
+  color:#fff;
+  margin-right: 20px;
+}
 </style>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-light">
-      <a class="navbar-brand text-dark">way2CMS</a> 
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNavDropdown">
-        <ul class="navbar-nav">
-          <li class="nav-item active">
-            <a class="nav-link" href="/clientHome/" style="color: black;"><i class="fa fa-home" aria-hidden="true"></i>Home</a>
-          </li>
-          <li class="nav-item dropdown" style="color: black;">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" style="color: black;" aria-haspopup="true" aria-expanded="false">
-              <i  class="fa fa-user" aria-hidden="true"></i>  My Account
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="/clientSettings/">Settings</a>
-              <a class="dropdown-item" href="/logout/">Logout</a>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark ">
+    <a class="navbar-brand">way2CMS</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+      <ul class="navbar-nav">
+        <li class="nav-item active">
+          <a class="nav-link" href="/clientHome/"><i class="fa fa-home" aria-hidden="true"></i>MyHome<span class="sr-only"></span></a>
+        </li>
+      
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i  class="fa fa-user" aria-hidden="true"></i>   MyAccount
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <a class="dropdown-item" href="/clientSettings/">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-settings mr-2"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+              </svg>Settings</a>
+            <a class="dropdown-item" href="/logout/"><i class="fa fa-sign-out" style="font-size:20px"></i></span>Logout</a>
               </div>
-          </li>
+            </li>
           </ul>
-          </div></nav> <br><br>
+        </div>
+        <span id="hello-msg">Hello,{{request.user}}</span>
+      </nav> <br><br>
     <div class="container">
       <div class="row gutters-sm">
         <div class="col-md-4 d-none d-md-block">
@@ -103,9 +114,9 @@ body{
                 <a href="#profile" data-toggle="tab" class="nav-item nav-link has-icon nav-link-faded active">
                   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user mr-2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>Profile Information
                 </a>
-                <a href="#account" data-toggle="tab" class="nav-item nav-link has-icon nav-link-faded">
+                <!--a href="#account" data-toggle="tab" class="nav-item nav-link has-icon nav-link-faded">
                   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-settings mr-2"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>Account Settings
-                </a>
+                </a--->
                 <a href="#security" data-toggle="tab" class="nav-item nav-link has-icon nav-link-faded">
                   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-shield mr-2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>Security
                 </a>
@@ -160,14 +171,15 @@ body{
             
                     {% csrf_token %}
                   <button type="submit"  name="update" class="btn btn-dark">Update Profile</button>
-                  <button type="submit" class="btn btn-light">Reset Changes</button>
+  
                   </form>
             
               </div>
-              <div class="tab-pane" id="account">
+              <!--div class="tab-pane" id="account">
                 <h6>ACCOUNT SETTINGS</h6>
                 <hr>
-                <form>
+                <form  method=POST action="/clientSettings/">
+                  {% csrf_token %}
                   <div class="form-group">
                     <label for="username">Username</label>
                     <input type="text" class="form-control" id="username" aria-describedby="usernameHelp" placeholder="Enter your username" value="{{userInfo.username}}">
@@ -178,20 +190,23 @@ body{
                     <label class="d-block text-danger">Delete Account</label>
                     <p class="text-muted font-size-sm">Once you delete your account, there is no going back. We would be glad if you gave it a thought again before bidding us Good Bye!</p>
                   </div>
-                  <button class="btn btn-danger" type="button">Delete Account</button>
+                  {% csrf_token %}
+                  <button class="btn btn-danger" type="submit">Delete Account</button>
                 </form>
-              </div>
+              </div--->
               <div class="tab-pane" id="security">
                 <h6>SECURITY SETTINGS</h6>
                 <hr>
-                <form>
+                <form  method=POST action="/clientSettings/">
+                  {% csrf_token %}
                   <div class="form-group">
                     <label class="d-block">Change Password</label>
-                    <input type="text" class="form-control" placeholder="Enter your old password">
-                    <input type="text" class="form-control mt-1" placeholder="New password">
-                    <input type="text" class="form-control mt-1" placeholder="Confirm new password">
+                    <input type="password" name="old_pw" class="form-control" placeholder="Enter your old password">
+                    <input type="password" name="new_pw" class="form-control mt-1" placeholder="New password">
+                    <input type="password" name="confirm_pw" class="form-control mt-1" placeholder="Confirm new password">
                     <br>
-                    <button type="button" class="btn btn-dark">Change Password</button>
+                    {% csrf_token %}
+                    <button type="submit" name="change_pw" class="btn btn-dark">Change Password</button>
                   </div>
                 </form>
                 <hr>
@@ -201,4 +216,21 @@ body{
       </div>
     </div>
   </body>
+  <script class="lazy" data-src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+  <script class="lazy" data-src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+  <script class="lazy" data-src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+  
+  {% for message in messages %}
+  <br>
+  <div class="container-fluid p-0" style="width:max-content;" >
+    <div class="alert {{ message.tags }} alert-dismissible" role="alert" style="text-align: center; background-color:lightgoldenrodyellow" >
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close" >
+        <span aria-hidden="true">&times;</span>
+      </button>
+      {{ message }}
+    </div>
+  </div>
+  {% endfor %}
+  </div>
+
     </html>
