@@ -186,4 +186,4 @@ def suggestingAds(request):
         expertiseFeild=request.POST['customRadio']
         print(expertiseFeild)
         ad_details=advocateAccounts.objects.filter(Q(additionalExpertises__icontains=expertiseFeild))
-    return render(request,'suggestedAdsList.html',context={'ad_details':ad_details,'heading':expertiseFeild})
+    return render(request,'suggestedAdsList.html',context={'ad_details':ad_details,'heading':expertiseFeild} )
