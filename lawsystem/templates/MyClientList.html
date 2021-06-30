@@ -11,6 +11,13 @@
   <script src="https://use.fontawesome.com/a48ffc1c86.js"></script>
 </head>
 <style>
+body
+{
+    counter-reset: Serial;           /* Set the Serial counter to 0 */
+}
+
+
+
   #hello-msg{
     font-size: 18px;
     color:#fff; 
@@ -71,6 +78,11 @@
           }
 
           .generate_invoice:hover {opacity: 1}
+          tr td:first-child:before
+{
+  counter-increment: Serial;      /* Increment the Serial counter */
+  content:counter(Serial); /* Display the counter */
+}
   </style>
 <body>
   {%csrf_token%}
@@ -115,6 +127,7 @@
       <br>
     <table id="clientDetails">
       <tr>
+        <th>S.No.</th>
         <th>Name</th>
         <th>Email</th>
         <th>Phone No</th>
@@ -122,6 +135,7 @@
       </tr>
       {% for id in usernameList%}
         <tr>
+          <td></td>
           <td>{{id.first_name}} {{id.last_name}}</td>
           <td>{{id.email}} </td>
           <td>{{id.phno}} </td>

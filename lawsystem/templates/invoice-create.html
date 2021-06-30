@@ -1,4 +1,8 @@
-{% extends "invoice/base.html" %}{% load bulma_tags %}
+{% extends "base.html" %}
+{%load static%}
+{% load django_simple_bulma %}
+{% bulma %}
+{% font_awesome %}
 {% block content %}
 <br>
 <section class="hero is-fullheight">
@@ -8,19 +12,19 @@
                 <form class="" method="POST" action="">{% csrf_token %}
                     <div class="columns is-centered">
                         <div class="column is-one-third">
-                            {{form.customer|bulma}}
+                            {{form.customer}}
                         </div>
 
                         <div class="column is-one-third">
-                            {{form.customer_email|bulma}}
+                            {{form.customer_email}}
                         </div>
                         <div class="column is-one-third">
-                            {{form.message|bulma}}
+                            {{form.message}}
                         </div>
                     </div>
                     <div class="columns is-centered">
                         <div class="column is-one-third">
-                            {{form.billing_address|bulma}}
+                            {{form.billing_address}}
                         </div>
                         <div class="column is-one-third">
                             date: <input class="input" type="date" name="date">

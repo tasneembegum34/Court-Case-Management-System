@@ -47,7 +47,7 @@ def advocateRegister(request):
                     phno=phno,email=email,username=username,password=password,experience=experience,expertise=expertise,address=address)
                     us=User.objects.create(username=username,password=password)
                     User.save(us)
-                    print(user)
+                    print(user) 
                     print("user created---------------")
                     return redirect('/regSuccessful/')
                    

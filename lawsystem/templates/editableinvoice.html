@@ -1,29 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
+    {%load static%}
 <head>
     <meta charset="utf-8">
     <title>Invoice</title>
-    {%load static%}
-    <script src="{% static 'styles/script.js' %}"></script>
     <link rel="stylesheet" href="{% static 'styles/style.css' %}">
+    <script src="{% static 'styles/script.js' %}"></script>
+  
 </head>
 <body>
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
     <header>
         <h1>Invoice</h1>
         <address contenteditable>
-            <p>Advocate name:{{user_ad.first_name}} {{user_ad.last_name}}</p>
-            <p>Address: {{user_ad.address}}
-            <p>PHNO.{{user_ad.phno}}</p>
+            <b>Advocate Details:</b><br>
+               <p>{{user_ad.first_name}} {{user_ad.last_name}}</p>
+            <p> {{user_ad.address}}</p>
+            <p> {{user_ad.phno}}</p>
         </address>
        
     </header>
     <article>
+        
         <h1>Recipient</h1>
         <address contenteditable>
-            <p>Client Name: {{user_cli.first_name}} {{user_cli.last_name}}</p>
-            <p>Address:<br>{{user_cli.address}}<br>
-            <p>PHNO.: {{user_cli.phno}}</p>
+            <p>{{user_cli.first_name}} {{user_cli.last_name}}</p>
+            <p>{{user_cli.address}}</p>
+            <p>{{user_cli.phno}}.</p>
         </address>
         <table class="meta">
             <tr>
@@ -32,7 +35,11 @@
             </tr>
             <tr>
                 <th><span contenteditable>Date</span></th>
-                <td><span contenteditable>January 1, 2012</span></td>
+                <td><span contenteditable><input type="date" name="date" required></span></td>
+            </tr>
+            <tr>
+                <th><span contenteditable>Due Date</span></th>
+                <td><span contenteditable><input type="date" name="due_date" required></span></td>
             </tr>
             <tr>
                 <th><span contenteditable>Amount Due</span></th>

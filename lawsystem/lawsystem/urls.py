@@ -22,6 +22,7 @@ urlpatterns = [
  path('',include('advocate.urls')),
  path('',include('login.urls')),
  path('',include('hireAdvocates.urls')),
+ path('', include("invoice.urls")),
 ]
 
 urlpatterns+=staticfiles_urlpatterns()

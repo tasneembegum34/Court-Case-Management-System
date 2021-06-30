@@ -43,6 +43,8 @@ INSTALLED_APPS = [
     'advocate',
     'login',
     'client',
+    'invoice',
+    'django_simple_bulma',
 ]
 MESSAGE_TAGS = {
         messages.DEBUG: 'alert-secondary',
@@ -152,6 +154,14 @@ STATIC_ROOT=os.path.join(BASE_DIR,'assests')
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
+STATICFILES_FINDERS = [
+  # First add the two default Finders, since this will overwrite the default.
+  'django.contrib.staticfiles.finders.FileSystemFinder',
+  'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+
+  # Now add our custom SimpleBulma one.
+  'django_simple_bulma.finders.SimpleBulmaFinder',
+]
 
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'

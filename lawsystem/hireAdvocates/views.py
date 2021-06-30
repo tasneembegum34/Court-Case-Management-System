@@ -188,8 +188,3 @@ def suggestingAds(request):
         ad_details=advocateAccounts.objects.filter(Q(additionalExpertises__icontains=expertiseFeild))
     return render(request,'suggestedAdsList.html',context={'ad_details':ad_details,'heading':expertiseFeild} )
 
-def generateInvoice(request):
-    cli_name=request.POST['generate_invoice']
-    user_cli=clientAccounts.objects.get(username=cli_name)
-    user_ad=advocateAccounts.objects.get(username=request.user)
-    return render(request,'editableinvoice.html',context={'user_cli':user_cli,'user_ad':user_ad})
