@@ -23,7 +23,7 @@ class Invoice(models.Model):
 class LineItem(models.Model):
     client = models.ForeignKey(Invoice, on_delete=models.CASCADE,default=1)
     service = models.TextField(blank=True,max_length=255)
-    description = models.TextField(blank=True,max_length=255)
+    description = models.TextField(blank=True,max_length=254)
     rate = models.DecimalField(max_digits=9, decimal_places=2,blank=True)
     noHours = models.IntegerField(default=1,blank=True)
     price = models.DecimalField(max_digits=9, decimal_places=2,default=0.0)

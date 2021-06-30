@@ -202,7 +202,7 @@ function onContentLoad() {
 
 		while (files[i]) reader.readAsDataURL(files[i++]);
 	}
- 
+
 	function onFileLoad(e) {
 		var data = e.target.result;
 
