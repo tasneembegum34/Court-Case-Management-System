@@ -16,6 +16,7 @@ class clientAccounts(models.Model):
     hiredAdUsername=models.CharField(max_length=255,blank=True)
     confirmedAds=models.CharField(max_length=30,blank=True)
     contactedAds=models.CharField(max_length=30,blank=True)
+    address=models.CharField(max_length=255,blank=True)
 
 class sectionNoDetails(models.Model):
     serial_No=models.IntegerField(default=0,primary_key=True)

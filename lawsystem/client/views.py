@@ -42,13 +42,14 @@ def clientRegister(request):
             gender=request.POST['gender']
             phno=request.POST['phno']
             email=request.POST['email']
+            address=request.POST['address']
             try:
                 validate_email(email)
                 username=request.POST['username']
                 password=request.POST['password']
                 re_password=request.POST['re_password']
                 if password==re_password:
-                    user=clientAccounts.objects.create(first_name=first_name,last_name=last_name,email=email,dob=dob,username=username,password=password,age=age,gender=gender,phno=phno)
+                    user=clientAccounts.objects.create(first_name=first_name,last_name=last_name,email=email,address=address,dob=dob,username=username,password=password,age=age,gender=gender,phno=phno)
                     print("user created---------------")
                     us=User.objects.create(username=username,password=password)
                     User.save(us)

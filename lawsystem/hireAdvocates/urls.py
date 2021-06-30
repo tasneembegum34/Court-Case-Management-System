@@ -13,5 +13,5 @@ urlpatterns=[
     path('clientRequests/',views.clientRequests,name="clientRequests" ),
     path('confirmedAds/',views.confirmedAds ,name="confirmedAds" ),
     path('suggestingAds/',views.suggestingAds,name="suggestingAds" ),
-    
+    path('generateInvoice/',views.generateInvoice,name="generateInvoice" ),
 ]

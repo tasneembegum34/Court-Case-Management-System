@@ -53,24 +53,24 @@
   background-color:darkgrey;
   color: white;
 }
-.removebtn {
+.generate_invoice{
             background-color:black;
             position:static;
             border: none;
             color: white;
-            padding: 16px 32px;
-            text-align: center;
-            font-size: 16px;
+
+            
+            font-size: 14px;
             margin: 4px 2px;
             opacity: 0.6;
             transition: 0.3s;
-          height: 50px;
-          width: 100px;
+          height: 40px;
+          width: 150px;
             text-decoration: none;
             cursor: pointer;
           }
 
-          .removebtn:hover {opacity: 1}
+          .generate_invoice:hover {opacity: 1}
   </style>
 <body>
   {%csrf_token%}
@@ -118,14 +118,18 @@
         <th>Name</th>
         <th>Email</th>
         <th>Phone No</th>
-  
+        <th>Actions</th>
       </tr>
       {% for id in usernameList%}
         <tr>
           <td>{{id.first_name}} {{id.last_name}}</td>
           <td>{{id.email}} </td>
           <td>{{id.phno}} </td>
-      
+          <td><form  method=POST action="{% url 'generateInvoice' %}">
+            {%csrf_token%}
+          <button  type="submit" name="generate_invoice"  value='{{id.username}}' class="generate_invoice" >Genearte Invoice</button>
+
+          </form></td>
         </tr>
         {% endfor %}
       </table>

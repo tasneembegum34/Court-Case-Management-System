@@ -117,6 +117,7 @@ def clientSettings(request):
         userInfo.last_name=request.POST['last_name']
         userInfo.phno=request.POST['phoneNo']
         userInfo.email=request.POST['email']
+        userInfo.address=request.POST['address']
         userInfo.save()
     if request.method=="POST"  and 'change_pw' in request.POST:
         old_pw=request.POST['old_pw']

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Invoice</title>
+    {%load static%}
+    <script src="{% static 'styles/script.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'styles/style.css' %}">
+</head>
+<body>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+    <header>
+        <h1>Invoice</h1>
+        <address contenteditable>
+            <p>Advocate name:{{user_ad.first_name}} {{user_ad.last_name}}</p>
+            <p>Address: {{user_ad.address}}
+            <p>PHNO.{{user_ad.phno}}</p>
+        </address>
+       
+    </header>
+    <article>
+        <h1>Recipient</h1>
+        <address contenteditable>
+            <p>Client Name: {{user_cli.first_name}} {{user_cli.last_name}}</p>
+            <p>Address:<br>{{user_cli.address}}<br>
+            <p>PHNO.: {{user_cli.phno}}</p>
+        </address>
+        <table class="meta">
+            <tr>
+                <th><span contenteditable>Invoice #</span></th>
+                <td><span contenteditable>101138</span></td>
+            </tr>
+            <tr>
+                <th><span contenteditable>Date</span></th>
+                <td><span contenteditable>January 1, 2012</span></td>
+            </tr>
+            <tr>
+                <th><span contenteditable>Amount Due</span></th>
+                <td><span id="prefix" contenteditable>Rs.</span><span>600.00</span></td>
+            </tr>
+        </table>
+        <table class="inventory">
+            <thead>
+                <tr>
+                    <th><span contenteditable>Service</span></th>
+                    <th><span contenteditable>Description</span></th>
+                    <th><span contenteditable>Rate Per Hour</span></th>
+                    <th><span contenteditable>Hours</span></th>
+                    <th><span contenteditable>Price</span></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><a class="cut">-</a><span contenteditable>Front End Consultation</span></td>
+                    <td><span contenteditable>Experience Review</span></td>
+                    <td><span data-prefix>Rs.</span><span contenteditable>150.00</span></td>
+                    <td><span contenteditable>4</span></td>
+                    <td><span data-prefix>Rs.</span><span>600.00</span></td>
+                </tr>
+            </tbody>
+        </table>
+        <a class="add">+</a>
+        <table class="balance">
+            <tr>
+                <th><span contenteditable>Total</span></th>
+                <td><span data-prefix>Rs.</span><span>600.00</span></td>
+            </tr>
+            <tr>
+                <th><span contenteditable>Amount Paid</span></th>
+                <td><span data-prefix>Rs.</span><span contenteditable>0.00</span></td>
+            </tr>
+            <tr>
+                <th><span contenteditable>Balance Due</span></th>
+                <td><span data-prefix>Rs.</span><span>600.00</span></td>
+            </tr>
+        </table>
+    </article>
+    <aside>
+        <h1><span >Additional Notes</span></h1>
+        <div class="invoice-note">
+            * Make all cheques payable to way2Cms<br>
+            * Payment is due within 30 days<br>
+            * A finance charge of 1.5% will be made on unpaid balances after 30 days<br>
+            * If you have any questions concerning this invoice, contact  way2CMS@gmail.com
+         </div>
+       
+    </aside>
+    <br><br><br><br><br><br><br><br>
+    <footer>
+        <p class="text-center m-b-5 f-w-600">
+            THANK YOU FOR YOUR BUSINESS
+         </p>
+         <br>
+         <p class="text-center">
+            <span class="m-r-10"><i class="fa fa-fw fa-lg fa-globe"></i> way2Cms.com</span>
+            <span class="m-r-10"><i class="fa fa-fw fa-lg fa-envelope"></i> way2CMS@gmail.com</span>
+         </p>
+    </footer>
+    <br><br><br><br>
+    <button class="button">Submit</button>
+</body>
+</html>

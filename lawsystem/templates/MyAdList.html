@@ -152,7 +152,7 @@
           <td>{{id.address}}</td>
           <td>
           <form  method=POST action="{% url 'MyAdList' %}">
-            {%csrf_token%}
+            {%csrf_token%} 
           <button  type="submit" name="remove"  value='{{id.username}}' class="removebtn" >Remove</button>
 
           </form>
