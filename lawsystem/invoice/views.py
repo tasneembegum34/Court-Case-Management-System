@@ -24,10 +24,16 @@ def generateInvoice(request):
 
 def invoice_data(request):
     if request.is_ajax():
-        print("came2")
-        data1=request.POST.get('data1[]')
-        print(data1)
-       
-       
+        if 'data1[]' in request.POST:
+            print("came2")
+            data1=request.POST.get('data1[]')
+            print(data1)
+        if 'meta[]' in request.POST:
+            meta=request.POST.get('meta[]')
+            print(meta)
+        if 'balance[]' in request.POST:
+            balance=request.POST.get('balance[]')
+            print(balance)
+        return render(request,'MyClientList.html')
     # nothing went well
     return HttpResponse('FAIL!!!!!')

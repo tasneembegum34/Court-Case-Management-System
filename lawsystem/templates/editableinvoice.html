@@ -62,6 +62,7 @@
                 <td><span id="prefix" contenteditable>Rs.</span><span>600.00</span></td>
             </tr>
         </table>
+        
         <table class="inventory">
             <thead>
                 <tr>
@@ -82,41 +83,7 @@
                 </tr>
             </tbody>
         </table>
-        <form id="form" method="POST">  
-            {% csrf_token %}
-            <button type="submit" id="data_btn">Submit</button><br><br>
-            
-            <!--button type="submit" id="done_btn" value=data1 >Submit</button-->
-    
-            </form>
-            <script type="text/javascript">
-                $(document).ready(function(){
-                    $('form').submit(function(){
-                        event.preventDefault();
-                        var data1=""
-                        for (var a = document.querySelectorAll('table.inventory tbody tr td'), i = 0; a[i]; ++i){
-                    data1+=a[i].textContent+",";
-                }
-                alert(data1)
-                        $.ajax({
-                            url: "{% url 'invoice_data' %}",
-                            headers: {
-        'X-CSRFToken': $('input[name=csrfmiddlewaretoken]').val()
-    },
-                            type: 'POST',
-                            data: {
-                                'data1[]':data1
-                            }
-                            ,success: function(data){
-                                console.log('Success!');
-                            },
-                            dataType:'json'
-                        });
-                        return false;
-                    });
-                });
-            </script>
-<br><br>
+ 
         <a class="add">+</a>
         <table class="balance">
             <tr>
@@ -155,7 +122,53 @@
          </p>
     </footer>
     <br><br><br><br>
-    
+    <form id="form" method="POST">  
+        {% csrf_token %}
+        <button type="submit" id="data_btn">Submit</button><br><br>
+        
+        <!--button type="submit" id="done_btn" value=data1 >Submit</button-->
+
+        </form>
+        <script type="text/javascript">
+            $(document).ready(function(){
+                $('form').submit(function(){
+                    event.preventDefault();
+                    var data1=""
+                    var meta=""
+                    var balance=""
+                    for (var a = document.querySelectorAll('table.inventory tbody tr td'), i = 0; a[i]; ++i){
+                data1+=a[i].textContent+",";
+            }
+            alert(data1)
+            for (var a = document.querySelectorAll('table.meta tbody tr td'), i = 0; a[i]; ++i){
+                meta+=a[i].textContent+",";
+            }
+           
+            alert(meta)
+            for (var a = document.querySelectorAll('table.balance tbody tr td'), i = 0; a[i]; ++i){
+                balance+=a[i].textContent+",";
+            }
+           
+            alert(balance)
+                    $.ajax({
+                        url: "{% url 'invoice_data' %}",
+                        headers: {
+    'X-CSRFToken': $('input[name=csrfmiddlewaretoken]').val()
+},
+                        type: 'POST',
+                        data: {
+                            'data1[]':data1, 'meta[]':meta,'balance[]':balance
+                        }
+                        ,success: function(data){
+                            console.log('Success!');
+                        },
+                        dataType:'json'
+                    });
+                    return false;
+                });
+            });
+        </script>
+<br><br>
 
 </body>
 </html>
