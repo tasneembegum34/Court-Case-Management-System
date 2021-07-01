@@ -42,7 +42,7 @@ INSTALLED_APPS = [
     'advocate',
     'login',
     'client',
-    'invoice',
+    'generate_invoice',
 ]
 MESSAGE_TAGS = {
         messages.DEBUG: 'alert-secondary',

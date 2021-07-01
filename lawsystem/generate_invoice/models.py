@@ -1,5 +1,4 @@
 from django.db import models
-import datetime
 # Create your models here.
 class Invoice(models.Model):
     invoice_no=models.CharField(max_length=30,blank=True)

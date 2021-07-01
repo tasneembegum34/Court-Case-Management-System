@@ -2,83 +2,99 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Example 2</title>
-    <link rel="stylesheet" href="{%static 'css/invoice-template-1.css' %}" media="all" />
+    <title>Pdf template</title>
+    <link rel="stylesheet" href="{%static 'styles/pdf_template_style.css' %}" media="all" />
+    <script src="https://use.fontawesome.com/a48ffc1c86.js"></script>
   </head>
   <body>
+    <main class="invoice_div">
     <header class="clearfix">
       <div id="logo">
-        <img src="{% static 'img/logo.png'%}" style="width: 134px; height:116px"> 
+        <img src="{% static 'images/new_logo.PNG'%}" style="width: 200px; height:116px"> 
       </div>
       <div id="company">
-        <h1 class="name">{{company.name}}</h1>
-        <div>{{company.address}}</div>
-        <div>{{company.phone}}</div>
-        <div><a href="mailto:{{company.email}}">{{company.email}}</a></div>
+        <h1 class="name">way2CMS</h1>
+        <div>6328,Langar House,Hyderabad</div>
+        <div>+91 XXXXX XXXXX</div>
+        <div><i class="fa fa-fw fa-lg fa-envelope" style="color: black;"></i><a href="mailto:{{company.email}}">way2CMS@gmail.com</a></div>
+        
       </div>
       </div>
     </header>
-    <main>
-      <div id="details" class="clearfix">
-        <div id="client">
-          <div class="to">INVOICE TO:</div>
-          <h2 class="name">{{customer}}</h2>
-          <div class="address">{{billing_address}}</div>
-          <div class="email"><a href="mailto:{{customer_email}}">{{customer_email}}</a></div>
-        </div>
-        <div id="invoice">
-          <h1>#{{invoice_id}}</h1>
-          <div class="date">Date of Invoice: {{date}}</div>
-          <div class="date">Due Date: {{due_date}}</div>
-        </div>
-      </div>
-      <table border="0" cellspacing="0" cellpadding="0">
-        <thead>
-          <tr>
-            <th class="no">#</th>
-            <th class="desc">DESCRIPTION</th>
-            <th class="unit">RATE</th>
-            <th class="qty">QUANTITY</th>
-            <th class="total">TOTAL</th>
-          </tr>
-        </thead>
-        <tbody>
-			{% for item in lineitem %}
-          <tr>
-            <td class="no">{{forloop.counter}}</td>
-            <td class="desc">{{item.description}}</td>
-            <td class="unit">${{item.rate}}</td>
-            <td class="qty">{{item.quantity}}</td>
-            <td class="total">${{item.amount}}</td>
-		  </tr>
-		  {% endfor %}
-        </tbody>
-        <tfoot>
-          <tr>
-            <td colspan="2"></td>
-            <td colspan="2">SUBTOTAL</td>
-            <td>${{invoice_total}}</td>
-          </tr>
-          <tr>
-            <td colspan="2"></td>
-            <td colspan="2">TAX 0%</td>
-            <td>${{invoice_total}}</td>
-          </tr>
-          <tr>
-            <td colspan="2"></td>
-            <td colspan="2">GRAND TOTAL</td>
-            <td>${{invoice_total}}</td>
-          </tr>
-        </tfoot>
-      </table>
-      <div id="thanks">Thank you!</div>
-      <div id="notices">
-        <div>NOTICE:</div>
-        <div class="notice">A finance charge of 1.5% will be made on unpaid balances after 30 days.</div>
-      </div>
-    </main>
-    <footer>
-      Invoice was created on a computer and is valid without the signature and seal.
-    </footer>
+ 
+      <article>
+        <h1>Recipient</h1>
+        <br>
+        <address contenteditable style="font-size: 16px;">
+            <p id="cli_name" value={{user_cli.username}}>{{user_cli.first_name}} {{user_cli.last_name}}</p>
+            <p>{{user_cli.address}}</p>
+            <p>{{user_cli.phno}}</p>
+        </address>
+        <table class="meta">
+            <tr>
+                <th><span contenteditable>Invoice #</span></th>
+                <td><span contenteditable>{{invoice_table.invoice_no}}</span></td>
+            </tr>
+            <tr>
+                <th><span contenteditable>Date</span></th>
+                
+                <td><span contenteditable>{{invoice_table.date}}</span></td>
+            </tr>
+            <tr>
+                <th><span contenteditable>Due Date</span></th>
+                
+                <td><span contenteditable>{{invoice_table.due_date}}</span></td>
+            </tr>
+        </table>
+        
+        <table class="inventory">
+            <thead>
+                <tr>
+                    <th><span contenteditable>Service</span></th>
+                    <th><span contenteditable>Description</span></th>
+                    <th><span contenteditable>Rate Per Hour</span></th>
+                    <th><span contenteditable>Hours</span></th>
+                    <th><span contenteditable>Price</span></th>
+                </tr>
+            </thead>
+            <tbody>
+              {% for id in lineitem_table%}
+                <tr>
+                    <td><span contenteditable>{{id.service}}</span></td>
+                    <td><span contenteditable>{{id.description}}</span></td>
+                    <td><span data-prefix>Rs.</span><span contenteditable>{{id.rate}}</span></td>
+                    <td><span contenteditable>{{id.noHours}}</span></td>
+                    <td><span data-prefix>Rs.</span><span>{{id.price}}</span></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <table class="balance">
+            <tr>
+                <th><span contenteditable>Total</span></th>
+                <td><span data-prefix>Rs.</span><span>{{invoice_table.total_amount}}</span></td>
+            </tr>
+        </table>
+    </article>
+    <br><br><br>
+    <aside>
+        <h1 ><span >Additional Notes</span></h1>
+        <div class="invoice-note">
+            * Make all cheques payable to way2Cms<br>
+            * Payment is due within 30 days<br>
+            * A finance charge of 1.5% will be made on unpaid balances after 30 days<br>
+            * If you have any questions concerning this invoice, contact  way2CMS@gmail.com
+         </div>
+    </aside>
+<br><br><br><br><br>
+    <footer >
+        <p class="text-center m-b-5 f-w-600" >
+            <span style="float:left; font-style: inherit; color:black">THANK YOU FOR YOUR BUSINESS</span>
+         </p><br><br>
+         <p class="text-center" >
+            <span style="float:left; color: black;" class="m-r-10"><i class="fa fa-fw fa-lg fa-globe"></i> way2Cms.com</span>
+         </p>
+    </footer></main>
   </body>
 </html>

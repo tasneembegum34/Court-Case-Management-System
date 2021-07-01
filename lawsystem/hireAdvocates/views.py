@@ -12,7 +12,7 @@ def hireAdvocates(request):
 def addAdvocate(val,username):
     print(val,username)
     id=clientAccounts.objects.get(Q(username=username))
-    if val not in id.hiredAdUsername and val not in id.contactedAds:
+    if val not in id.hiredAdUsername and val not in id.contactedAds and val not in id.confirmedAds:
         id.hiredAdUsername += val+"," 
         #ad_user.save()
     id.save()

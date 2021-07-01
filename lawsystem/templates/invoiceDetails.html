@@ -83,6 +83,19 @@ body
   counter-increment: Serial;      /* Increment the Serial counter */
   content:counter(Serial); /* Display the counter */
 }
+.button {
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: black;
+ 
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  margin: 4px 2px;
+  cursor: pointer;
+  width: 80px;
+  height: 40px;
+}
   </style>
 <body>
   {%csrf_token%}
@@ -118,38 +131,43 @@ body
         </div>
       </nav> <br> 
       <div>
-
         {% block content %}
         <br>
 <center>
-    {% if usernameList %}
-      <h2>My Client List</h2>
+    {% if invoice_table %}
+      <h2>INVOICE DETAILS</h2>
       <br>
     <table id="clientDetails">
       <tr>
-        <th>S.No.</th>
-        <th>Name</th>
-        <th>Email</th>
-        <th>Phone No</th>
-        <th>Actions</th>
+        <th>INVOICE NO</th>
+        <th>CLIENT NAME</th>
+        <th>DATE</th>
+        <th>DUE DATE</th>
+        <th>BALANCE DUE</th>
+        <th>TOTAL</th>
+        <th>STATUS</th>
+        <th>VIEW</th>
+        <th>DOWNLOAD</th>
       </tr>
-      {% for id in usernameList%}
+      {% for id in invoice_table%}
         <tr>
-          <td></td>
-          <td>{{id.first_name}} {{id.last_name}}</td>
-          <td>{{id.email}} </td>
-          <td>{{id.phno}} </td>
-          <td><form  method=POST action="{% url 'generateInvoice' %}">
-            {%csrf_token%}
-          <button  type="submit" name="generate_invoice"  value='{{id.username}}' class="generate_invoice" >Genearte Invoice</button>
-
+          <td>{{id.invoice_no}} </td>
+          <td>{{id.client}} </td>
+          <td>{{id.date}} </td>
+          <td>{{id.due_date}} </td>
+          <td>{{id.balance}} </td>
+          <td>{{id.total_amount}} </td>
+          {% if id.status %}
+                <td><button class="button button1" style="background-color: green;">Paid</button></td>
+          {% else %}
+                <td><button class="button button1" style="background-color:lightcoral">Not Paid</button></td>
+          {% endif %}
+          <form  method=POST action="{% url 'view_PDF' %}">
+              {% csrf_token %}
+          <td><button class="button button1" name="view_template2" style="background-color: lightskyblue;" type="submit" value={{id.invoice_no}}>View</button> </td>
           </form>
-          <form  method=POST action="{% url 'viewInvoice' %}">
-            {%csrf_token%}
-          <button  type="submit" name="viewInvoice"  value='{{id.username}}' class="generate_invoice" >View Invoice</button>
-
-          </form>
-        </td>
+          <td> <a href="{% url 'generate_PDF'  %}">Download</a></td>
+         
         </tr>
         {% endfor %}
       </table>
@@ -160,10 +178,15 @@ body
 
       <table id="clientDetails">
         <tr>
-          <th>Name</th>
-          <th>Email</th>
-          <th>Phone No</th>
-         
+            <th>INVOICE NO</th>
+                <th>CLIENT NAME</th>
+                <th>DATE</th>
+                <th>DUE DATE</th>
+                <th>BALANCE</th>
+                <th>TOTAL</th>
+                <th>STATUS</th>
+                <th>VIEW</th>
+                <th>DOWNLOAD</th>
         </tr>
        
         </table>
