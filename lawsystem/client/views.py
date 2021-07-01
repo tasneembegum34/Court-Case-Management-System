@@ -2,7 +2,6 @@
 from django.shortcuts import render,redirect
 from django.contrib import messages
 from django.contrib.auth.models import User
-from requests.api import head
 from .models import clientAccounts, sectionNoDetails
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import ValidationError
@@ -16,15 +15,15 @@ import re
 from PIL import Image
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-# Create your views here.
 from .decorators import unauthenticated_user,allowed_users
+# Create your views here.
 
 user_type=""
 def home(request):
     return render(request,'home.html')
  
-#@login_required(login_url='/login/')
-#@allowed_users(allowed_roles=['client'])
+@login_required(login_url='/login/')
+@allowed_users(allowed_roles=['client'])
 def clientHome(request):
     print("client  home")
     return render(request,'clientHome.html') 

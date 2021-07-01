@@ -8,12 +8,16 @@
     <link rel="stylesheet" href="{% static 'styles/style.css' %}">
     <script src="{% static 'styles/script.js' %}"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://use.fontawesome.com/a48ffc1c86.js"></script>
   <style>
-    .user-details {
+    #data_btn {
         display: inline-block;
         border-radius: 4px;
-        background-color: #f16439;
+        background-color: black;
         border: none;
         color: #FFFFFF;
         text-align: center;
@@ -26,27 +30,59 @@
         opacity: 0.6;
        
       }
-      .user-details:hover {opacity: 1}
+      #data_btn:hover {opacity: 1}
     </style>
   
 </head>
 <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand">way2CMS</a> 
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      
+        <div style="position: relative;" class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul  class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="/advocateHome/"><i class="fa fa-home" aria-hidden="true"></i>Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/MyClientList/">My List</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/clientRequests/">Client Requests</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a  class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fa fa-user" aria-hidden="true"></i>  My Account
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="/advocateSettings/"> <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-settings mr-2"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+                </svg>Settings</a>
+              <a class="dropdown-item" href="/logout/"><i class="fa fa-sign-out" style="font-size:20px"></i>Logout</a>
+                
+            </li>
+          </ul>
+          <span id="hello-msg">Hello,{{request.user}}</span>
+        </div>
+      </nav> <br>
+      <div class="invoice_div">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
     <header>
-        <h1>Invoice</h1>
+        <h1>Invoice</h1><br><br>
         <address contenteditable>
-            <p>Advocate name</p>
-            <p>Address#1<br>Address#2</p>
-            <p>PHNO.</p>
+            <p>{{user_ad.first_name}} {{user_ad.last_name}} Advocate</p>
+            <p>{{user_ad.address}}</p>
+            <p>{{user_ad.phno}}</p>
         </address>
        
     </header>
     <article>
         <h1>Recipient</h1>
         <address contenteditable>
-            <p>Client name</p>
-            <p>Address#1<br>Address#2</p>
-            <p>PHNO.</p>
+            <p>{{user_cli.first_name}} {{user_cli.last_name}}</p>
+            <p>{{user_cli.address}}
+            <p>{{user_ad.phno}}</p>
         </address>
         <table class="meta">
             <tr>
@@ -84,7 +120,7 @@
             </tbody>
         </table>
  
-        <a class="add">+</a>
+        <a class="add" >+</a>
         <table class="balance">
             <tr>
                 <th><span contenteditable>Total</span></th>
@@ -100,8 +136,9 @@
             </tr>
         </table>
     </article>
+    <br><br>
     <aside>
-        <h1><span >Additional Notes</span></h1>
+        <h1 ><span >Additional Notes</span></h1>
         <div class="invoice-note">
             * Make all cheques payable to way2Cms<br>
             * Payment is due within 30 days<br>
@@ -110,21 +147,21 @@
          </div>
          
     </aside>
-    <br><br><br><br><br><br><br><br>
-    <footer>
-        <p class="text-center m-b-5 f-w-600">
-            THANK YOU FOR YOUR BUSINESS
+    <br><br><br><br>
+    <footer >
+        <p class="text-center m-b-5 f-w-600" >
+            <span style="float:left; font-style: inherit;">THANK YOU FOR YOUR BUSINESS</span>
          </p>
-         <br>
-         <p class="text-center">
-            <span class="m-r-10"><i class="fa fa-fw fa-lg fa-globe"></i> way2Cms.com</span>
-            <span class="m-r-10"><i class="fa fa-fw fa-lg fa-envelope"></i> way2CMS@gmail.com</span>
+      <br>
+         <p class="text-center" >
+            <span style="float:left;" class="m-r-10"><i class="fa fa-fw fa-lg fa-globe"></i> way2Cms.com</span>
+            <span style="float:left;" class="m-r-10"><i class="fa fa-fw fa-lg fa-envelope"></i> way2CMS@gmail.com</span>
          </p>
     </footer>
-    <br><br><br><br>
+    <br><br>
     <form id="form" method="POST">  
         {% csrf_token %}
-        <button type="submit" id="data_btn">Submit</button><br><br>
+        <button type="submit" id="data_btn">Submit</button><br>
         
         <!--button type="submit" id="done_btn" value=data1 >Submit</button-->
 
@@ -139,17 +176,17 @@
                     for (var a = document.querySelectorAll('table.inventory tbody tr td'), i = 0; a[i]; ++i){
                 data1+=a[i].textContent+",";
             }
-            alert(data1)
+        
             for (var a = document.querySelectorAll('table.meta tbody tr td'), i = 0; a[i]; ++i){
                 meta+=a[i].textContent+",";
             }
            
-            alert(meta)
+          
             for (var a = document.querySelectorAll('table.balance tbody tr td'), i = 0; a[i]; ++i){
                 balance+=a[i].textContent+",";
             }
            
-            alert(balance)
+          
                     $.ajax({
                         url: "{% url 'invoice_data' %}",
                         headers: {
@@ -158,17 +195,24 @@
                         type: 'POST',
                         data: {
                             'data1[]':data1, 'meta[]':meta,'balance[]':balance
-                        }
-                        ,success: function(data){
-                            console.log('Success!');
                         },
                         dataType:'json'
+                        ,success: function(data){
+                           if(data.redirect){
+                            window.location.replace(data.redirect);
+                            alert('success')
+                           }
+                           else{
+                               alert('failure')
+                           }
+                        },
+                       
                     });
-                    return false;
+             alert("success");
                 });
             });
         </script>
 <br><br>
-
+</div>
 </body>
 </html>

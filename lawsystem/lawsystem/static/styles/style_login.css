@@ -1,7 +1,7 @@
 body {margin: 0;  
   padding: 0;  
   font-family: 'Cambria'; 
-  background-image: url("{%static 'images/login_bg.jpg'%}");
+ 
    }
   
 .login{  
@@ -54,7 +54,7 @@ span{
   font-size: 17px;  
 }  
 a{  
-  float: right;    
+  float: center;    
 }
 
 

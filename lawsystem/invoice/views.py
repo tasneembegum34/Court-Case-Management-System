@@ -1,4 +1,5 @@
-from django.shortcuts import render
+from django.http.response import HttpResponseRedirect
+from django.shortcuts import redirect, render
 from advocate.models import advocateAccounts
 from client.models import clientAccounts
 from .forms import InvoiceForm,LineItemForm
@@ -7,8 +8,9 @@ from django.http import HttpResponse
 # Create your views here.
 
 def generateInvoice(request):
-    return render(request,'editableinvoice.html')
-    """ if request.method == "POST"  and 'updatebtn' in request.POST:
+    user_cli=""
+    user_ad=""
+    if request.method == "POST"  and 'updatebtn' in request.POST:
         invoiceDetails=Invoice()
         invoiceDetails.invoice_no=request.POST['invoice_no']
         invoiceDetails.client=user_cli
@@ -19,8 +21,11 @@ def generateInvoice(request):
         print(request.POST.get('total'))
         invoiceDetails.status=0
         invoiceDetails.save()
-    else       pass"""
-   #context={'user_cli':user_cli,'user_ad':user_ad})
+    else:
+        cli_name=request.POST['generate_invoice']
+        user_cli=clientAccounts.objects.get(username=cli_name)
+        user_ad=advocateAccounts.objects.get(username=request.user)
+    return render(request,'editableinvoice.html',context={'user_cli':user_cli,'user_ad':user_ad})
 
 def invoice_data(request):
     if request.is_ajax():
@@ -34,6 +39,8 @@ def invoice_data(request):
         if 'balance[]' in request.POST:
             balance=request.POST.get('balance[]')
             print(balance)
-        return render(request,'MyClientList.html')
+        return HttpResponse('/advocateHome/')
+        #return render(request,'MyClientList.html')
     # nothing went well
     return HttpResponse('FAIL!!!!!')
+

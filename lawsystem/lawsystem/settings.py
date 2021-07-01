@@ -9,7 +9,6 @@ https://docs.djangoproject.com/en/3.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
-#	15190/2016 
 from pathlib import Path
 import os
 from django.contrib.messages import constants as messages
@@ -44,7 +43,6 @@ INSTALLED_APPS = [
     'login',
     'client',
     'invoice',
-    'django_simple_bulma',
 ]
 MESSAGE_TAGS = {
         messages.DEBUG: 'alert-secondary',
@@ -154,14 +152,7 @@ STATIC_ROOT=os.path.join(BASE_DIR,'assests')
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
-STATICFILES_FINDERS = [
-  # First add the two default Finders, since this will overwrite the default.
-  'django.contrib.staticfiles.finders.FileSystemFinder',
-  'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 
-  # Now add our custom SimpleBulma one.
-  'django_simple_bulma.finders.SimpleBulmaFinder',
-]
 
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
