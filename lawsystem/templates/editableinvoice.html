@@ -80,7 +80,7 @@
     <article>
         <h1>Recipient</h1>
         <address contenteditable>
-            <p>{{user_cli.first_name}} {{user_cli.last_name}}</p>
+            <p id="cli_name" value={{user_cli.username}}>{{user_cli.first_name}} {{user_cli.last_name}}</p>
             <p>{{user_cli.address}}
             <p>{{user_ad.phno}}</p>
         </address>
@@ -91,7 +91,13 @@
             </tr>
             <tr>
                 <th><span contenteditable>Date</span></th>
-                <td><span contenteditable>January 1, 2012</span></td>
+                
+                <td><span contenteditable>January 1,2012</span></td>
+            </tr>
+            <tr>
+                <th><span contenteditable>Due Date</span></th>
+                
+                <td><span contenteditable>January 1,2012</span></td>
             </tr>
             <tr>
                 <th><span contenteditable>Amount Due</span></th>
@@ -158,8 +164,8 @@
             <span style="float:left;" class="m-r-10"><i class="fa fa-fw fa-lg fa-envelope"></i> way2CMS@gmail.com</span>
          </p>
     </footer>
-    <br><br>
-    <form id="form" method="POST">  
+    <br><br> 
+    <form id="form" method="POST"> 
         {% csrf_token %}
         <button type="submit" id="data_btn">Submit</button><br>
         
@@ -173,6 +179,7 @@
                     var data1=""
                     var meta=""
                     var balance=""
+                    var cli_name="{{user_cli.username}}"
                     for (var a = document.querySelectorAll('table.inventory tbody tr td'), i = 0; a[i]; ++i){
                 data1+=a[i].textContent+",";
             }
@@ -180,8 +187,7 @@
             for (var a = document.querySelectorAll('table.meta tbody tr td'), i = 0; a[i]; ++i){
                 meta+=a[i].textContent+",";
             }
-           
-          
+            meta+=cli_name+","
             for (var a = document.querySelectorAll('table.balance tbody tr td'), i = 0; a[i]; ++i){
                 balance+=a[i].textContent+",";
             }
@@ -208,7 +214,7 @@
                         },
                        
                     });
-             alert("success");
+             alert("success"+cli_name);
                 });
             });
         </script>
