@@ -23,68 +23,74 @@
       </div>
     </header>
     
-      <h1>Invoice</h1><br>
+     <center> <h1>INVOICE</h1></center><br>
+      <hr>
       <p style="float: left; font-weight: bold;">Advocate Details</p><br>
-      <address contenteditable>
+      <address >
           <p>{{user_ad.first_name}} {{user_ad.last_name}} Advocate</p>
           <p>{{user_ad.address}}</p>
           <p>{{user_ad.phno}}</p>
       </address>
-     <br><br>
+      <hr><br>
       <article>
         <p style="float: left; font-weight: bold;">Client Details</p><br>
-        <address contenteditable style="font-size: 16px;">
+        <address >
             <p id="cli_name" value={{user_cli.username}}>{{user_cli.first_name}} {{user_cli.last_name}}</p>
             <p>{{user_cli.address}}</p>
             <p>{{user_cli.phno}}</p>
         </address>
+        <hr>
         <table class="meta">
             <tr>
-                <th><span contenteditable>Invoice #</span></th>
+                <th><span>Invoice #</span></th>
                 <td><span contenteditable>{{invoice_table.invoice_no}}</span></td>
             </tr>
             <tr>
-                <th><span contenteditable>Date</span></th>
+                <th><span >Date</span></th>
                 
-                <td><span contenteditable>{{invoice_table.date}}</span></td>
+                <td><span>{{invoice_table.date}}</span></td>
             </tr>
             <tr>
-                <th><span contenteditable>Due Date</span></th>
+                <th><span >Due Date</span></th>
                 
-                <td><span contenteditable>{{invoice_table.due_date}}</span></td>
+                <td><span >{{invoice_table.due_date}}</span></td>
             </tr>
         </table>
-        
+        <hr>
         <table class="inventory">
             <thead>
                 <tr>
-                    <th><span contenteditable>Service</span></th>
-                    <th><span contenteditable>Description</span></th>
-                    <th><span contenteditable>Rate Per Hour</span></th>
-                    <th><span contenteditable>Hours</span></th>
-                    <th><span contenteditable>Price</span></th>
+                    <th><span >Service</span></th>
+                    <th><span >Description</span></th>
+                    <th><span >Rate Per Hour</span></th>
+                    <th><span >Hours</span></th>
+                    <th><span >Price</span></th>
+                    <hr>
                 </tr>
             </thead>
+        <br>
             <tbody>
               {% for id in lineitem_table%}
                 <tr>
-                    <td><span contenteditable>{{id.service}}</span></td>
-                    <td><span contenteditable>{{id.description}}</span></td>
+                    <td><span >{{id.service}}</span></td>
+                    <td><span>{{id.description}}</span></td>
                     <td><span data-prefix>Rs.</span><span contenteditable>{{id.rate}}</span></td>
-                    <td><span contenteditable>{{id.noHours}}</span></td>
+                    <td><span>{{id.noHours}}</span></td>
                     <td><span data-prefix>Rs.</span><span>{{id.price}}</span></td>
+                   
                 </tr>
                 {% endfor %}
             </tbody>
         </table>
-
+<hr>
         <table class="balance">
             <tr>
-                <th><span contenteditable>Total</span></th>
+                <th><span >Total</span></th>
                 <td><span data-prefix>Rs.</span><span>{{invoice_table.total_amount}}</span></td>
             </tr>
         </table>
     </article>
+    <hr>
     <br><br><br>
     <aside>
         <h1 ><span >Additional Notes</span></h1>

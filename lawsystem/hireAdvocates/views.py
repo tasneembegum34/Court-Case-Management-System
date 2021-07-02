@@ -58,6 +58,7 @@ def displayHiredAds(req_user):
             adlist.pop() 
             for i in adlist:
                 contactedAdsList.append(advocateAccounts.objects.get(username=i))
+        print(usernameList,contactedAdsList)
         return usernameList,contactedAdsList
             
 def MyAdList(request):
@@ -65,57 +66,64 @@ def MyAdList(request):
     user_cli=clientAccounts.objects.get(username=req_user)
     contactedAdsList=[]
     usernameList=[]
-    if request.method=="POST"  and 'remove' in request.POST:
-        ad_remove=request.POST['remove']
-        user_ad=advocateAccounts.objects.get(username=ad_remove)
-        if user_cli.hiredAdUsername:
-            l=user_cli.hiredAdUsername.split(',')
-            l.remove(ad_remove)            
-            user_cli.hiredAdUsername=",".join(l)
+    try:
+        if request.method=="POST"  and 'remove' in request.POST:
+            ad_remove=request.POST['remove']
+            user_ad=advocateAccounts.objects.get(username=ad_remove)
+            if user_cli.hiredAdUsername:
+                print("came=-----------")
+                l=user_cli.hiredAdUsername
+                print(l)
+                l=l.split(',')
+                l.pop
+                l.remove(ad_remove)            
+                user_cli.hiredAdUsername=",".join(l)
 
-            """l2=user_ad.clientRequest.split(',')
-            l2.remove(user_cli.username)
-            user_ad.clientRequest=",".join(l2)"""
-        else:
-            user_cli.hireAdUsername=""
-        user_cli.save()
-        #user_ad.save()
-        usernameList,contactedAdsList=displayHiredAds(req_user)
-        if contactedAdsList:
-            return render(request,'MyAdList.html',context={'usernameList':usernameList,'contactedAdsList':contactedAdsList})
-        else:
-            return render(request,'MyAdList.html',{'usernameList':usernameList})
-
-
-    elif request.method=="POST"  and 'contact' in request.POST:
-        print("came---------")
-        ad_contact=request.POST['contact']
-        ad_user=advocateAccounts.objects.get(Q(username=ad_contact))
-        print(ad_user.clientRequest)
-        #add client name into advocate table column clientRequests 
-        if user_cli.username not in ad_user.clientRequest:
-            ad_user.clientRequest+=user_cli.username+","
-            ad_user.save()
-        if ad_user.username not in user_cli.contactedAds:
-            user_cli.contactedAds+=ad_user.username+","
-            user_cli.save()
-        if user_cli.hiredAdUsername:
+                """l2=user_ad.clientRequest.split(',')
+                l2.remove(user_cli.username)
+                user_ad.clientRequest=",".join(l2)"""
+            else:
+                user_cli.hireAdUsername=""
             print(user_cli.hiredAdUsername)
-            l=user_cli.hiredAdUsername.split(',')
-            l.remove(ad_user.username)            
-            user_cli.hiredAdUsername=",".join(l)
             user_cli.save()
-        usernameList,contactedAdsList=displayHiredAds(req_user)
-        return render(request,'MyAdList.html',context={'usernameList':usernameList,'contactedAdsList':contactedAdsList})
-    else:
-        if user_cli.hiredAdUsername:
-            req_user=request.user
+            #user_ad.save()
             usernameList,contactedAdsList=displayHiredAds(req_user)
-            print(usernameList,contactedAdsList)
+            if contactedAdsList:
+                return render(request,'MyAdList.html',context={'usernameList':usernameList,'contactedAdsList':contactedAdsList})
+            else:
+                return render(request,'MyAdList.html',{'usernameList':usernameList})
+
+
+        elif request.method=="POST"  and 'contact' in request.POST:
+            print("came---------")
+            ad_contact=request.POST['contact']
+            ad_user=advocateAccounts.objects.get(Q(username=ad_contact))
+            print(ad_user.clientRequest)
+            #add client name into advocate table column clientRequests 
+            if user_cli.username not in ad_user.clientRequest:
+                ad_user.clientRequest+=user_cli.username+","
+                ad_user.save()
+            if ad_user.username not in user_cli.contactedAds:
+                user_cli.contactedAds+=ad_user.username+","
+                user_cli.save()
+            if user_cli.hiredAdUsername:
+                print(user_cli.hiredAdUsername)
+                l=user_cli.hiredAdUsername.split(',')
+                l.remove(ad_user.username)            
+                user_cli.hiredAdUsername=",".join(l)
+                user_cli.save()
+            usernameList,contactedAdsList=displayHiredAds(req_user)
             return render(request,'MyAdList.html',context={'usernameList':usernameList,'contactedAdsList':contactedAdsList})
         else:
-            return render(request,'MyAdList.html')
-        
+            if user_cli.hiredAdUsername:
+                req_user=request.user
+                usernameList,contactedAdsList=displayHiredAds(req_user)
+                print(usernameList,contactedAdsList)
+                return render(request,'MyAdList.html',context={'usernameList':usernameList,'contactedAdsList':contactedAdsList})
+            else:
+                return render(request,'MyAdList.html')
+    except:
+        return render(request,'MyAdList.html',{'usernameList':usernameList})
 def confirmedAds(request):
     user_cli=clientAccounts.objects.get(username=request.user)
     confirmedAds=user_cli.confirmedAds
