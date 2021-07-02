@@ -20,13 +20,12 @@ def loginPage(request):
             usertype=request.POST["usertype"]
             print(usertype)
             if usertype=="client":
-                print(username,psw)
                 user1=authenticate(request,username=username,password=psw)
                 if user1 is not None :
-                    print("authenticated----")
                     usercli=clientAccounts.objects.filter(username=username,password=psw).exists()
                     if usercli==True:
                         login(request,user1)
+                        messages.info(request,"You have Loged in successfully!! ")
                         return render(request, 'clientHome.html')
                     else:
                         messages.error(request,"Username as  usertype 'Client' unrecongnized")
@@ -40,6 +39,7 @@ def loginPage(request):
                     usercli=advocateAccounts.objects.filter(username=username,password=psw).exists()
                     if usercli==True:
                         login(request,user1)
+                        messages.info(request,"You have Loged in successfully!! ")
                         return render(request, 'advocateHome.html')
                     else:
                         messages.error(request,"Username as usertype 'Advocate' unrecongnized")
@@ -58,6 +58,7 @@ def loginPage(request):
 
 def logoutUser(request):
     logout(request)
+    messages.info(request,'You have Logout Successfully!!')
     return render(request,'home.html')
 
 def advocateSettings(request):

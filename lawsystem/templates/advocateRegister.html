@@ -10,12 +10,12 @@
   <script class="lazy" data-src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
   {% for message in messages %}
-  <br>
-  <div class="container-fluid p-0"  >
-    <div class="alert {{ message.tags }} alert-dismissible" role="alert" style="text-align: center; background-color:rgb(211, 91, 91)" >
-      {{ message }} <button type="button" class="close" data-dismiss="alert" aria-label="Close" style="width: 50px;">
+  <div class="container-fluid p-0">
+    <div class="alert {{ message.tags }} alert-dismissible" role="alert" >
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
         <span aria-hidden="true">&times;</span>
       </button>
+      {{ message }}
     </div>
   </div>
   {% endfor %}

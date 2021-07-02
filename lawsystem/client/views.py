@@ -6,6 +6,7 @@ from .models import clientAccounts, sectionNoDetails
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import ValidationError
 from django.core.validators import validate_email
+from django.contrib.auth.hashers import make_password
 from django.db.models import Q
 from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -50,6 +51,7 @@ def clientRegister(request):
                 if password==re_password:
                     user=clientAccounts.objects.create(first_name=first_name,last_name=last_name,email=email,address=address,dob=dob,username=username,password=password,age=age,gender=gender,phno=phno)
                     print("user created---------------")
+                    password=make_password(password)
                     us=User.objects.create(username=username,password=password)
                     User.save(us)
                     return redirect('/regSuccessful/')

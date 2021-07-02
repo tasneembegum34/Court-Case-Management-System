@@ -97,7 +97,7 @@ body
   height: 40px;
 }
   </style>
-<body>
+<body  style="background-color:#878384;">
   {%csrf_token%}
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <a class="navbar-brand">way2CMS</a> 
@@ -139,9 +139,7 @@ body
       <br>
     <table id="clientDetails">
       <tr>
-        <th>SNO</th>
         <th>INVOICE NO</th>
-        <th>CLIENT NAME</th>
         <th>DATE</th>
         <th>DUE DATE</th>
         <th>BALANCE DUE</th>
@@ -152,9 +150,7 @@ body
       </tr>
       {% for id in invoice_table%}
         <tr>
-          <td></td>
           <td>{{id.invoice_no}} </td>
-          <td>{{id.client}} </td>
           <td>{{id.date}} </td>
           <td>{{id.due_date}} </td>
           <td>{{id.balance}} </td>
@@ -164,13 +160,13 @@ body
           {% else %}
                 <td><button class="button button1" style="background-color:lightcoral">Not Paid</button></td>
           {% endif %}
-          <form  method=POST action="{% url 'view_PDF' %}">
+          <form  method=POST action="{% url 'invoiceHistory' %}">
               {% csrf_token %}
-          <td><button class="button button1" name="view_template2" style="background-color: lightskyblue;" type="submit" value={{id.invoice_no}}>View</button> </td>
+          <td><button class="button button1" name="view_my_invoice" style="background-color: lightskyblue;" type="submit" value="{{user_ad.username}},{{id.invoice_no}}" >View</button> </td>
           </form>
           <form  method=POST action="{% url 'generate_PDF' %}">
             {% csrf_token %}
-          <td> <button class="button3 button1" name="view_template3"  type="submit" value={{id.invoice_no}}>Download</button></td>
+          <td> <button class="button3 button1" name="downloadMyInvoice"  type="submit" value="{{user_ad.username}},{{id.invoice_no}}">Download</button></td>
          </form>
         </tr>
         {% endfor %}
@@ -200,34 +196,7 @@ body
     </center>
     
     {% endblock %}
-    <br><br>
-    <form  method=POST action="{% url 'viewInvoice' %}">
-    <div style=" padding-left: 400px;">
-    <div class="card has-background-white-ter" style="width: 50%; ">
-      <header class="card-header" style="padding-left: 30px; height:40px">
-          <center><p class="card-header-title" >
-            Change Invoice Status
-          </p></center>
-      </header>
-      <div class="card-content">
-          <div class="select is-rounded"><br>
-            <center>
-            <label for="invoice_no">Enter Invoice No*</label>
-              <input type="text"  name="input_invoice_no" required>
-              <select id="status" name="status">
-                  <option value="1">Paid</option>
-                  <option value="0">Not Paid</option>
-              </select>
-          </div>
-        </center>
-          <center>
-         
-            {% csrf_token %}
-          <button class="button  is-info is-rounded" type="submit" class="btn"   style="width: max-content;" name="mybtn">Change Status</button>
-          </form></center>
-      </div>
-  </div>
-            </div>
+            
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
   
     </body>

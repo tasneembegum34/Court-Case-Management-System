@@ -7,6 +7,7 @@ from .models import advocateAccounts
 from enrollmentInfo.models import EnrollmentDetails
 from django.contrib.auth.decorators import login_required
 from .decorators import unauthenticated_user
+from django.contrib.auth.hashers import make_password
 # Create your views here.
 user_type=""
 def home(request):
@@ -45,6 +46,7 @@ def advocateRegister(request):
                     print("entered usercreation")
                     user=advocateAccounts.objects.create(first_name=first_name,last_name=last_name,age=age,gender=gender,dob=dob,
                     phno=phno,email=email,username=username,password=password,experience=experience,expertise=expertise,address=address)
+                    password=make_password(password)
                     us=User.objects.create(username=username,password=password)
                     User.save(us)
                     print(user) 

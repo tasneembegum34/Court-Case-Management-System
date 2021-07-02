@@ -128,7 +128,7 @@ span[contenteditable] { display: inline-block; }
 
 /* heading */
 
-h1 { font: bold 100% sans-serif; letter-spacing: 0.5em; text-align: center; text-transform: uppercase; }
+h1,h2{ font: bold 100% sans-serif; letter-spacing: 0.5em; text-align: center; text-transform: uppercase;}
 
 /* table */
 
@@ -160,7 +160,7 @@ header img { max-height: 100%; max-width: 100%; }
 
 article, article address, table.meta, table.inventory { margin: 0 0 3em; }
 
-article h1 { background: #000; border-radius: 0.25em; color: #FFF; margin: 0 0 1em; padding: 0.5em 0; height: 30px; width: 50%;  font-size: small; }
+article h1 { background: #000; border-radius: 0.25em; color: #FFF; margin: 0 0 1em; padding: 0.5em 0; height: 20px; width: 50%;  font-size: small; }
 
 article address { float: left; font-size: 75%; font-style: normal; line-height: 1.25; margin: 0 1em 1em 0; }
 
