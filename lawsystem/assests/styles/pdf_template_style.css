@@ -1,4 +1,94 @@
-*
+@font-face {
+    font-family: SourceSansPro;
+    src: url(SourceSansPro-Regular.ttf);
+  }
+  
+  .clearfix:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+  
+  a {
+    color: #0087C3;
+    text-decoration: none;
+  }
+  
+  body {
+    position: relative;
+    width: 21cm;  
+    height: 29.7cm; 
+    margin: 0 auto; 
+    color: #555555;
+    background: darkgray;
+    font-family: Arial, sans-serif; 
+    font-size: 14px; 
+    font-family:inherit;
+    padding:20px;
+  }
+  
+  header {
+    padding: 10px 0;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #AAAAAA;
+  }
+  
+  #logo {
+    float: left;
+    margin-top: 8px;
+  }
+  
+  #logo img {
+    height: 70px;
+  }
+  
+  #company {
+    float: right;
+    text-align: right;
+  }
+  
+  
+  #details {
+    margin-bottom: 50px;
+  }
+  
+  #client {
+    padding-left: 6px;
+    border-left: 6px solid #0087C3;
+    float: left;
+  }
+  
+  #client .to {
+    color: #777777;
+  }
+  
+  h2.name {
+    font-size: 1.4em;
+    font-weight: normal;
+    margin: 0;
+  }
+  
+  #invoice {
+    float: right;
+    text-align: right;
+  }
+  
+  #invoice h1 {
+    color: #0087C3;
+    font-size: 2.4em;
+    line-height: 1em;
+    font-weight: normal;
+    margin: 0  0 10px 0;
+  }
+  
+  #invoice .date {
+    font-size: 1.1em;
+    color: #777777;
+  }
+  
+  
+ 
+  *
 {
 	border: 0;
 	box-sizing: content-box;
@@ -15,13 +105,9 @@
 	vertical-align: top;
 
 }
-body{
-	margin-left: 100px;
-	background-color: darkgray;
-}
 
 .button {
-	background-color:white;
+	background-color: #555555;
 	border: none;
 	color: white;
 	padding: 30px 30px;
@@ -37,34 +123,31 @@ body{
 
 *[contenteditable] { border-radius: 0.25em; min-width: 1em; outline: 0; font-size: 20x; }
 
-*[contenteditable] { cursor: pointer; }
-
-*[contenteditable]:hover, *[contenteditable]:focus, td:hover *[contenteditable], td:focus *[contenteditable], img.hover { background: #DEF; box-shadow: 0 0 1em 0.5em #DEF; }
 
 span[contenteditable] { display: inline-block; }
 
 /* heading */
 
-h1 { font: bold 100% sans-serif; letter-spacing: 0.5em; text-align: center; text-transform: uppercase; }
+h1,h2{ font: bold 100% sans-serif; letter-spacing: 0.5em; text-align: center; text-transform: uppercase;}
 
 /* table */
 
-table { font-size: 75%; table-layout: fixed; width: 100%; }
+table { font-size: 100%; table-layout: fixed; width: 100%; }
 table { border-collapse: separate; border-spacing: 2px; }
-th, td { border-width: 1px; padding: 0.5em; position: relative; text-align: left; }
+th, td { border-width: 1px; padding: 0.5em; position: relative; text-align: left; color:black; }
 th, td { border-radius: 0.25em; border-style: solid; }
 th { background: #EEE; border-color: #BBB; }
 td { border-color: #DDD; }
 
 /* page */
 
-.invoice_div{  margin: 0 auto; overflow: hidden;  width:800px; float: center; padding-left: 20px; padding-right: 20px; font-size:inherit;font-size: inherit;}
+.invoice_div{  margin: 0 auto; overflow: hidden;  width:800px; float: center; padding-left: 20px; padding: 20px; font-size:16px;font-size: inherit;}
 .invoice_div { box-sizing: content-box; background:white; border-radius: 1px; box-shadow: 0 0 1in -0.25in rgba(0, 0, 0, 0.5);  }
 
 /* header */
 
 header { margin: 0 0 3em; }
-header:after { clear: both; content: ""; display: table; }
+
 
 header h1 { background: #000; border-radius: 0.25em; font-size: small; color: #FFF; margin: 0 0 1em; padding: 0.5em 0 ; height: 30px;}
 header address { float: left; font-size: 75%; font-style: normal; line-height: 1.25; margin: 0 1em 1em 0; }
@@ -72,20 +155,19 @@ header address p { margin: 0 0 0.25em; }
 header span, header img { display: block; float: right; }
 header span { margin: 0 0 1em 1em; max-height: 25%; max-width: 60%; position: relative; }
 header img { max-height: 100%; max-width: 100%; }
-header input { cursor: pointer;  height: 100%; left: 0; opacity: 0; position: absolute; top: 0; width: 100%; }
 
 /* article */
 
 article, article address, table.meta, table.inventory { margin: 0 0 3em; }
-article:after { clear: both; content: ""; display: table; }
-article h1 { background: #000; border-radius: 0.25em; color: #FFF; margin: 0 0 1em; padding: 0.5em 0; height: 30px; width: 50%;  font-size: small; }
+
+article h1 { background: #000; border-radius: 0.25em; color: #FFF; margin: 0 0 1em; padding: 0.5em 0; height: 20px; width: 50%;  font-size: small; }
 
 article address { float: left; font-size: 75%; font-style: normal; line-height: 1.25; margin: 0 1em 1em 0; }
 
 /* table meta & balance */
 
 table.meta, table.balance { float: right; width: 36%; }
-table.meta:after, table.balance:after { clear: both; content: ""; display: table; }
+
 
 /* table meta */
 
@@ -115,37 +197,11 @@ aside h1 { border-color: #999; border-bottom-style: solid; }
 
 /* javascript */
 
-.add, .cut
-{
-	border-width: 1px;
-	display: block;
-	font-size: .8rem;
-	padding: 0.25em 0.5em;	
-	float: left;
-	text-align: center;
-	width:max-content;
+
+.invoice-note{
+    font-size: 14px;
+    color:black;
 }
-
-.add, .cut
-{
-	background: #9AF;
-	box-shadow: 0 1px 2px rgba(0,0,0,0.2);
-	background-image: -moz-linear-gradient(#00ADEE 5%, #0078A5 100%);
-	background-image: -webkit-linear-gradient(#00ADEE 5%, #0078A5 100%);
-	border-radius: 0.5em;
-	border-color: #0076A3;
-	color: #FFF;
-	cursor: pointer;
-	font-weight: bold;
-	text-shadow: 0 -1px 2px rgba(0,0,0,0.333);
-}
-
-.add { margin: -2.5em 0 0; }
-
-.add:hover { background: #00ADEE; }
-
-.cut { opacity: 0; position: absolute; top: 0; left: -1.5em; }
-
 tr:hover .cut { opacity: 1; }
 
 @media print {
@@ -153,7 +209,6 @@ tr:hover .cut { opacity: 1; }
 	html { background: none; padding: 0; }
 	body { box-shadow: none; margin: 0; }
 	span:empty { display: none; }
-	.add, .cut { display: none; }
 }
 
 @page { margin: 0; }

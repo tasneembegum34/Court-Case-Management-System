@@ -1,7 +1,6 @@
 from django.contrib.auth.models import User, auth
 from django.shortcuts import render,redirect
 from django.contrib import messages
-#from django.core.checks import messages
 from django.contrib.auth.models import User
 from .models import advocateAccounts
 from enrollmentInfo.models import EnrollmentDetails

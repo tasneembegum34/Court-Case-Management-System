@@ -148,10 +148,4 @@ def clientSettings(request):
     return render(request,'clientSettings.html',{'userInfo':userInfo})
 
     
-"""def show_popup_once_processor(request):
-    show_popup = False
-    if not request.session.get('popup_seen', False):
-        request.session['popup_seen'] = True
-        show_popup = True
-    return { "show_popup": show_popup }"""
 
