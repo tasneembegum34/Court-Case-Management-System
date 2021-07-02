@@ -6,7 +6,6 @@ from .models import Invoice,LineItem
 from django.http import HttpResponse
 from .utils import render_to_pdf
 from django.template.loader import get_template
-import pdfkit
 from django.contrib import messages
 
 # Create your views here.
