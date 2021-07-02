@@ -4,7 +4,10 @@ from advocate.models import advocateAccounts
 from client.models import clientAccounts
 from .models import Invoice,LineItem
 from django.http import HttpResponse
+from .utils import render_to_pdf
+from django.template.loader import get_template
 import pdfkit
+
 # Create your views here.
 cli_name=""
 def generateInvoice(request):
@@ -78,6 +81,7 @@ def invoice_data(request):
         return HttpResponse('/advocateHome/')
     return HttpResponse('FAIL!!!!!')
 
+
 def view_PDF(request):
     if request.method=="POST":
         invoice_no=request.POST.get('view_template2')
@@ -87,9 +91,25 @@ def view_PDF(request):
         print(invoice_table.client,user_cli.first_name,lineitem_table)
     return render(request,'pdf_template.html',context={'invoice_table':invoice_table,'user_cli':user_cli,'lineitem_table':lineitem_table})
 
-def generate_PDF(request,id=None):
-    # Use False instead of output path to save pdf to a variable
-    """pdf = pdfkit.from_url(request.build_absolute_uri(reverse('view_PDF')), False)
-    response = HttpResponse(pdf,content_type='application/pdf')
-    response['Content-Disposition'] = 'attachment; filename="pdf_template.pdf"'"""
-    pdfkit.from_url("http://google.com", "out.pdf")
+def generate_PDF(request,*args,**kwargs):
+    if request.method=="POST":
+        invoice_no=request.POST.get('view_template3')
+        invoice_table=Invoice.objects.get(invoice_no=invoice_no)
+        user_cli=clientAccounts.objects.get(username=invoice_table.client)
+        lineitem_table=LineItem.objects.filter(invoice_no=invoice_no)
+        print(invoice_table.client,user_cli.first_name,lineitem_table)
+        context={'invoice_table':invoice_table,'user_cli':user_cli,'lineitem_table':lineitem_table}
+    template=get_template('pdf_template.html')
+    html=template.render(context)
+    pdf=render_to_pdf('pdf_template.html',context)
+    if pdf:
+        response= HttpResponse(pdf,content_type='applciation/pdf')
+        filename="Invoice_%s.pdf" %("12341231")
+        content="inline; filename='%s'"%(filename)
+        download=request.GET.get("download")
+        if download:
+            content="attachment; filename='%s'" %(filename)
+        response['Content-Disposition']=content
+        return response
+    return HttpResponse("Not found")
+

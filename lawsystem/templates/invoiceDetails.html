@@ -166,8 +166,10 @@ body
               {% csrf_token %}
           <td><button class="button button1" name="view_template2" style="background-color: lightskyblue;" type="submit" value={{id.invoice_no}}>View</button> </td>
           </form>
-          <td> <a href="{% url 'generate_PDF'  %}">Download</a></td>
-         
+          <form  method=POST action="{% url 'generate_PDF' %}">
+            {% csrf_token %}
+          <td> <button class="button button1" name="view_template3" style="background-color: lightskyblue;" type="submit" value={{id.invoice_no}}>Download</button></td>
+         </form>
         </tr>
         {% endfor %}
       </table>

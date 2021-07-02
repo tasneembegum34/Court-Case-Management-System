@@ -140,6 +140,7 @@
         <th>Experience</th>
         <th>Expertise</th>
         <th>Address</th>
+        <th>Actions</th>
       </tr>
       {% for id in usernameList%}
         <tr>
@@ -149,7 +150,12 @@
           <td>{{id.experience}} </td>
           <td>{{id.expertise}} </td>
           <td>{{id.address}}</td>
-          
+          <td>
+          <form  method=POST action="{% url 'view_PDF' %}">
+            {%csrf_token%}
+          <button class="view_invoice" name="view_invoice" style="vertical-align:middle" value='{{id.username}}'  ><span>View Invoice </span></button>
+        </form>
+      </td>
         </tr>
         
       
