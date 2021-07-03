@@ -9,6 +9,16 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   <script src="https://use.fontawesome.com/a48ffc1c86.js"></script>
+  {% for message in messages %}
+  <div class="container-fluid p-0">
+    <div class="alert {{ message.tags }} alert-dismissible" role="alert" >
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+      {{ message }}
+    </div>
+  </div>
+  {% endfor %}
 </head>
 <style>
 body
@@ -211,17 +221,32 @@ body
       </header>
       <div class="card-content">
           <div class="select is-rounded"><br>
+            <script>
+              function yesnoCheck(that) {
+                var t =document.getElementById("display_0")
+          if (t.value == 0) {
+        alert("Please Enter the balance Due");
+              document.getElementById("ifYes").style.display = "block";
+          } else {
+              document.getElementById("ifYes").style.display = "none";
+          }
+      }
+            </script>
             <center>
             <label for="invoice_no">Enter Invoice No*</label>
               <input type="text"  name="input_invoice_no" required>
-              <select id="status" name="status">
-                  <option value="1">Paid</option>
-                  <option value="0">Not Paid</option>
+              <select id="status" name="status" onchange="yesnoCheck();">
+                  <option  value="1">Paid</option>
+                  <option id="display_0" value="0">Not Paid</option>
               </select>
           </div>
         </center>
+      <br>
           <center>
-         
+            <div id="ifYes" style="display: none;">
+              <label for="balance_due">Enter Balance due:</label>
+              <input type="text" id="balance_due" name="due_balance" required/><br>
+            </div>
             {% csrf_token %}
           <button class="button  is-info is-rounded" type="submit" class="btn"   style="width: max-content;" name="mybtn">Change Status</button>
           </form></center>

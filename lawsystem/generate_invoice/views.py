@@ -20,20 +20,34 @@ def generateInvoice(request):
 
 def viewInvoice(request):
     invoice_table=""
-    if request.method=='POST' and 'mybtn' in request.POST:
-        invoice_no=request.POST['input_invoice_no']
-        status=request.POST['status']
-        print(invoice_no,status)
-        invoice_table=Invoice.objects.get(invoice_no=invoice_no)
-        invoice_table.status=status
-        if status=='1':
-            invoice_table.balance=0.0
-        invoice_table.save()
-        invoice_table=Invoice.objects.filter(client=invoice_table.client)
-    if request.method=='POST' and 'viewInvoice' in request.POST:
-        cli_name=request.POST['viewInvoice']
-        invoice_table=Invoice.objects.filter(client=cli_name)
-    return render(request,'invoiceDetails.html',{'invoice_table':invoice_table})
+    try:
+        if request.method=='POST' and 'mybtn' in request.POST:
+            invoice_no=request.POST['input_invoice_no']
+            status=request.POST['status']
+            print(invoice_no,status)
+            invoice_table=Invoice.objects.get(invoice_no=invoice_no)
+            invoice_table.status=status
+            if status=='1':
+                invoice_table.balance=0.0
+                invoice_table.save()
+            else:
+                due_balance=float(request.POST['due_balance'])
+                print(due_balance)
+                if(due_balance<=invoice_table.total_amount):
+                    invoice_table.balance=due_balance
+                    invoice_table.save()
+                else:
+                    messages.error(request,'Your Entered balance is more than total')
+            invoice_table=Invoice.objects.filter(client=invoice_table.client)
+        if request.method=='POST' and 'viewInvoice' in request.POST:
+            cli_name=request.POST['viewInvoice']
+            invoice_table=Invoice.objects.filter(client=cli_name)
+        return render(request,'invoiceDetails.html',{'invoice_table':invoice_table})
+    except Exception as e:
+        print(e)
+        messages.error(request,'Entered Invoice not found')
+        return render(request,'MyClientList.html')
+    
 
 def invoice_data(request):
     try:
@@ -116,7 +130,7 @@ def generate_PDF(request,*args,**kwargs):
         invoice_table=Invoice.objects.get(invoice_no=invoice_no)
         user_cli=clientAccounts.objects.get(username=invoice_table.client)
         lineitem_table=LineItem.objects.filter(invoice_no=invoice_no)
-        user_ad=advocateAccounts.objects.get(username=request.user)
+        user_ad=advocateAccounts.objects.get(username=request.user) 
         print(invoice_table.client,user_cli.first_name,lineitem_table)
         context={'invoice_table':invoice_table,'user_cli':user_cli,'lineitem_table':lineitem_table,'user_ad':user_ad}
     if request.method=="POST" and 'downloadMyInvoice' in request.POST:

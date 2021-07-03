@@ -45,29 +45,30 @@ def firms(request):
 #common function for displaying hired advocates details to clients
 def displayHiredAds(req_user):
     user=clientAccounts.objects.get(username=req_user)
+    usernameList=[]
     contactedAdsList=[]
     hiredAdUsernames=user.hiredAdUsername
     if hiredAdUsernames:
         adlist=hiredAdUsernames.split(',')
         adlist.pop() 
-        usernameList=[]
         for i in adlist:
             usernameList.append(advocateAccounts.objects.get(username=i))
-        if user.contactedAds:
-            adlist=user.contactedAds.split(',')
-            adlist.pop() 
-            for i in adlist:
-                contactedAdsList.append(advocateAccounts.objects.get(username=i))
-        print(usernameList,contactedAdsList)
-        return usernameList,contactedAdsList
+    if user.contactedAds:
+        adlist=user.contactedAds.split(',')
+        adlist.pop() 
+        for i in adlist:
+            contactedAdsList.append(advocateAccounts.objects.get(username=i))
+        print(contactedAdsList)
+    return usernameList,contactedAdsList
             
 def MyAdList(request):
     req_user=request.user
     user_cli=clientAccounts.objects.get(username=req_user)
     contactedAdsList=[]
     usernameList=[]
+    usernameList,contactedAdsList=displayHiredAds(req_user)
     try:
-        if request.method=="POST"  and 'remove' in request.POST:
+        if request.method=="POST" and  'remove' in request.POST:
             ad_remove=request.POST['remove']
             user_ad=advocateAccounts.objects.get(username=ad_remove)
             if user_cli.hiredAdUsername:
@@ -88,10 +89,8 @@ def MyAdList(request):
             user_cli.save()
             #user_ad.save()
             usernameList,contactedAdsList=displayHiredAds(req_user)
-            if contactedAdsList:
-                return render(request,'MyAdList.html',context={'usernameList':usernameList,'contactedAdsList':contactedAdsList})
-            else:
-                return render(request,'MyAdList.html',{'usernameList':usernameList})
+            print(usernameList,contactedAdsList)
+            return render(request,'MyAdList.html',context={'usernameList':usernameList,'contactedAdsList':contactedAdsList})
 
 
         elif request.method=="POST"  and 'contact' in request.POST:
@@ -115,9 +114,10 @@ def MyAdList(request):
             usernameList,contactedAdsList=displayHiredAds(req_user)
             return render(request,'MyAdList.html',context={'usernameList':usernameList,'contactedAdsList':contactedAdsList})
         else:
-            if user_cli.hiredAdUsername:
+            if user_cli.hiredAdUsername or user_cli.contactedAds:
                 req_user=request.user
                 usernameList,contactedAdsList=displayHiredAds(req_user)
+                print("I am here")
                 print(usernameList,contactedAdsList)
                 return render(request,'MyAdList.html',context={'usernameList':usernameList,'contactedAdsList':contactedAdsList})
             else:
