@@ -1,4 +1,4 @@
-# Court-Case-Management-System
+# way2CMS (Case Management System)
 The term Court Case Management System (CCMS) refer to a subset of law practice management and cover a range of approaches and technologies
 used by law firms and courts to leverage knowledge and methodologies for managing the life cycle of a case or matter more effectively.
 
