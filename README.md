@@ -9,3 +9,4 @@ The fundamental concept of the project is to come up with a web application wher
 case (if it exists) and also provide some basic information about laws and sections so that they get some idea about what they're 
 dealing with.Along with all these features for the client, we also have a feature for the advocates to register themselves in our
 web application in order to get hired by the potential clients. The advocates will be providing the invoice after they get hired.
+ 
